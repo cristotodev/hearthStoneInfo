@@ -19,7 +19,7 @@ La tabla "USUARIOS" consta de dos atributos los cuales son:
 
 ## Tabla MAZOS
 
-La tabla "MAZOS" cosnta de tres atributos los cuales son:
+La tabla "MAZOS" consta de tres atributos los cuales son:
 
 - ID, que es clave primaria y de tipo int,
 - Nombre, que es de tipo varchar(20).
