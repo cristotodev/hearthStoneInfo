@@ -14,22 +14,25 @@ Cada usuario dispondrá de una o varias cuentas en la cuál podrá crear sus pro
 
 Además, HearthStone info permite realizar una serie de búsquedas específicas según los siguientes criterios:
 
-· Buscar todas las cartas.
+- Buscar todas las cartas.
 
-· Buscar los dorsales.
+- Buscar los dorsales.
 
-· Buscar una carta en concreto.
+- Buscar una carta en concreto.
 
-· Buscar por expansiónes.
+- Buscar por expansiónes.
 
-· Buscar mediante clases.
+- Buscar mediante clases.
 
-· Buscar por facciones.
+- Buscar por facciones.
 
-· Burcar por rareza.
+- Burcar por rareza.
 
-· Buscar por tipos (hechizos, armas).
+- Buscar por tipos (hechizos, armas).
+
 
 Para mejorar el rendimiento de  la aplicación, hearthStone info almacenará la información en caché la cuál se actualizará cada semana o cuando salga una nueva expansión del "HearthStone".
 
 ## Documentación
+
+HearthStone info publica toda la documentación en la sección **"doc"**
