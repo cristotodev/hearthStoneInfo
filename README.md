@@ -35,4 +35,4 @@ Para mejorar el rendimiento de  la aplicación, hearthStone info almacenará la 
 
 ## Documentación
 
-HearthStone info publica toda la documentación en la sección **"doc"**
+HearthStone info publica toda la documentación en la sección [**"doc"**](doc)
