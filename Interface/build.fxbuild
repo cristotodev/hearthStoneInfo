@@ -1,0 +1,8 @@
+<?xml versin="1.0" encding="ASCII"?>
+<anttasks:AntTask xmi:versin="2.0" xmlns:xmi="http://www.mg.rg/XMI" xmlns:anttasks="http://rg.eclipse.fx.ide.jdt/1.0" buildDirectry="${prject}/build">
+  <deply>
+    <applicatin name="HearthStneInf.interface"/>
+    <inf/>
+  </deply>
+  <signjar/>
+</anttasks:AntTask>
