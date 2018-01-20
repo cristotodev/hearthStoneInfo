@@ -3,6 +3,7 @@
 En ámbito global la aplicación consta de tres diagramas de flujo de datos principales que cubren las siguientes acciones:
 
 - Inicio de sesión.
+- Registro de usuarios.
 - Búsqueda de cartas.
 - Guardado de datos.
 
@@ -19,6 +20,16 @@ Se le solicita los datos al usuario, se comprueban en la base de datos. Si los d
 
 
 ![inicioSesion](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/inicioSesion.png)
+
+
+
+## Registro de usuarios (DFD)
+
+Se le solicitan los datos al usuario, una vez introducidos se comprueba dicho usuario en la base de datos. Si el usuario existe se le vuelve a solicitar el usuario y contraseña, si no existe, se almacenan los datos en la base de datos y se pasa a la ventana de inicio de sesión.
+
+
+
+![registroUsuario]()
 
 ## 
 

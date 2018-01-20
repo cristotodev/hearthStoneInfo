@@ -44,3 +44,7 @@ La tabla "FAVORITOS" consta de dos atributos los cuales son:
 
 - NombreUsuario, clave primaria y clave foránea de la tabla "USUARIOS" de tipo varchar(20).
 - IdCarta, clave primaria y clave foránea de la tabla "CARTAS" de tipo varchar(10).
+
+
+
+![diagramaMER](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/MER/Entity%20Relationship%20diagram.png)
