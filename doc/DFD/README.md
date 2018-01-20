@@ -29,7 +29,7 @@ Se le solicitan los datos al usuario, una vez introducidos se comprueba dicho us
 
 
 
-![registroUsuario]()
+![registroUsuario](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/registroUsuario.png)
 
 ## 
 
