@@ -26,6 +26,8 @@ Se le solicita los datos al usuario, se comprueban en la base de datos. Si los d
 
  Se recogen los filtros que el usuario ha especificado, la aplicación se conecta a la API y recoge los datos de cuyo datos coincidan con los filtros. Una vez obtenidos los datos, se obtiene de la caché la imagen que coincide con el id que nos devuelte la API y se finaliza el proceso de búsqueda.
 
+![busquedaDeCartas](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/B%C3%BAsquedaDeCartas.png)
+
 
 
 ## Guardado de datos (DFD)
@@ -33,3 +35,7 @@ Se le solicita los datos al usuario, se comprueban en la base de datos. Si los d
 Cuando se realizan cambios en la sección de mazo o de cartas favoritas, se recoge dichas modificaciones (el id de las cartas o del mazo) y se almacenan en la base de datos.
 
 Una vez realizado el almacenamiento, se cierra la conexión y finaliza el guardado de datos.
+
+
+
+![guardadoDeDatos](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/guardarDatos.png)
