@@ -16,6 +16,10 @@ Si es la primera vez que se inicia el programa se descargan las imágenes en loc
 
 Se le solicita los datos al usuario, se comprueban en la base de datos. Si los datos son correctos se cargan los datos del usuario y entra en la aplicación, si no son correctos, se vuelve a solicitar el usuario y la contraseña.
 
+
+
+![inicioSesion](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/inicioSesion.png)
+
 ## 
 
 ## Búsqueda de cartas (DFD)
