@@ -8,7 +8,7 @@ USE dbHearthStoneInfo;
 CREATE TABLE T_USUARIOS
 (
 Nombre VARCHAR(20),
-Password VARCHAR(20),
+Password CHAR(40),
 CONSTRAINT pk_t_usuarios_nombre(Nombre)
 )
 

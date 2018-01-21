@@ -15,7 +15,7 @@ El modelo entidad realación de la aplicación "HearthStone info" consta de cinc
 La tabla "USUARIOS" consta de dos atributos los cuales son: 
 
 - Nombre, que es la clave primaria y de tipo varchar(20).
-- Password, que es de tipo varchar(20).
+- Password, que es de tipo char(40).
 
 ## Tabla MAZOS
 
