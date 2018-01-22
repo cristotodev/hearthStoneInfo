@@ -13,6 +13,14 @@ Mediante los objetos de tipo "Carta" almacenaremos cada valor devuelto del JSON 
 
 
 
-![Cartas Mapeo]()
+![Cartas Mapeo](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/UML/mapeoCartas.png)
+
+Se sigue la misma tónica de mapeo que la clase "ListaDeCartas" y "Cartas" pero en esta situación con los "Dorsales".
+
+![Dorsales Mapeo](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/UML/mapeoDorsales.png)
+
+Por último para el mapeo, disponemos la clase "Info" en la cuál se almacenará toda la información sobre la API (versión, valores para las búsquedas, etc).
+
+![Info Mapeo](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/UML/infoMapeo.png)
 
 ## Modelo para JavaFX
