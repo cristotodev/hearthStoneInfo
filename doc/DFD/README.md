@@ -37,7 +37,7 @@ Se le solicitan los datos al usuario, una vez introducidos se comprueba dicho us
 
  Se recogen los filtros que el usuario ha especificado, la aplicación se conecta a la API y recoge los datos de cuyo datos coincidan con los filtros. Una vez obtenidos los datos, se obtiene de la caché la imagen que coincide con el id que nos devuelte la API y se finaliza el proceso de búsqueda.
 
-![busquedaDeCartas](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/B%C3%BAsquedaDeCartas.png)
+![busquedaDeCartas](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/DFD/BúsquedaDeCartas.png)
 
 
 
