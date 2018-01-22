@@ -1,8 +1,8 @@
 #Borrado y creación de la base de datos
-DROP DATABASE IF EXISTS dbHearthStoneInfo;
-CREATE DATABASE dbHearthStoneInfo CHARACTER SET UTF8 COLLATE UTF_GENERAL_CI;
-USE dbHearthStoneInfo;
-
+#DROP DATABASE IF EXISTS dbHearthStoneInfo;
+#CREATE DATABASE dbHearthStoneInfo CHARACTER SET UTF8 COLLATE UTF_GENERAL_CI;
+#USE dbHearthStoneInfo;
+USE id4384416_hearthstoneinfo;
 #Creación de las tablas
 #Tabla para almacenar los usuarios y contraseñas
 CREATE TABLE T_USUARIOS
