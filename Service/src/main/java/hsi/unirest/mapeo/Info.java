@@ -8,6 +8,8 @@ public class Info {
 	private String patch;
 	private List<String> classes;
 	private List<String> sets;
+	private List<String> standards;
+	private List<String> wilds;
 	private List<String> types;
 	private List<String> factions;
 	private List<String> qualities;
@@ -22,6 +24,8 @@ public class Info {
 		qualities = new ArrayList<>();
 		races = new ArrayList<>();
 		locales = new ArrayList<>();
+		standards = new ArrayList<>();
+		wilds = new ArrayList<>();
 	}
 
 	public String getPatch() {
@@ -46,6 +50,22 @@ public class Info {
 
 	public void setSets(List<String> sets) {
 		this.sets = sets;
+	}
+
+	public List<String> getStandards() {
+		return standards;
+	}
+
+	public void setStandards(List<String> standards) {
+		this.standards = standards;
+	}
+
+	public List<String> getWilds() {
+		return wilds;
+	}
+
+	public void setWilds(List<String> wilds) {
+		this.wilds = wilds;
 	}
 
 	public List<String> getTypes() {
@@ -87,5 +107,5 @@ public class Info {
 	public void setLocales(List<String> locales) {
 		this.locales = locales;
 	}
-
+	
 }

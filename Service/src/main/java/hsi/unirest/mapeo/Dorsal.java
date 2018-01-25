@@ -13,6 +13,7 @@ public class Dorsal {
 	private String sortCategory;
 	private String sortOrder;
 	private String locale;
+	
 	public String getCardBackId() {
 		return cardBackId;
 	}
