@@ -17,6 +17,14 @@ import hsi.unirest.mapeo.ListaDeDorsales;
 
 public class ServicioAPI {
 
+	/** Obtiene todas las cartas del juego
+	 *  @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 *  @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 *  @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 *  @param locale Especifica en que idioma va a devolver los resultados.
+	 *  @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 *  @throws UnirestException
+	 **/
 	public ListaDeCartas getTodasLasCartas(Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		ListaDeCartas listaDeCartas = new ListaDeCartas();
@@ -55,6 +63,16 @@ public class ServicioAPI {
 		return listaDeCartas;
 	}
 
+	/** Obtiene todas las cartas de la expansión especificada en el parámetro "expansion"
+	 * 
+	 * @param expansion Indica la expansión por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasExpansion(String expansion, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		
@@ -79,6 +97,16 @@ public class ServicioAPI {
 		return listaDeCartas;
 	}
 	
+	/** Obtiene todas las cartas de la clase especificada en el parámetro "clase"
+	 * 
+	 * @param clase Indica la clase por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasClases(String clase, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		
@@ -102,6 +130,16 @@ public class ServicioAPI {
 		return listaDeCartas;
 	}
 	
+	/** Obtiene todas las cartas de la facción especificada en el parámetro "faccion"
+	 * 
+	 * @param faccion Indica la facción por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasFacciones(String faccion, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		
@@ -124,6 +162,16 @@ public class ServicioAPI {
 		return listaDeCartas;
 	}
 	
+	/** Obtiene todas las cartas de la rareza especificada en el parámetro "rareza"
+	 * 
+	 * @param rareza Indica la rareza por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasRareza(String rareza, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		ListaDeCartas listaDeCartas = new ListaDeCartas();
@@ -145,6 +193,16 @@ public class ServicioAPI {
 		return listaDeCartas;
 	}
 	
+	/**Obtiene todas las cartas de la raza especificada en el parámetro "raza"
+	 * 
+	 * @param raza Indica la raza por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasRaza(String raza, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		ListaDeCartas listaDeCartas = new ListaDeCartas();
@@ -165,7 +223,17 @@ public class ServicioAPI {
 		
 		return listaDeCartas;
 	}
-	
+	 
+	/** Obtiene todas las cartas del tipo especificada en el parámetro "tipo"
+	 * 
+	 * @param tipo Indica el tipo por la que se va a realizar la búsqueda de las cartas
+	 * @param attack Especifica la cantidad de ataque por la que va a realizar la búsqueda.
+	 * @param cost Especifica la cantidad de cristales por la que va a realizar la búsqueda.
+	 * @param health Especifica la cantidad de vida por la que va a realizar la búsqueda.
+	 * @param locale Especifica en que idioma va a devolver los resultados.
+	 * @return Una ListaDeCartas en el cuál cada objeto interno tiene la información del JSON.
+	 * @throws UnirestException
+	 */
 	public ListaDeCartas getCartasTipo(String tipo, Integer attack, Integer cost, Integer health,
 			String locale) throws UnirestException {
 		ListaDeCartas listaDeCartas = new ListaDeCartas();
@@ -198,6 +266,11 @@ consulta = comprobacionesAtributos(consulta, attack, cost, health, locale);
 		}
 	}
 	
+	/** Pasa los atributos de un objeto JSON a un Objeto de tipo Carta
+	 * 
+	 * @param origen Objeto JSON que contiene los datos.
+	 * @param destino Objeto de tipo Carta al cuál se le van a pasar los valores.
+	 */
 	private static void pasarAtributos(JSONObject origen, Carta destino) {
 		destino.setCardId(origen.getString("cardId"));
 		destino.setDbfId(origen.getString("dbfId"));
@@ -277,6 +350,15 @@ consulta = comprobacionesAtributos(consulta, attack, cost, health, locale);
 		}
 	}
 	
+	/** Concatena a la "consulta" con la cuál realizaremos la petición a la API los atributos que le pasamos por parámetro.
+	 *  Si se pasan null, no se concatena, y si se pasa un valor se concatena dicho valor a la consulta. 
+	 * 
+	 * @param consulta String que contiene la consulta principal y la que será modificada.
+	 * @param attack 
+	 * @param cost
+	 * @param health
+	 * @param locale
+	 */
 	private String comprobacionesAtributos(String consulta, Integer attack, Integer cost, Integer health,
 			String locale) {
 		if (attack != null)
@@ -294,6 +376,12 @@ consulta = comprobacionesAtributos(consulta, attack, cost, health, locale);
 		return consulta;
 	}
 
+	/** Obtiene una lista con todos los dorsales
+	 * 
+	 * @param idioma Nos permite indicar en que idioma queremos que nos devuelva la información.
+	 * @return Una ListaDeDorsales con objetos de tipo Dorsal los cuales contienen la información.
+	 * @throws UnirestException
+	 */
 	public ListaDeDorsales getDorsales(String idioma) throws UnirestException {
 		ListaDeDorsales listaDeDorsales = new ListaDeDorsales();
 
@@ -315,6 +403,11 @@ consulta = comprobacionesAtributos(consulta, attack, cost, health, locale);
 		return listaDeDorsales;
 	}
 
+	/** Pasa los valores de los atributos de un objeto JSON a un objeto de tipo Dorsal
+	 * 
+	 * @param origen Objeto de tipo JSON el cuál contiene la información.
+	 * @param destino Objeto de tipo Dorsal al cuál se le pasarán los valores.
+	 */
 	private static void pasarAtributos(JSONObject origen, Dorsal destino) {
 		destino.setCardBackId(origen.getString("cardBackId"));
 		destino.setName(origen.getString("name"));
@@ -332,6 +425,12 @@ consulta = comprobacionesAtributos(consulta, attack, cost, health, locale);
 		destino.setLocale(origen.getString("locale"));
 	}
 
+	/** Obtiene un objeto de tipo Info el cuál contiene la información principal de la API (versión, valores de búsqueda, etc)
+	 * 
+	 * @param idioma Indica en que idioma nos devolverá los datos la API
+	 * @return Un objeto Info con toda la información principal de la API.
+	 * @throws UnirestException
+	 */
 	public Info getInfo(String idioma) throws UnirestException {
 		Info info = new Info();
 
