@@ -6,7 +6,6 @@ El modelo entidad realación de la aplicación "HearthStone info" consta de cinc
 - FAVORITOS
 - MAZOS
 - MAZO-CARTAS
-- CARTAS
 
 
 
@@ -31,12 +30,6 @@ La tabla "MAZO-CARTAS" consta de dos atributos los cuales son:
 
 - IdMazo, clave primaria y clave foránea de la tabla "MAZOS" de tipo int.
 - IdCarta, clave primaria y clave foránea de la tabla "CARTAS" de tipo varchar(10).
-
-## Tabla CARTAS
-
-La tabla "CARTAS" consta de un único atributo el cuál es:
-
-- ID, clave primaria y es de tipo varchar(10).
 
 ## Tabla FAVORITOS
 
