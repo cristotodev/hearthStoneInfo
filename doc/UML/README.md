@@ -24,3 +24,7 @@ Por último para el mapeo, disponemos la clase "Info" en la cuál se almacenará
 ![Info Mapeo](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/UML/infoMapeo.png)
 
 ## Modelo para JavaFX
+
+Clases en las cuales ya se filtran y se cogen los atributos necesarios para el funcionamiento de la aplicación.
+
+![Objetos interfaz](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/UML/interfazGrafica.png)
