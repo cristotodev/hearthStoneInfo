@@ -1,3 +1,8 @@
+El panel derecho de forma adicional tendrá unos apartados más:
+-Elite
+-Clase
+-Mecanismo
+
 # Inicio de sesión
 
 ![Inicio de Sesión](https://github.com/Cristoto/hearthStoneInfo/blob/master/doc/Mockup/InicioSesion.png)
