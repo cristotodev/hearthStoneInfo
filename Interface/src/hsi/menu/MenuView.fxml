@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Mazos">
+            <items>
+              <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo" />
+                  <MenuItem fx:id="verMazoMenu" mnemonicParsing="false" text="Ver mazo" />
+                  <MenuItem fx:id="eliminarMazoMenu" mnemonicParsing="false" text="Eliminar mazo" />
+            </items>
+          </Menu>
+          <Menu fx:id="favoritosMenu" mnemonicParsing="false" text="Favoritos" />
+          <Menu mnemonicParsing="false" text="Idioma">
+               <items>
+                  <Menu fx:id="cartasMenu" mnemonicParsing="false" text="Cartas" />
+                  <Menu fx:id="appMenu" mnemonicParsing="false" text="App" />
+               </items>
+          </Menu>
+            <Menu fx:id="informacionMenu" mnemonicParsing="false" text="Información" />
+            <Menu fx:id="acercaDeMenu" mnemonicParsing="false" text="Acerca de" />
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
