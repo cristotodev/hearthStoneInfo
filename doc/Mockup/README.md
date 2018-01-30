@@ -1,7 +1,7 @@
 El panel derecho de forma adicional tendrá unos apartados más:
--Elite
--Clase
--Mecanismo
+- Elite
+- Clase
+- Mecanismo
 
 # Inicio de sesión
 
