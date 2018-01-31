@@ -48,6 +48,10 @@ public class Mazo {
 		this.nombreProperty().set(nombre);
 	}
 	
+	@Override
+	public String toString() {
+		return this.getNombre();
+	}
 
 	
 }

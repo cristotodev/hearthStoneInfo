@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 
 import hsi.items.Mazo;
 import hsi.menu.crearMazo.CrearMazoController;
+import hsi.menu.eliminarMazo.EliminarMazoController;
+import hsi.menu.verMazo.VerMazoController;
 import hsi.sql.FuncionesSQL;
 import hsi.app.HsiApp;
 import hsi.items.Carta;
@@ -112,17 +114,37 @@ public class MenuController implements Initializable {
 	}
 
 	private void onEliminarMazoMenuAction(ActionEvent e) {
-
+		try {
+			EliminarMazoController controller = new EliminarMazoController();
+			controller.getUsuario().bind(usuario);
+			controller.getMazos().bind(mazos);
+			controller.crearVentana();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			llenarMazos();
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 	}
 
 	private void onVerMazoMenuAction(ActionEvent e) {
-
+		try {
+			VerMazoController controller = new VerMazoController();
+			controller.getUsuario().bind(usuario);
+			controller.getMazos().bind(mazos);
+			controller.crearVentana();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	private void onCrearMazoMenuAction(ActionEvent e) {
-		CrearMazoController mazoController;
 		try {
-			mazoController = new CrearMazoController();
+			CrearMazoController mazoController = new CrearMazoController();
 			mazoController.getUsuario().bind(usuario);
 			mazoController.crearVentana();
 		} catch (IOException e2) {
@@ -165,6 +187,7 @@ public class MenuController implements Initializable {
 	}
 	
 	private void llenarMazos() throws ClassNotFoundException, SQLException {
+		mazos.clear();
 		List<hsi.sql.Mazo> mazos = FuncionesSQL.consultaMazos(usuario.get());
 		for (hsi.sql.Mazo mazo : mazos) {
 			Mazo mazoNuevo = new Mazo();
