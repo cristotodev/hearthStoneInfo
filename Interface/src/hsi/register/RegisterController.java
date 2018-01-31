@@ -2,9 +2,11 @@ package hsi.register;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import hsi.login.LoginController;
+import hsi.sql.FuncionesSQL;
 import hsi.ventanaArranque.VentanaArranqueController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -65,21 +67,32 @@ public class RegisterController implements Initializable {
 		crearButton.setOnAction(e -> onCrearButtonAction(e));
 	}
 	
-	private Object onCrearButtonAction(ActionEvent e) {
+	private void onCrearButtonAction(ActionEvent e) {
 		// TODO Dentro de task mandar al servidor y cuando lo haga y vaya bien sustituir borderPane en el centro del padre el login
-		if(password.equals(repetirPassword)) {
-			System.out.println("Conectar al servidor");
+		if(!usuario.get().equals("")) {
+			if(password.get().equals(repetirPassword.get())) {
+				try {
+					if(!FuncionesSQL.consultaExisteUsuario(usuario.get())) {
+						FuncionesSQL.insertarUsuario(usuario.get(), password.get());
+						cambiarALogin();
+					}else {
+						//TODO Indicar que usuario ya existe
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+			}else {
+				//TODO Alerta para contraseña erronea
+				System.out.println("Indicar fallo");
+			}
 		}else {
-			System.out.println("Indicar fallo");
+			//TODO Alerta para usuario vacio
 		}
-		
-		cambiarALogin();
-		return null;
 	}
 
-	private Object onCancelarButtonAction(ActionEvent e) {
+	private void onCancelarButtonAction(ActionEvent e) {
 		cambiarALogin();
-		return null;
 	}
 	
 	private void cambiarALogin() {

@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hsi.menu.MenuController;
 import hsi.register.RegisterController;
+import hsi.sql.FuncionesSQL;
 import hsi.ventanaArranque.VentanaArranqueController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,6 +23,7 @@ import javafx.scene.layout.GridPane;
 public class LoginController implements Initializable {
 
 	//Model
+	private MenuController menuController;
 	private StringProperty usuario;
 	private StringProperty password;
 	
@@ -45,6 +48,8 @@ public class LoginController implements Initializable {
 		usuario = new SimpleStringProperty(this, "usuario");
 		password = new SimpleStringProperty(this, "password");
 		
+		menuController = new MenuController();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
 		loader.setController(this);
 		loader.load();
@@ -56,6 +61,7 @@ public class LoginController implements Initializable {
 		//Bindeo
 		usuario.bind(usuarioTextField.textProperty());
 		password.bind(contraPassField.textProperty());
+		menuController.getUsuario().bind(usuario);
 		
 		//Evento
 		crearLink.setOnAction(e -> onCrearCuentaLinkAction(e));
@@ -74,10 +80,21 @@ public class LoginController implements Initializable {
 		
 	}
 
-	private Object onEntrarButtonAction(ActionEvent e) {
+	private void onEntrarButtonAction(ActionEvent e) {
 		// TODO Dentro de task comprobrar en el servidor y si todo va bien cambiar de stage.
-		System.out.println("Entrar");
-		return null;
+		if(!usuario.get().equals("") && !password.get().equals("")) {
+			try {
+				if(FuncionesSQL.consultaInicioSesion(usuario.get(), password.get()))
+						menuController.crearMenu();
+				else {
+					//TODO datos incorrectos
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}else {
+			//TODO Mostrar error
+		}
 	}
 
 	public GridPane getView() {

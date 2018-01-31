@@ -1,50 +1,26 @@
 package hsi.sql;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class Mazo {
 
-	private IntegerProperty ID;
-	private StringProperty Nombre;
+	private Integer ID;
+	private String Nombre;
 	
-	public Mazo(int id, String nombre) {
-		ID = new SimpleIntegerProperty(this, "ID", id);
-		Nombre = new SimpleStringProperty(this,"Nombre", nombre);
+	public Mazo(Integer id, String nombre) {
+		this.ID = id;
+		this.Nombre = nombre;
+	}
+	
+	public Integer getID() {
+		return ID;
+	}
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+	public String getNombre() {
+		return Nombre;
+	}
+	public void setNombre(String nombre) {
+		Nombre = nombre;
 	}
 
-	public final IntegerProperty IDProperty() {
-		return this.ID;
-	}
-	
-
-	public final int getID() {
-		return this.IDProperty().get();
-	}
-	
-
-	public final void setID(final int ID) {
-		this.IDProperty().set(ID);
-	}
-	
-
-	public final StringProperty NombreProperty() {
-		return this.Nombre;
-	}
-	
-
-	public final String getNombre() {
-		return this.NombreProperty().get();
-	}
-	
-
-	public final void setNombre(final String Nombre) {
-		this.NombreProperty().set(Nombre);
-	}
-	
-	
-	
-	
 }

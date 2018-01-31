@@ -1,12 +1,22 @@
 package hsi.carga;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import hsi.login.LoginController;
+import hsi.unirest.herramientas.ServicioAPI;
+import hsi.unirest.mapeo.Carta;
+import hsi.unirest.mapeo.ListaDeCartas;
 import hsi.ventanaArranque.VentanaArranqueController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +28,8 @@ import javafx.scene.layout.VBox;
 public class CargaController implements Initializable {
 
 	// LÃ³gica de negocio
-	private File ruta;
-	private File ficheroActualizacion;
+	private ServicioAPI servicio;
+	
 	// view
 	@FXML
 	private VBox view;
@@ -31,6 +41,8 @@ public class CargaController implements Initializable {
 	private Label frasesLabel;
 
 	public CargaController() throws IOException {
+		servicio = new ServicioAPI();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CargaView.fxml"));
 		loader.setController(this);
 		loader.load();
@@ -38,33 +50,57 @@ public class CargaController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		try {
-			crearEstructuraDirectorios();
-		} catch (IOException e) {
+		//TODO Investigar como ejecutar código java en la instalación para bajar las imágenes y crear el directorio con el nombre del patch
+		/*try {
+			descargarImagenes();
+		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}*/
+	}
+	
+	//TODO Hacer este método cuanod se instale la aplicación o cuando cambie la versión
+	private void descargarImagenes() throws UnirestException {		
+		ListaDeCartas cartas = servicio.getTodasLasCartas(null, null, null, "esES");
+		
+		for (Carta carta : cartas.getCartas()) {
+			if(carta.getImg() != null) {
+				try {
+					descargarImagen(carta.getImg());
+				} catch (IOException e) {
+					System.out.println("fallo normal");
+				}
+			}
+			
+			if(carta.getImgGold() != null) {
+				try {
+					descargarImagen(carta.getImgGold());
+				} catch (IOException e) {
+					System.out.println("fallo dorada");
+				}
+			}
 		}
 	}
-
-	//TODO Hacerlo en la carpeta User (buscar permisos)
-	private void crearEstructuraDirectorios() throws IOException {
-		ruta = new File(System.getProperty("user.home"));
-		//ruta = new File(ruta.getParentFile(),".hearthStoneInfo");
-		ruta = new File(ruta,".hearthStoneInfo");
-		ruta = new File(ruta.getPath(), "img");
-		System.out.println(ruta);
+	
+	private void descargarImagen(String url) throws IOException {
+		String destinationFile;
+		URL enlace = new URL(url);
 		
-		// ComprobaciÃ³n si existe el directorio para no sobreescribir las imÃ¡genes ya
-		// descargadas y el fichero de actualizaciÃ³n
-		//TODO Mirar if porque no lo hace bien
-		if (Files.exists(ruta.getParentFile().toPath())) {
-			Files.createDirectories(ruta.toPath());
-			// File ficheroActualizacion = new File(ruta, "ficheroActualizacion.hsi");
-		} else {
-			System.out.println("existe");
+		File file = new File(enlace.getFile());
+		destinationFile = file.getName();
+		
+		InputStream is = enlace.openStream();
+		OutputStream os = new FileOutputStream(new File("10.0.0.22611/images", destinationFile));
+
+		byte[] b = new byte[2048];
+		int length;
+
+		while ((length = is.read(b)) != -1) {
+			os.write(b, 0, length);
 		}
 
+		is.close();
+		os.close();
 	}
 
 	private void cambiarALogin() throws IOException {

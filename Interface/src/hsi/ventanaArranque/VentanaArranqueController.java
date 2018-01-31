@@ -21,6 +21,8 @@ public class VentanaArranqueController implements Initializable {
 
 	// Controllers
 	private CargaController cargaController;
+	//prueba 
+	private LoginController loginController;
 
 	// View
 	private static BorderPane copiaView;
@@ -33,6 +35,7 @@ public class VentanaArranqueController implements Initializable {
 
 	public VentanaArranqueController() throws IOException {
 		cargaController = new CargaController();
+		loginController = new LoginController();
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("VentanaArranque.fxml"));
 		loader.setController(this);
@@ -42,7 +45,8 @@ public class VentanaArranqueController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		copiaView = view;
-		view.setCenter(cargaController.getView());
+		//view.setCenter(cargaController.getView());
+		view.setCenter(loginController.getView());
 		efectosImagen();
 
 	}
