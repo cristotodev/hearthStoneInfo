@@ -1,5 +1,4 @@
 El panel derecho en las interfaces de cartas, de forma adicional tendrá unos apartados más:
-- Elite
 - Clase
 - Mecanismo
 
