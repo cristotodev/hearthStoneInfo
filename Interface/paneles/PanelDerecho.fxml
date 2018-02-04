@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <StackPane>
+         <children>
+            <ImageView fx:id="imgGif" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" translateX="15.0" translateY="-15.0">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </ImageView>
+            <ImageView fx:id="imgNormal" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </StackPane>
+      <Label fx:id="nombreLabel" alignment="CENTER" text="Nombre" />
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Expansión:" />
+            <Label fx:id="expansionLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Tipo:" />
+            <Label fx:id="tipoLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Facción:" />
+            <Label fx:id="faccionLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Rareza:" />
+            <Label fx:id="rarezaLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Coste:" />
+            <Label fx:id="costeLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Ataque:" />
+            <Label fx:id="ataqueLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Vida:" />
+            <Label fx:id="vidaLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Texto:" />
+            <Label fx:id="textoLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Descripción:" />
+            <Label fx:id="descripcionLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Raza:" />
+            <Label fx:id="razaLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Artista:" />
+            <Label fx:id="artistaLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Elite:" />
+            <Label fx:id="eliteLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Clase:" />
+            <Label fx:id="claseLabel" text="-" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Mecanismo:" />
+            <Label fx:id="mecanismoLabel" text="-" />
+         </children>
+      </HBox>
+      <Separator />
+      <HBox>
+         <children>
+            <Label text="Mazos:" />
+         </children>
+      </HBox>
+      <ComboBox fx:id="mazosComboBox" prefWidth="150.0" visibleRowCount="5" />
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
