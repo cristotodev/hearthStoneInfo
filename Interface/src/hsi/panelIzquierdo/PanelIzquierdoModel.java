@@ -185,15 +185,4 @@ public class PanelIzquierdoModel {
 		this.costeProperty().set(coste);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
