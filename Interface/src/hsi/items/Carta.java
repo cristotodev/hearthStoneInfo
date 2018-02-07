@@ -2,10 +2,13 @@ package hsi.items;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 
 public class Carta {
 	
@@ -24,8 +27,8 @@ public class Carta {
 	private StringProperty raza;
 	private StringProperty artista;
 	private StringProperty clase;
-	private StringProperty img;
-	private StringProperty imgDorada;
+	private ObjectProperty<Image> img;
+	private ObjectProperty<Image> imgDorada;
 	private StringProperty mecanismo;
 	
 	public Carta() {
@@ -44,8 +47,8 @@ public class Carta {
 		raza = new SimpleStringProperty(this, "raza");
 		artista = new SimpleStringProperty(this, "artista");
 		clase = new SimpleStringProperty(this, "clase");
-		img = new SimpleStringProperty(this, "img");
-		imgDorada = new SimpleStringProperty(this, "imgDorada");
+		img = new SimpleObjectProperty<>(this, "img");
+		imgDorada = new SimpleObjectProperty<>(this, "imgDorada");
 		mecanismo = new SimpleStringProperty(this, "mecanismo");
 	}
 
@@ -274,32 +277,32 @@ public class Carta {
 	}
 	
 
-	public final StringProperty imgProperty() {
+	public final ObjectProperty<Image> imgProperty() {
 		return this.img;
 	}
 	
 
-	public final String getImg() {
+	public final Image getImg() {
 		return this.imgProperty().get();
 	}
 	
 
-	public final void setImg(final String img) {
+	public final void setImg(final Image img) {
 		this.imgProperty().set(img);
 	}
 	
 
-	public final StringProperty imgDoradaProperty() {
+	public final ObjectProperty<Image> imgDoradaProperty() {
 		return this.imgDorada;
 	}
 	
 
-	public final String getImgDorada() {
+	public final Image getImgDorada() {
 		return this.imgDoradaProperty().get();
 	}
 	
 
-	public final void setImgDorada(final String imgDorada) {
+	public final void setImgDorada(final Image imgDorada) {
 		this.imgDoradaProperty().set(imgDorada);
 	}
 	
@@ -317,4 +320,5 @@ public class Carta {
 	public final void setMecanismo(final String mecanismo) {
 		this.mecanismoProperty().set(mecanismo);
 	}
+
 }

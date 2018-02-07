@@ -11,11 +11,18 @@ import hsi.items.Mazo;
 import hsi.menu.crearMazo.CrearMazoController;
 import hsi.menu.eliminarMazo.EliminarMazoController;
 import hsi.menu.verMazo.VerMazoController;
+import hsi.panelDerecho.PanelDerechoController;
+import hsi.panelDerecho.Busqueda.PanelDerechoBusquedaController;
+import hsi.panelDerecho.Favorito.PanelDerechoFavoritoController;
+import hsi.panelDerecho.Mazos.PanelDerechoMazosController;
 import hsi.sql.FuncionesSQL;
 import hsi.app.HsiApp;
 import hsi.items.Carta;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -37,15 +44,26 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
 	private Stage stage;
+	
+	//controller
+	private PanelDerechoController panelDerechoController;
+	private PanelDerechoMazosController panelDerechoMazosController;
+	private PanelDerechoBusquedaController panelDerechoBusquedaController;
+	private PanelDerechoFavoritoController panelDerechoFavoritoController;
 
 	// model
 	private StringProperty usuario;
 	private ListProperty<Mazo> mazos;
-	private ListProperty<Carta> favoritas;
+	private ListProperty<String> favoritas;
+	private ObjectProperty<Carta> cartaSeleccionada;
+	private ObjectProperty<Mazo> mazoSeleccionado;
 
 	// view
 	@FXML
 	private BorderPane view;
+	
+	@FXML
+	private BorderPane borderPaneDerecho;
 
 	@FXML
 	private MenuItem crearMazoMenu;
@@ -75,9 +93,16 @@ public class MenuController implements Initializable {
 	// TODO ¿Rellenar desde modelo con listado de string y coger el seleccionado?
 
 	public MenuController() throws IOException {
+		panelDerechoController = new PanelDerechoController();
+		panelDerechoMazosController = new PanelDerechoMazosController();
+		panelDerechoBusquedaController = new PanelDerechoBusquedaController();
+		panelDerechoFavoritoController = new PanelDerechoFavoritoController();
+		
 		usuario = new SimpleStringProperty(this, "usuario");
 		mazos = new SimpleListProperty<>(this, "barajas", FXCollections.observableArrayList());
 		favoritas = new SimpleListProperty<>(this, "favoritas", FXCollections.observableArrayList());
+		cartaSeleccionada = new SimpleObjectProperty<>(this, "cartaSeleccionada");
+		mazoSeleccionado = new SimpleObjectProperty<>(this, "mazoSeleccionado");
 
 		//mazoController = new CrearMazoController();
 
@@ -88,6 +113,24 @@ public class MenuController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//TODO Bindeos con atributos de PanelDerechoMazosController
+		
+		//bindeos
+		panelDerechoController.getMazosComboBox().itemsProperty().bind(mazos);
+		panelDerechoController.cartaSeleccionadaProperty().bind(cartaSeleccionada);
+		mazoSeleccionado.bind(panelDerechoController.mazoSeleccionadoProperty());
+		Bindings.bindBidirectional(mazos, panelDerechoController.mazosProperty());
+		panelDerechoController.usuarioProperty().bind(usuario);
+		
+		panelDerechoBusquedaController.cartaSeleccionadaProperty().bind(cartaSeleccionada);
+		panelDerechoBusquedaController.mazoSeleccionadoProperty().bind(mazoSeleccionado);
+		panelDerechoBusquedaController.usuarioProperty().bind(usuario);
+		Bindings.bindBidirectional(favoritas, panelDerechoBusquedaController.favoritosProperty());
+		
+		panelDerechoFavoritoController.usuarioProperty().bind(usuario);
+		panelDerechoFavoritoController.mazoSeleccionadoProperty().bind(mazoSeleccionado);
+		panelDerechoFavoritoController.cartaSelecionadaProperty().bind(cartaSeleccionada);
+		Bindings.bindBidirectional(favoritas, panelDerechoFavoritoController.favoritosProperty());
 
 		// Eventos
 		crearMazoMenu.setOnAction(e -> onCrearMazoMenuAction(e));
@@ -98,6 +141,10 @@ public class MenuController implements Initializable {
 		informacionMenu.setOnAction(e -> onInformacionMenuAction(e));
 		acercaDeMenu.setOnAction(e -> onAcercaDeMenuAction(e));
 		
+		//Colocación de paneles
+		borderPaneDerecho.setCenter(panelDerechoController.getView());
+		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
+		
 		
 	}
 
@@ -106,11 +153,11 @@ public class MenuController implements Initializable {
 	}
 
 	private void onInformacionMenuAction(ActionEvent e) {
-
+		//TODO informacion hacerlo
 	}
 
 	private void onFavoritosMenuAction(ActionEvent e) {
-
+		//TODO Favorito hacerlo
 	}
 
 	private void onEliminarMazoMenuAction(ActionEvent e) {
@@ -164,6 +211,7 @@ public class MenuController implements Initializable {
 		//Lo situamos en crearMenu para cargarlo una vez se introduce el usuario y es correcto
 		try {
 			llenarMazos();
+			llenarFavoritos();
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -177,13 +225,17 @@ public class MenuController implements Initializable {
 		HsiApp.getPrimaryStage().close();
 		stage.showAndWait();
 	}
-
-	public BorderPane getView() {
-		return view;
-	}
-
-	public StringProperty getUsuario() {
-		return usuario;
+	
+	private void llenarFavoritos() {
+		favoritas.clear();
+		try {
+			//TODO la consulta del sql da error comprobar
+			favoritas.set(new SimpleListProperty<>(this, "favoritosSQL", FXCollections.observableArrayList(FuncionesSQL.consultaFavoritos(usuario.get()))));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void llenarMazos() throws ClassNotFoundException, SQLException {
@@ -197,5 +249,12 @@ public class MenuController implements Initializable {
 			this.mazos.add(mazoNuevo);
 		}
 	}
+	
+	public BorderPane getView() {
+		return view;
+	}
 
+	public StringProperty getUsuario() {
+		return usuario;
+	}
 }

@@ -28,4 +28,7 @@
         </menus>
       </MenuBar>
    </top>
+   <right>
+      <BorderPane fx:id="borderPaneDerecho" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>
