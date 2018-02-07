@@ -338,7 +338,7 @@ public class FuncionesSQL {
 
 		PreparedStatement ps = conectarServidor()
 				.prepareStatement("select IdCarta from T_FAVORITOS where NombreUsuario = ?");
-		ps.setString(2, nombreUsuario);
+		ps.setString(1, nombreUsuario);
 
 		ResultSet rs = ps.executeQuery();
 
