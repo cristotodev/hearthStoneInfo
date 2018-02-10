@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import hsi.unirest.herramientas.ServicioAPI;
 import hsi.unirest.mapeo.Info;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +21,11 @@ import javafx.scene.layout.VBox;
 
 public class PanelIzquierdoController implements Initializable {
 	
+	//Lógica de negocio
+	private ServicioAPI servicioApi;
+	
 	// model
+	private static final Integer POSDESHABILITAR = -1;
 	private PanelIzquierdoModel panelIzquierdoModelo;
 	private ObjectProperty<Info> info;
 
@@ -63,9 +69,17 @@ public class PanelIzquierdoController implements Initializable {
 	@FXML
 	private Button buscarButton;
 
-	public PanelIzquierdoController() throws IOException {		
+	public PanelIzquierdoController() throws IOException {	
+		servicioApi = new ServicioAPI();
 		panelIzquierdoModelo = new PanelIzquierdoModel();
-		info = new SimpleObjectProperty<>(this, "info");
+		this.info = new SimpleObjectProperty<>(this, "info", new Info());
+		
+		try {
+			info.set(servicioApi.getInfo("esES"));
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PanelIzquierdoView.fxml"));
 		loader.setController(this);
@@ -86,14 +100,94 @@ public class PanelIzquierdoController implements Initializable {
 		panelIzquierdoModelo.vidaProperty().bind(vidaTextfield.textProperty());
 		panelIzquierdoModelo.costeProperty().bind(costeTextField.textProperty());
 		
-		//TODO Arreglar error 
+		busquedaCamposVbox.disableProperty().bind(panelIzquierdoModelo.nombreProperty().isNotEqualTo(""));
+		bindeosDeshabilitarNombreText();
+		bindeosDeshabilitarExpansionCombo();
+		bindeosDeshabilitarClaseCombo();
+		bindeosDeshabilitarFaccionCombo();
+		bindeosDeshabilitarRarezaCombo();
+		bindeosDeshabilitarTipoCombo();
+		bindeosDeshabilitarRazaCombo();
+		
 		//Llenar modelo
-		/*panelIzquierdoModelo.getExpansion().setAll(info.get().getSets());
+		panelIzquierdoModelo.getExpansion().setAll(info.get().getSets());
 		panelIzquierdoModelo.getClase().setAll(info.get().getClasses());
 		panelIzquierdoModelo.getFaccion().setAll(info.get().getFactions());
 		panelIzquierdoModelo.getRareza().setAll(info.get().getQualities());
 		panelIzquierdoModelo.getTipo().setAll(info.get().getTypes());
-		panelIzquierdoModelo.getRaza().setAll(info.get().getRaces());*/
+		panelIzquierdoModelo.getRaza().setAll(info.get().getRaces());
+		
+		//Evento
+		buscarButton.setOnAction(e -> onBuscarButtonAction(e));
+	}
+
+	private void onBuscarButtonAction(ActionEvent e) {
+		//TODO Buscar
+	}
+	
+	private void bindeosDeshabilitarRazaCombo() {
+		razaCombo.disableProperty().bind(
+				expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarTipoCombo() {
+		tipoCombo.disableProperty().bind(
+				expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarRarezaCombo() {
+		rarezaCombo.disableProperty().bind(
+				expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarFaccionCombo() {
+		faccionCombo.disableProperty().bind(
+				expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarClaseCombo() {
+		claseCombo.disableProperty().bind(expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarExpansionCombo() {
+		expansionCombo.disableProperty().bind(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)));
+	}
+	
+	private void bindeosDeshabilitarNombreText() {
+		nombreTextField.disableProperty().bind(
+				expansionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR).
+				or(claseCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(faccionCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(rarezaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(tipoCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(razaCombo.getSelectionModel().selectedIndexProperty().greaterThan(POSDESHABILITAR)).
+				or(panelIzquierdoModelo.ataqueProperty().isNotEqualTo("")).
+				or(panelIzquierdoModelo.vidaProperty().isNotEqualTo("")).
+				or(panelIzquierdoModelo.costeProperty().isNotEqualTo("")));
 	}
 
 	public VBox getView() {

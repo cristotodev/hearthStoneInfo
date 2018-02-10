@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-
+import hsi.app.HsiApp;
+import hsi.items.Carta;
 import hsi.items.Mazo;
 import hsi.menu.crearMazo.CrearMazoController;
 import hsi.menu.eliminarMazo.EliminarMazoController;
@@ -19,10 +18,6 @@ import hsi.panelDerecho.Favorito.PanelDerechoFavoritoController;
 import hsi.panelDerecho.Mazos.PanelDerechoMazosController;
 import hsi.panelIzquierdo.PanelIzquierdoController;
 import hsi.sql.FuncionesSQL;
-import hsi.unirest.herramientas.ServicioAPI;
-import hsi.unirest.mapeo.Info;
-import hsi.app.HsiApp;
-import hsi.items.Carta;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -31,17 +26,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -49,9 +40,6 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
 	private Stage stage;
-	
-	//Lógica de negocio
-	private ServicioAPI servicioApi;
 	
 	//controller
 	private PanelDerechoController panelDerechoController;
@@ -66,7 +54,6 @@ public class MenuController implements Initializable {
 	private ListProperty<String> favoritas;
 	private ObjectProperty<Carta> cartaSeleccionada;
 	private ObjectProperty<Mazo> mazoSeleccionado;
-	private ObjectProperty<Info> info;
 
 	// view
 	@FXML
@@ -103,14 +90,12 @@ public class MenuController implements Initializable {
 	// TODO ¿Rellenar desde modelo con listado de string y coger el seleccionado?
 
 	public MenuController() throws IOException {
-		servicioApi  = new ServicioAPI();
 		
 		panelDerechoController = new PanelDerechoController();
 		panelDerechoMazosController = new PanelDerechoMazosController();
 		panelDerechoBusquedaController = new PanelDerechoBusquedaController();
 		panelDerechoFavoritoController = new PanelDerechoFavoritoController();
 		panelIzquierdoController = new PanelIzquierdoController();
-		info = new SimpleObjectProperty<>(this, "info");
 		
 		usuario = new SimpleStringProperty(this, "usuario");
 		mazos = new SimpleListProperty<>(this, "barajas", FXCollections.observableArrayList());
@@ -145,8 +130,6 @@ public class MenuController implements Initializable {
 		panelDerechoFavoritoController.mazoSeleccionadoProperty().bind(mazoSeleccionado);
 		panelDerechoFavoritoController.cartaSelecionadaProperty().bind(cartaSeleccionada);
 		Bindings.bindBidirectional(favoritas, panelDerechoFavoritoController.favoritosProperty());
-
-		panelIzquierdoController.infoProperty().bind(info);
 		
 		// Eventos
 		crearMazoMenu.setOnAction(e -> onCrearMazoMenuAction(e));

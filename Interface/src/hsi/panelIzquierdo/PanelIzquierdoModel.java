@@ -21,7 +21,6 @@ public class PanelIzquierdoModel {
 	private StringProperty coste;
 	
 	public PanelIzquierdoModel() {
-		
 		nombre = new SimpleStringProperty(this, "nombre");
 		expansion = new SimpleListProperty<>(this, "expansion", FXCollections.observableArrayList());
 		clase = new SimpleListProperty<>(this, "clase", FXCollections.observableArrayList());
