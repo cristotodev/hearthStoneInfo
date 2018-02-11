@@ -62,6 +62,31 @@ public class ServicioAPI {
 
 		return listaDeCartas;
 	}
+	
+	/**
+	 * 
+	 * @param palabra Indica la palabra por la que la API realizará la búsqueda
+	 * @param idioma Especifica el idioma por el cuál se realizarán la búsqueda del contenido de las cartas
+	 * @return Una ListaDeCartas en la cuál cada objeto interno tiene la información del JSON
+	 * @throws UnirestException
+	 */
+	
+	public ListaDeCartas getCartasPorPalabra(String palabra, String idioma) throws UnirestException {
+		ListaDeCartas listaDeCartas = new ListaDeCartas();
+		String consulta = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/" + palabra + "/?locale=" + idioma;
+	
+		HttpResponse<JsonNode> response = Unirest.get(consulta)
+				.header("X-Mashape-Key", "65lMyicqJFmshoONWG7rijO8v9fap1oVHOUjsnCu6wDEybbrNT").asJson();
+	
+		JSONArray datosRespuesta = response.getBody().getArray();
+		
+		cargarLista(datosRespuesta, listaDeCartas);
+		
+		if(listaDeCartas.getCartas().isEmpty())
+			throw new UnirestException("Todos los datos de la peticÃ³n estaban vacios");
+		
+		return listaDeCartas;
+	}
 
 	/** Obtiene todas las cartas de la expansiÃ³n especificada en el parÃ¡metro "expansion"
 	 * 
