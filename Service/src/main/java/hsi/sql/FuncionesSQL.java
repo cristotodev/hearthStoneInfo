@@ -428,7 +428,24 @@ public class FuncionesSQL {
 		cerrarServidor();
 
 	}
+	/**
+	 * Elimina un mazo concreto mediante el ID, que es único.
+	 * @param IdMazo Identificador int, del mazo que se quiere eliminar.
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public static void eliminarMazoByID(int IdMazo)
+			throws ClassNotFoundException, SQLException {
 
+		PreparedStatement ps = conectarServidor()
+				.prepareStatement("delete from T_MAZOS where ID = ?;");
+		ps.setInt(1, IdMazo);
+
+		ps.execute();
+
+		cerrarServidor();
+
+	}
 	/**
 	 * Elimina todos los mazos de un usuario concreto.
 	 * 
