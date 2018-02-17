@@ -4,13 +4,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import hsi.app.HsiApp;
+import hsi.controlErrores.ControllerControlesView;
 import hsi.unirest.herramientas.ServicioAPI;
+import hsi.unirest.mapeo.Info;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +34,11 @@ public class IdiomaCartasController implements Initializable {
 
 	private Stage stage;
 	
+	//Lógica de negocio
+	private ServicioAPI servicioApi;
+	
 	//Model
+	private ObjectProperty<Info> info;
 	private ListProperty<String> idiomas;
 	private StringProperty idiomaSelecionado;
 	
@@ -44,12 +56,43 @@ public class IdiomaCartasController implements Initializable {
 	private Button cancelarBtn;
 
 	public IdiomaCartasController() throws IOException {
+		servicioApi = new ServicioAPI();
+		this.info = new SimpleObjectProperty<>(this, "info", new Info());
 		idiomas = new SimpleListProperty<>(this, "idiomas", FXCollections.observableArrayList());
 		idiomaSelecionado = new SimpleStringProperty(this, "idiomaSeleccionados");
 		
+		tareaInfoAPI();
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("IdiomaCartasView.fxml"));
 		loader.setController(this);
 		loader.load();
+	}
+
+	private void tareaInfoAPI() {
+		Task<Info> task = new Task<Info>() {
+			@Override
+			protected Info call() throws Exception {
+				return servicioApi.getInfo("esES");
+			}
+		};
+		
+		task.setOnFailed(e -> falloGetInfoAPITarea(e));
+		task.setOnSucceeded(e -> correctoGetInfoAPITarea(e));
+		task.run();
+	}
+	
+	private void correctoGetInfoAPITarea(WorkerStateEvent e) {
+		info.set((Info)e.getSource().getValue());
+		idiomas.addAll(info.get().getLocales());
+	}
+
+	private void falloGetInfoAPITarea(WorkerStateEvent e) {
+		try {
+			new ControllerControlesView("Hubo un problema al cargar los datos de la API",
+					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@Override
@@ -63,6 +106,9 @@ public class IdiomaCartasController implements Initializable {
 		//Eventos
 		cancelarBtn.setOnAction(e -> onCancelarBtnAction(e));
 		aceptarBtn.setOnAction(e -> onAceptarBtnAction(e));
+		
+		//llenarCombo
+		idiomas.addAll(info.get().getLocales());
 	}
 	
 	private void onAceptarBtnAction(ActionEvent e) {

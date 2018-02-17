@@ -321,4 +321,8 @@ public class Carta {
 		this.mecanismoProperty().set(mecanismo);
 	}
 
+	@Override
+	public String toString() {
+		return id + " : " + nombre;
+	}
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import hsi.app.HsiApp;
+import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Mazo;
 import hsi.sql.FuncionesSQL;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -16,6 +16,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,12 +74,27 @@ public class EliminarMazoController implements Initializable {
 	}
 	
 	private void onEliminarBtnAction(ActionEvent e) {
+		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				FuncionesSQL.eliminarMazo(usuario.get(), mazoSeleccionado.get().getNombre());
+				return null;
+			}
+		};
+		
+		task.setOnSucceeded(e1 -> stage.close());
+		task.setOnFailed(e1 -> falloEliminarMazoBDTarea(e1));
+		task.run();
+	}
+
+	private void falloEliminarMazoBDTarea(WorkerStateEvent e1) {
 		try {
-			FuncionesSQL.eliminarMazo(usuario.get(), mazoSeleccionado.get().getNombre());
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
+			new ControllerControlesView("Hubo un problema al eliminar el mazo de la BD",
+					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		stage.close();
 	}
 
 	private void onCancelarBtnAction(ActionEvent e) {

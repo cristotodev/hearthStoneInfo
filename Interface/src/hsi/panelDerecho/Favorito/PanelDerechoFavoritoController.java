@@ -51,7 +51,6 @@ public class PanelDerechoFavoritoController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		
 		//Bindeos
 		eliminarButton.disableProperty().bind(cartaSelecionada.isNull());
@@ -65,10 +64,8 @@ public class PanelDerechoFavoritoController implements Initializable {
 			FuncionesSQL.eliminarFavorito(getUsuario(), getCartaSelecionada().getId());
 			llenarFavoritos();
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		};
 	}
@@ -76,7 +73,6 @@ public class PanelDerechoFavoritoController implements Initializable {
 	private void llenarFavoritos() {
 		favoritos.clear();
 		try {
-			//TODO la consulta del sql da error comprobar
 			favoritos.set(new SimpleListProperty<>(this, "favoritosSQL", FXCollections.observableArrayList(FuncionesSQL.consultaFavoritos(usuario.get()))));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

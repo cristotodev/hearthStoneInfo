@@ -2,14 +2,15 @@ package hsi.menu.crearMazo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import hsi.app.HsiApp;
-import hsi.items.Mazo;
+import hsi.controlErrores.ControllerControlesView;
 import hsi.sql.FuncionesSQL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +25,13 @@ import javafx.stage.Stage;
 public class CrearMazoController implements Initializable {
 
 	private Stage stage;
-	
-	//Lógica
+
+	// Lógica
 	private StringProperty nombreMazo;
-	
-	//Modelo
+
+	// Modelo
 	private StringProperty usuario;
-	
+
 	// View
 	@FXML
 	private GridPane view;
@@ -47,7 +48,7 @@ public class CrearMazoController implements Initializable {
 	public CrearMazoController() throws IOException {
 		nombreMazo = new SimpleStringProperty(this, "nombreMazo");
 		usuario = new SimpleStringProperty(this, "usuario");
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CrearMazoView.fxml"));
 		loader.setController(this);
 		loader.load();
@@ -55,32 +56,40 @@ public class CrearMazoController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		//bindeo
+
+		// bindeo
 		nombreMazo.bind(nombreText.textProperty());
-		
-		
-		//Eventos
+		crearBtn.disableProperty().bind(nombreMazo.isEqualTo(""));
+
+		// Eventos
 		cancelarBtn.setOnAction(e -> onCancelarBtnAction(e));
 		crearBtn.setOnAction(e -> onCrearBtnAction(e));
 
 	}
-	
-	//TODO Completar función consultando en base de datos
+
 	private void onCrearBtnAction(ActionEvent e) {
-		if(!nombreMazo.get().equals("")) {
-			try {
-				FuncionesSQL.insertarMazo(usuario.get(), nombreMazo.get());
-				stage.close();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}else {
-			//TODO Crear alerta para campo vacio
-			System.out.println("Crear alerta");
-		}
 		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				FuncionesSQL.insertarMazo(usuario.get(), nombreMazo.get());
+				return null;
+			}
+		};
+		
+		task.setOnFailed(e1 -> falloInsertarMazoBDTarea(e1));
+		task.setOnSucceeded(e1 -> stage.close());
+		
+		task.run();
+	}
+
+	private void falloInsertarMazoBDTarea(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("Hubo un problema al insertar el mazo en la BD",
+					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void onCancelarBtnAction(ActionEvent e) {
@@ -90,14 +99,14 @@ public class CrearMazoController implements Initializable {
 	public void crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		//stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Crear mazo");
 		stage.setScene(new Scene(view));
 		stage.setResizable(false);
 		stage.showAndWait();
 	}
-	
+
 	public StringProperty getUsuario() {
 		return usuario;
 	}

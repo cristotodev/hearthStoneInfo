@@ -51,7 +51,7 @@ public class PanelDerechoBusquedaController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//TODO Modelo para los bindeos
+		//bindeos
 		insertarEnFavoritoButton.disableProperty().bind(cartaSeleccionada.isNull());
 		
 		//Eventos
@@ -73,7 +73,6 @@ public class PanelDerechoBusquedaController implements Initializable {
 	private void llenarFavoritos() {
 		favoritos.clear();
 		try {
-			//TODO la consulta del sql da error comprobar
 			favoritos.set(new SimpleListProperty<>(this, "favoritosSQL", FXCollections.observableArrayList(FuncionesSQL.consultaFavoritos(usuario.get()))));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

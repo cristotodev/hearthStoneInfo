@@ -29,6 +29,7 @@ public class VerMazoController implements Initializable {
 	private Stage stage;
 	
 	//Model
+	private boolean cancelo;
 	private StringProperty usuario;
 	private ListProperty<Mazo> mazos;
 	private ObjectProperty<Mazo> mazoSeleccionado;
@@ -47,6 +48,7 @@ public class VerMazoController implements Initializable {
 	private Button cancelarBtn;
 
 	public VerMazoController() throws IOException {
+		cancelo = false;
 		usuario = new SimpleStringProperty(this, "usuario");
 		mazos = new SimpleListProperty<>(this, "mazos", FXCollections.observableArrayList());
 		mazoSeleccionado = new SimpleObjectProperty<>(this, "mazoSeleccionado");
@@ -69,15 +71,15 @@ public class VerMazoController implements Initializable {
 	}
 	
 	private void verBtnAction(ActionEvent e) {
-		// TODO Consultar funcionamiento si retorna el mazo o que
 		stage.close();
 	}
 
 	private void onCancelarBtnAction(ActionEvent e) {
+		cancelo = true;
 		stage.close();
 	}
 
-	public void crearVentana() {
+	public Mazo crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
 		//stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
@@ -86,6 +88,10 @@ public class VerMazoController implements Initializable {
 		stage.setScene(new Scene(view));
 		stage.setResizable(false);
 		stage.showAndWait();
+		if(cancelo)
+			return null;
+		else
+			return mazoSeleccionado.get();
 	}
 	
 	public StringProperty getUsuario() {

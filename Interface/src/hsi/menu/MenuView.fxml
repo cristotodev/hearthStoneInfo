@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
+            <Menu fx:id="inicioMenu" mnemonicParsing="false" text="Inicio" />
           <Menu mnemonicParsing="false" text="Mazos">
             <items>
               <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo" />
@@ -29,6 +31,9 @@
       </MenuBar>
    </top>
    <right>
-      <BorderPane fx:id="borderPaneDerecho" BorderPane.alignment="CENTER" />
+      <BorderPane fx:id="borderPaneDerecho" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></BorderPane>
    </right>
 </BorderPane>

@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hsi.controlErrores.ControllerControlesView;
 import hsi.menu.MenuController;
 import hsi.register.RegisterController;
 import hsi.sql.FuncionesSQL;
 import hsi.ventanaArranque.VentanaArranqueController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,78 +25,95 @@ import javafx.scene.layout.GridPane;
 
 public class LoginController implements Initializable {
 
-	//Model
+	// Model
 	private MenuController menuController;
 	private StringProperty usuario;
 	private StringProperty password;
-	
-	//View
+
+	// View
 	@FXML
-    private GridPane view;
+	private GridPane view;
 
-    @FXML
-    private TextField usuarioTextField;
+	@FXML
+	private TextField usuarioTextField;
 
-    @FXML
-    private PasswordField contraPassField;
+	@FXML
+	private PasswordField contraPassField;
 
-    @FXML
-    private Button entrarButton;
+	@FXML
+	private Button entrarButton;
 
-    @FXML
-    private Hyperlink crearLink;
+	@FXML
+	private Hyperlink crearLink;
 
-	
 	public LoginController() throws IOException {
 		usuario = new SimpleStringProperty(this, "usuario");
 		password = new SimpleStringProperty(this, "password");
-		
+
 		menuController = new MenuController();
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
 		loader.setController(this);
 		loader.load();
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		//Bindeo
+
+		// Bindeo
 		usuario.bind(usuarioTextField.textProperty());
 		password.bind(contraPassField.textProperty());
 		menuController.getUsuario().bind(usuario);
-		
-		//Evento
+
+		entrarButton.disableProperty().bind(usuario.isEqualTo("").or(password.isEqualTo("")));
+
+		// Evento
 		crearLink.setOnAction(e -> onCrearCuentaLinkAction(e));
 		entrarButton.setOnAction(e -> onEntrarButtonAction(e));
 
 	}
-	
+
 	private void onCrearCuentaLinkAction(ActionEvent e) {
 		try {
 			RegisterController registerController = new RegisterController();
 			VentanaArranqueController.getCopiaView().setCenter(registerController.getView());
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 	}
 
 	private void onEntrarButtonAction(ActionEvent e) {
-		// TODO Dentro de task comprobrar en el servidor y si todo va bien cambiar de stage.
-		if(!usuario.get().equals("") && !password.get().equals("")) {
-			try {
-				if(FuncionesSQL.consultaInicioSesion(usuario.get(), password.get()))
-						menuController.crearMenu();
-				else {
-					//TODO datos incorrectos
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+		Task<Boolean> task = new Task<Boolean>() {
+			@Override
+			protected Boolean call() throws Exception {
+				return FuncionesSQL.consultaInicioSesion(usuario.get(), password.get());
 			}
-		}else {
-			//TODO Mostrar error
+		};
+		
+		task.setOnFailed(e1 -> consultaInicioSesionTaskError(e1));
+		task.setOnSucceeded(e1 ->consultaInicioSesionTaskCorrecto(e1) );
+		task.run();
+	}
+
+	private void consultaInicioSesionTaskCorrecto(WorkerStateEvent e1) {
+		Boolean result = (Boolean) e1.getSource().getValue();
+		if(result)
+			menuController.crearMenu();
+		else {
+			try {
+				new ControllerControlesView("Los datos no son correctos.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void consultaInicioSesionTaskError(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("No se pudo conectarse con la base de datos.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

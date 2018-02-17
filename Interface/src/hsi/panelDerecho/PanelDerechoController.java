@@ -16,6 +16,8 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -114,8 +116,16 @@ public class PanelDerechoController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// bindeos
-		mazoSeleccionado.bind(mazosComboBox.getSelectionModel().selectedItemProperty());
+		// bindeo
+		mazosComboBox.itemsProperty().bind(mazos);	
+		mazosComboBox.valueProperty().addListener(new ChangeListener<Mazo>() {
+			@Override
+			public void changed(ObservableValue<? extends Mazo> observable, Mazo oldValue, Mazo newValue) {
+				mazoSeleccionado.set(newValue);
+				System.out.println(newValue);
+			}
+		});
+		
 		copiarButton.disableProperty().bind(mazoSeleccionado.isNull().or(cartaSeleccionada.isNull()));
 		
 		imgGif.imageProperty().bind(cartaSeleccionada.get().imgDoradaProperty());
@@ -136,7 +146,7 @@ public class PanelDerechoController implements Initializable {
 		claseLabel.textProperty().bind(cartaSeleccionada.get().claseProperty());
 		mecanismoLabel.textProperty().bind(cartaSeleccionada.get().mecanismoProperty());
 		
-		//TODO Eliminar solo para prueba
+
 		cartaSeleccionada.get().setImg(new Image("http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_572.png"));
 		cartaSeleccionada.get().setImgDorada(new Image("http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_572_premium.gif"));
 		
@@ -147,8 +157,7 @@ public class PanelDerechoController implements Initializable {
 	private void onCopiarButtonAction(ActionEvent e) {
 		try {
 			if(FuncionesSQL.consultaNumeroMazoCarta(mazoSeleccionado.get().getId()) < CANTCARTAS)
-				FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
-			
+				FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());		
 			llenarMazos();
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();

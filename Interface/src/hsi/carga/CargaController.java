@@ -54,7 +54,6 @@ public class CargaController implements Initializable {
 		/*try {
 			descargarImagenes();
 		} catch (UnirestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
 	}
