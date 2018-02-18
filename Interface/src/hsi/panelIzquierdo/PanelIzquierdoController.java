@@ -183,13 +183,17 @@ public class PanelIzquierdoController implements Initializable {
 
 	private void onBuscarButtonAction(ActionEvent e) {
 		if (busquedaCamposVbox.isDisable()) {
-			try {
-				listaCartasServicios = servicioApi.getCartasPorPalabra(panelIzquierdoModelo.getNombre(),
-						idiomaCarta.get());
-				pasarCartas(listaCartasServicios.getCartas(), cartasBusqueda.get());
-			} catch (UnirestException e1) {
-				e1.printStackTrace();
-			}
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasPorPalabra(panelIzquierdoModelo.getNombre(),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
 
 		} else {
 			try {
@@ -207,39 +211,106 @@ public class PanelIzquierdoController implements Initializable {
 		}
 	}
 
-	private void busquedasPorCampos() throws NumberFormatException, UnirestException {
-		if (!expansionCombo.isDisable()) {
-			listaCartasServicios = servicioApi.getCartasExpansion(expansionSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}else if(!claseCombo.isDisable()) {
-			listaCartasServicios = servicioApi.getCartasClases(claseSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}else if(!faccionCombo.isDisable()) {
-			listaCartasServicios = servicioApi.getCartasFacciones(faccionSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}else if(!rarezaCombo.isDisable()) {
-			listaCartasServicios = servicioApi.getCartasRareza(rarezaSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}else if(!tipoCombo.isDisable()) {
-			listaCartasServicios = servicioApi.getCartasTipo(tipoSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}else {
-			listaCartasServicios = servicioApi.getCartasRaza(razaSeleccionada.get(),
-					Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-					Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-					idiomaCarta.get());
-		}
+	private void correctoObtenerCartasBDTarea(WorkerStateEvent e1) {
+		listaCartasServicios = (ListaDeCartas) e1.getSource().getValue();
 		pasarCartas(listaCartasServicios.getCartas(), cartasBusqueda.get());
+	}
+
+	private void falloObtenerCartasBDTarea(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("Hubo un problema al conectarse con la API para realizar la búsqueda.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void busquedasPorCampos() throws NumberFormatException, UnirestException {
+		
+		if (!expansionCombo.isDisable()) {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasExpansion(expansionSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}else if(!claseCombo.isDisable()) {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasClases(claseSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}else if(!faccionCombo.isDisable()) {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasFacciones(faccionSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}else if(!rarezaCombo.isDisable()) {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasRareza(rarezaSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}else if(!tipoCombo.isDisable()) {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasTipo(tipoSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}else {
+			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+				@Override
+				protected ListaDeCartas call() throws Exception {
+					return servicioApi.getCartasRaza(razaSeleccionada.get(),
+							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+							idiomaCarta.get());
+				}
+			};
+			
+			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+			task.run();
+		}
 	}
 
 	private void pasarCartas(List<hsi.unirest.mapeo.Carta> cartasServicio, List<Carta> cartasPrograma) {
