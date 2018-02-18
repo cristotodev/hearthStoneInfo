@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
 import hsi.items.Mazo;
 import hsi.sql.FuncionesSQL;
@@ -20,6 +21,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -122,7 +125,6 @@ public class PanelDerechoController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Mazo> observable, Mazo oldValue, Mazo newValue) {
 				mazoSeleccionado.set(newValue);
-				System.out.println(newValue);
 			}
 		});
 		
@@ -155,20 +157,68 @@ public class PanelDerechoController implements Initializable {
 	}
 	
 	private void onCopiarButtonAction(ActionEvent e) {
-		try {
-			if(FuncionesSQL.consultaNumeroMazoCarta(mazoSeleccionado.get().getId()) < CANTCARTAS)
-				FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());		
-			llenarMazos();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		
+		Task<Integer> task = new Task<Integer>() {
+			@Override
+			protected Integer call() throws Exception {
+				return FuncionesSQL.consultaNumeroMazoCarta(mazoSeleccionado.get().getId());
+			}
+		};
+		
+		task.setOnFailed(e1 -> falloConsultarMazosBDTarea(e1));
+		task.setOnSucceeded(e1 -> correctoConsultarMazosBDTarea(e1));
+		task.run();
 	}
 	
+	private void correctoConsultarMazosBDTarea(WorkerStateEvent e1) {
+		if((Integer)e1.getSource().getValue() <= CANTCARTAS) {
+			Task<Void> task = new Task<Void>() {
+				protected Void call() throws Exception {
+					FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
+					return null;
+				};
+			};
+			
+			task.setOnFailed(e2 -> falloConsultarMazosBDTarea(e2));
+			task.setOnSucceeded(e2 -> {
+				try {
+					llenarMazos();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			});
+			task.run();
+		}
+	}
+
+	private void falloConsultarMazosBDTarea(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("No se pudo conectarse con la base de datos.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void llenarMazos() throws ClassNotFoundException, SQLException {
+		
+		Task<List<hsi.sql.Mazo>> task = new Task<List<hsi.sql.Mazo>>() {
+			@Override
+			protected List<hsi.sql.Mazo> call() throws Exception {
+				return FuncionesSQL.consultaMazos(usuario.get());
+			}
+		};
+		
+		task.setOnSucceeded(e -> correctoLlenarMazoBDTarea(e));
+		task.setOnFailed(e ->  falloConsultarMazosBDTarea(e));
+		task.run();
+	}
+
+	private void correctoLlenarMazoBDTarea(WorkerStateEvent e) {
+		@SuppressWarnings("unchecked")
+		List<hsi.sql.Mazo> mazos = (List<hsi.sql.Mazo>) e.getSource().getValue();
 		mazos.clear();
-		List<hsi.sql.Mazo> mazos = FuncionesSQL.consultaMazos(usuario.get());
 		for (hsi.sql.Mazo mazo : mazos) {
 			Mazo mazoNuevo = new Mazo();
 			mazoNuevo.setId(mazo.getID());
@@ -177,7 +227,7 @@ public class PanelDerechoController implements Initializable {
 			this.mazos.add(mazoNuevo);
 		}
 	}
-	
+
 	public VBox getView() {
 		return view;
 	}

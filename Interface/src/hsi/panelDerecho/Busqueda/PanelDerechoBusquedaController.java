@@ -3,8 +3,10 @@ package hsi.panelDerecho.Busqueda;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
 import hsi.items.Mazo;
 import hsi.sql.FuncionesSQL;
@@ -16,6 +18,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,26 +63,50 @@ public class PanelDerechoBusquedaController implements Initializable {
 	}
 	
 	private void onInsertarEnFavoritoButtonAction(ActionEvent e) {
-		//TODO Hilo
-		try {
-			FuncionesSQL.insertarFavorito(usuario.get(), cartaSeleccionada.get().getId());
-			llenarFavoritos();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				FuncionesSQL.insertarFavorito(usuario.get(), cartaSeleccionada.get().getId());
+				return null;
+			}
+		};
+		
+		task.setOnSucceeded(e1 -> correctoInsertarFavoritoBDTarea(e1));
+		task.setOnFailed(e1 -> falloInsertarFavoritoBDTarea(e1));
+		task.run();
 	}
 	
-	private void llenarFavoritos() {
-		favoritos.clear();
+	private void falloInsertarFavoritoBDTarea(WorkerStateEvent e1) {
 		try {
-			favoritos.set(new SimpleListProperty<>(this, "favoritosSQL", FXCollections.observableArrayList(FuncionesSQL.consultaFavoritos(usuario.get()))));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+			new ControllerControlesView("No se pudo conectarse con la base de datos.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void correctoInsertarFavoritoBDTarea(WorkerStateEvent e1) {
+		llenarFavoritos();
+	}
+
+	private void llenarFavoritos() {
+		
+		Task<List<String>> task = new Task<List<String>>() {
+			@Override
+			protected List<String> call() throws Exception {
+				return FuncionesSQL.consultaFavoritos(usuario.get());
+			}
+		};
+		
+		task.setOnSucceeded(e -> correctoCogerFavoritosBDTarea(e));
+		task.setOnFailed(e -> falloInsertarFavoritoBDTarea(e));
+		task.run();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void correctoCogerFavoritosBDTarea(WorkerStateEvent e) {
+		favoritos.clear();
+		favoritos.addAll((List<String>) e.getSource().getValue());
 	}
 
 	public VBox getView() {
