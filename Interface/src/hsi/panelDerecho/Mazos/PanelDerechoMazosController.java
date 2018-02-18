@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
 import hsi.items.Mazo;
 import hsi.sql.FuncionesSQL;
@@ -16,6 +17,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,24 +70,44 @@ public class PanelDerechoMazosController implements Initializable {
 	}
 
 	private void onEliminarButtonAction(ActionEvent e) {
+		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				FuncionesSQL.eliminarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
+				return null;
+			}
+		};
+		
+		task.setOnFailed(e1 -> falloElimnarCartaBDTarea(e1));
+		task.run();
+	}
+
+	private void falloElimnarCartaBDTarea(WorkerStateEvent e1) {
 		try {
-			FuncionesSQL.eliminarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			new ControllerControlesView("No se pudo conectarse con la base de datos.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	private void onInsertarEnFavoritonButtonAction(ActionEvent e) {
-		try {
-			FuncionesSQL.insertarFavorito(getUsuario(), cartaSeleccionada.get().getId());
-			favoritas.add(cartaSeleccionada.get().getId());
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				FuncionesSQL.insertarFavorito(getUsuario(), cartaSeleccionada.get().getId());
+				return null;
+			}
+		};
+		
+		task.setOnSucceeded(e1 -> correctoInsertarFavoritoBDTarea(e1));
+		task.setOnFailed(e1 -> falloElimnarCartaBDTarea(e1));
+		task.run();
+	}
+
+	private void correctoInsertarFavoritoBDTarea(WorkerStateEvent e1) {
+		favoritas.add(cartaSeleccionada.get().getId());
 	}
 
 	public VBox getView() {
