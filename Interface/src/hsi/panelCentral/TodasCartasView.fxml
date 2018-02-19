@@ -5,7 +5,7 @@
 <!-- TODO colocar bien los paquetes -->
 <?import hsi.panelCentral.CartasPane?>
 
-<ScrollPane fx:id="view" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="view" fitToWidth="true" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <CartasPane fx:id="cartasPane" />
    </content>

@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import hsi.items.Carta;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 
 public class TodasLasCartasController implements Initializable {
 
@@ -26,8 +28,17 @@ public class TodasLasCartasController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-
+		// TODO PRUEBAS borrar
+		Carta c1 = new Carta();
+		c1.setId("1234");
+		c1.setImg(new Image("https://pics.filmaffinity.com/pulp_fiction-210382116-large.jpg"));
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
+		cartasPane.getCartas().add(c1);
 	}
 
 	public ScrollPane getView() {
