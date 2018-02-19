@@ -27,6 +27,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/**
+ * Clase encargada del crear el panel derecho inferior de Favorito. El que aparece en la opción "Favorito" del menú.
+ * @author Cristo
+ *
+ */
 public class PanelDerechoFavoritoController implements Initializable {
 
 	//model
@@ -63,6 +68,11 @@ public class PanelDerechoFavoritoController implements Initializable {
 		eliminarButton.setOnAction(e -> eliminarButtonAction(e));
 	}
 
+	/**
+	 * Evento asociado al botón "Eliminar".<br>
+	 * Elimina de favorito en la base de datos la carta seleccionada y llena la lista de favoritos una vez eliminado.
+	 * @param e
+	 */
 	private void eliminarButtonAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {

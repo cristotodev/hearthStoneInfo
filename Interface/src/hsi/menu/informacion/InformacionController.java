@@ -13,6 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encarga de crear la ventana emergente relacionada con la opción "Información" del menú.
+ * @author Cristo
+ *
+ */
 public class InformacionController implements Initializable {
 
 	private Stage stage;

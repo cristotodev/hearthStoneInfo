@@ -1,5 +1,11 @@
 package hsi.unirest.mapeo;
 
+/**
+ * Clase para el mapeo de los datos de una carta del JSON
+ * 
+ * @author Cristo
+ *
+ */
 public class Carta {
 	private String cardId;
 	private String dbfId;
@@ -17,6 +23,7 @@ public class Carta {
 	private Boolean collectible;
 	private String playerClass;
 	private String howToGetGold;
+	private String race;
 	private String img;
 	private String imgGold;
 	private String locale;
@@ -140,6 +147,12 @@ public class Carta {
 	}
 	public void setMechanics(String mechanics) {
 		this.mechanics = mechanics;
+	}
+	public String getRace() {
+		return race;
+	}
+	public void setRace(String race) {
+		this.race = race;
 	}
 	
 	

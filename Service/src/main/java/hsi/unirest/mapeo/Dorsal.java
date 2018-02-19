@@ -1,5 +1,11 @@
 package hsi.unirest.mapeo;
 
+/**
+ * Clase para el mapeo de los datos de los dorsales del JSON
+ * 
+ * @author Cristo
+ *
+ */
 public class Dorsal {
 	
 	private String cardBackId;

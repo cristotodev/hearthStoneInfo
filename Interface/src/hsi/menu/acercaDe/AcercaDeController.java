@@ -13,6 +13,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encargada de crear la ventana que contendrá la información básica de la aplicación.
+ * @author Cristo
+ *
+ */
 public class AcercaDeController implements Initializable {
 
 	private Stage stage;

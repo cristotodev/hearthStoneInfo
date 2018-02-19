@@ -24,6 +24,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encarga de crear la ventana emergente para seleccionar que mazo deseamos ver.
+ * @author Cristo
+ *
+ */
 public class VerMazoController implements Initializable {
 
 	private Stage stage;
@@ -70,15 +75,30 @@ public class VerMazoController implements Initializable {
 		verBtn.setOnAction(e -> verBtnAction(e));
 	}
 	
+	/**
+	 * Evento asociado al botón "Ver".<br>
+	 * Cierra el programa.
+	 * @param e
+	 */
 	private void verBtnAction(ActionEvent e) {
 		stage.close();
 	}
 
+	/**
+	 * Evento asociado al botón "Cancelar".<br>
+	 * Modifica el valor de la variable "cancelo" para luego comprobar que debe retornar y cierra el programa.
+	 * @param e
+	 */
 	private void onCancelarBtnAction(ActionEvent e) {
 		cancelo = true;
 		stage.close();
 	}
 
+	/**
+	 * Crear la ventana emergente.
+	 * @return Devuelve true si el usuario seleccionó un mazo y le dio aceptar.<br>
+	 *		   Devuelve false si el usuari le dió a cancelar o cerró la ventana emergente.
+	 */
 	public Mazo crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());

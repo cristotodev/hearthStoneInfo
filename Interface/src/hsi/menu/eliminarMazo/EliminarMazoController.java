@@ -29,6 +29,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encarga de crear la ventana emergente para la eliminación de mazos.
+ * @author Cristo
+ *
+ */
+
 public class EliminarMazoController implements Initializable {
 
 	private Stage stage;
@@ -73,6 +79,11 @@ public class EliminarMazoController implements Initializable {
 		eliminarBtn.setOnAction(e -> onEliminarBtnAction(e));
 	}
 	
+	/**
+	 * Evento asociado al botón "Eliminar".<br>
+	 * Elimina de la base de datos el mazo seleccionado.
+	 * @param e
+	 */
 	private void onEliminarBtnAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {
@@ -97,6 +108,11 @@ public class EliminarMazoController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado al botón "Cancelar".<br>
+	 * Cierra la ventana emergente.
+	 * @param e
+	 */
 	private void onCancelarBtnAction(ActionEvent e) {
 		stage.close();
 	}

@@ -22,6 +22,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Clase encargada del funcionamiento de la ventana de registro.
+ * 
+ * @author Cristo
+ *
+ */
 public class RegisterController implements Initializable {
 
 	// model
@@ -72,7 +78,13 @@ public class RegisterController implements Initializable {
 		cancelarButton.setOnAction(e -> onCancelarButtonAction(e));
 		crearButton.setOnAction(e -> onCrearButtonAction(e));
 	}
-
+	
+	/**
+	 * Evento asociado al botón Crear.
+	 * Comprueba que el usuario no está en la base de datos y lo crea.
+	 * 
+	 * @param e
+	 */
 	private void onCrearButtonAction(ActionEvent e) {
 		if (password.get().equals(repetirPassword.get())) {
 			comprobarUsuarioTarea();
@@ -145,6 +157,12 @@ public class RegisterController implements Initializable {
 		}
 	}
 	
+	/**
+	 * Evento asociado al botón Cancelar.
+	 * Vuelve a la ventana del login.
+	 * 
+	 * @param e
+	 */
 	private void onCancelarButtonAction(ActionEvent e) {
 		cambiarALogin();
 	}

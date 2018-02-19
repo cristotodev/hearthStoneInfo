@@ -27,6 +27,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/**
+ * Clase encargada del crear el panel derecho inferior de búsqueda. El que aparece en la opción "Inicio" del menú.
+ * @author Cristo
+ *
+ */
 public class PanelDerechoBusquedaController implements Initializable {
 	
 	//Model
@@ -62,6 +67,11 @@ public class PanelDerechoBusquedaController implements Initializable {
 		insertarEnFavoritoButton.setOnAction(e -> onInsertarEnFavoritoButtonAction(e));
 	}
 	
+	/**
+	 * Evento asociado al botón "Insertar en favorito".<br>
+	 * Inserta en la base de datos la carta seleccionada en ese usuario.
+	 * @param e
+	 */
 	private void onInsertarEnFavoritoButtonAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {

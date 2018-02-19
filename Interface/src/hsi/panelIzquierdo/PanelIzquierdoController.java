@@ -31,6 +31,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
+/**
+ * Clase encargada del panel Izquierdo de búsqueda.<br>
+ * Encargado de realizar búsquedas por clases, facción, nombre, etc.
+ * @author Cristo
+ *
+ */
 public class PanelIzquierdoController implements Initializable {
 
 	// Lógica de negocio
@@ -181,6 +187,11 @@ public class PanelIzquierdoController implements Initializable {
 		buscarButton.setOnAction(e -> onBuscarButtonAction(e));
 	}
 
+	/**
+	 * Evento asociado al botón "Buscar".<br>
+	 * Realiza la consulta a la API dependiendo de los atributos que el usuario ha especificado.
+	 * @param e
+	 */
 	private void onBuscarButtonAction(ActionEvent e) {
 		if (busquedaCamposVbox.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
@@ -313,6 +324,11 @@ public class PanelIzquierdoController implements Initializable {
 		}
 	}
 
+	/**
+	 * Pasa los atributos de un objeto Carta del Servicio, a un objeto Carta de la interfaz.
+	 * @param cartasServicio Origen.
+	 * @param cartasPrograma Destino.
+	 */
 	private void pasarCartas(List<hsi.unirest.mapeo.Carta> cartasServicio, List<Carta> cartasPrograma) {
 		for (hsi.unirest.mapeo.Carta cartaServicio : cartasServicio) {
 			Carta carta = new Carta();

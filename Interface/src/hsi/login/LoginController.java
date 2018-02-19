@@ -23,6 +23,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Clase encargada del funcionamiento de la ventana del login.
+ * 
+ * @author Cristo
+ *
+ */
 public class LoginController implements Initializable {
 
 	// Model
@@ -73,6 +79,11 @@ public class LoginController implements Initializable {
 
 	}
 
+	/**
+	 * Evento vinculado al botón Crear.
+	 * Sustituye la ventana del login por la del registro de usuario.
+	 * @param e
+	 */
 	private void onCrearCuentaLinkAction(ActionEvent e) {
 		try {
 			RegisterController registerController = new RegisterController();
@@ -83,6 +94,11 @@ public class LoginController implements Initializable {
 
 	}
 
+	/**
+	 * Evento vinculado al botón Entrar.
+	 * Comprueba los datos de la base de datos. Si todo es correcto cambia a la ventana de MenuController, si falla lanza una ventana de error.
+	 * @param e
+	 */
 	private void onEntrarButtonAction(ActionEvent e) {
 		Task<Boolean> task = new Task<Boolean>() {
 			@Override

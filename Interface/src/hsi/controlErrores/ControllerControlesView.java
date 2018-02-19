@@ -14,12 +14,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encargada de crear las ventanas cuando surge algún error, datos erroneos, etc.
+ * 
+ * @author Cristo
+ *
+ */
 public class ControllerControlesView implements Initializable {
 
 	private Stage stage;
@@ -40,6 +45,12 @@ public class ControllerControlesView implements Initializable {
 	@FXML
 	private Button aceptarBtn;
 
+	/**
+	 * 
+	 * @param mensaje Mensaje que va a mostrar en la ventana del error.
+	 * @param urlImage Dirección de la imagen para sustituirla depende del tipo de error.
+	 * @throws IOException
+	 */
 	public ControllerControlesView(String mensaje, String urlImage) throws IOException {
 		this.mensaje = new SimpleStringProperty(this, "mensaje", mensaje);
 		this.urlImage = new SimpleStringProperty(this, "urlImage", urlImage);
@@ -58,10 +69,18 @@ public class ControllerControlesView implements Initializable {
 		aceptarBtn.setOnAction(e -> onAceptarButtonAction(e));
 	}
 
+	/**
+	 * Evento asociado al botón Aceptar. 
+	 * Cierra la ventan del error.
+	 * @param e
+	 */
 	private void onAceptarButtonAction(ActionEvent e) {
 		stage.close();
 	}
 	
+	/**
+	 * Método para crear y mostrar la ventana del error.
+	 */
 	public void crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());

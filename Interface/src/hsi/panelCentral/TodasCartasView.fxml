@@ -2,9 +2,9 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.BorderPane?>
 <!-- TODO colocar bien los paquetes -->
 <?import hsi.component.custom.CartasPane?>
-
 
 <ScrollPane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.141"

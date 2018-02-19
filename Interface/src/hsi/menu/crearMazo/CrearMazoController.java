@@ -22,6 +22,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encarga de crear la ventana emergente para la creación de nuevos mazos.
+ * @author Cristo
+ *
+ */
 public class CrearMazoController implements Initializable {
 
 	private Stage stage;
@@ -67,6 +72,11 @@ public class CrearMazoController implements Initializable {
 
 	}
 
+	/**
+	 * Evento asociado al botón "Crear".<br>
+	 * Inserta el nuevo mazo en la base de datos.
+	 * @param e
+	 */
 	private void onCrearBtnAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {
@@ -92,6 +102,11 @@ public class CrearMazoController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado al botón "Cancelar".<br>
+	 * Cierra la ventana emergente.
+	 * @param e
+	 */
 	private void onCancelarBtnAction(ActionEvent e) {
 		stage.close();
 	}

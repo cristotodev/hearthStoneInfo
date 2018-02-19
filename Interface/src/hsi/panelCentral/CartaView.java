@@ -50,8 +50,7 @@ public class CartaView extends BorderPane implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		this.carta.addListener((o, ov, nv) -> {
 			if(nv != null) {
-				//TODO utilizar bien el modelo, comentado por error temporal
-				//imagenView.imageProperty().bind(nv.imgProperty());
+				imagenView.imageProperty().bind(nv.imgProperty());
 				nombreView.textProperty().bind(nv.nombreProperty());
 			}
 		});

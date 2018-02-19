@@ -35,6 +35,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
+/**
+ * Clase encargada de crear la parte superior del panel derecho.<br>
+ * El encargado de mostrar los datos de una cartam, el desplegable de los mazos y el botón "Copiar a Mazo".
+ * @author Cristo
+ *
+ */
 public class PanelDerechoController implements Initializable {
 	
 	private final static Integer CANTCARTAS = 30;
@@ -156,6 +162,11 @@ public class PanelDerechoController implements Initializable {
 		copiarButton.setOnAction(e -> onCopiarButtonAction(e));
 	}
 	
+	/**
+	 * Evento asociado al botón "Copiar a Mazo".<br>
+	 * Comprueba la cantidad de cartas que tiene un mazo y si no es superior a 30 inserta esa carta en el mazo.
+	 * @param e
+	 */
 	private void onCopiarButtonAction(ActionEvent e) {
 		
 		Task<Integer> task = new Task<Integer>() {

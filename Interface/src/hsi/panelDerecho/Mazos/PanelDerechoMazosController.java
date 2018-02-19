@@ -26,6 +26,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
+/**
+ * Clase encargada del crear el panel derecho inferior de Mazos. El que aparece en la opción "Ver mazos" del menú.
+ * @author Cristo
+ *
+ */
 public class PanelDerechoMazosController implements Initializable {
 
 	//model
@@ -69,6 +74,11 @@ public class PanelDerechoMazosController implements Initializable {
 
 	}
 
+	/**
+	 * Evento asociado al botón "Eliminar".<br>
+	 * Elimina de la base de datos la carta seleccionada.
+	 * @param e
+	 */
 	private void onEliminarButtonAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {
@@ -91,6 +101,11 @@ public class PanelDerechoMazosController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado al botón "Insertar en favorito".<br>
+	 * Inserta en la base de datos y en la lista "favoritas" la carta seleccionda.
+	 * @param e
+	 */
 	private void onInsertarEnFavoritonButtonAction(ActionEvent e) {
 		
 		Task<Void> task = new Task<Void>() {

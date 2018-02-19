@@ -3,6 +3,12 @@ package hsi.unirest.mapeo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase para el mapeo de los datos generales de la información de la API recogidos desde el JSON.
+ * 
+ * @author Cristo
+ *
+ */
 public class Info {
 	
 	private String patch;

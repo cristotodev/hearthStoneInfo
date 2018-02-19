@@ -9,6 +9,12 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Clase que contendrá la información de un baraja
+ * 
+ * @author Cristo
+ *
+ */
 public class Baraja {
 	
 	private IntegerProperty id;

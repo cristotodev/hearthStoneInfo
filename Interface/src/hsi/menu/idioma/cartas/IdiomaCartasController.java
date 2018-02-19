@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-
 import hsi.app.HsiApp;
 import hsi.controlErrores.ControllerControlesView;
 import hsi.unirest.herramientas.ServicioAPI;
@@ -30,6 +28,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encargada de crear la ventana emergente para seleccionar el idioma de las cartas.
+ * @author Cristo
+ *
+ */
 public class IdiomaCartasController implements Initializable {
 
 	private Stage stage;
@@ -111,14 +114,28 @@ public class IdiomaCartasController implements Initializable {
 		idiomas.addAll(info.get().getLocales());
 	}
 	
+	/**
+	 * Evento asociado al botón "Aceptar".<br>
+	 * Cierra el programa.
+	 * @param e
+	 */
 	private void onAceptarBtnAction(ActionEvent e) {
 		stage.close();
 	}
 
+	/**
+	 * Evento asociado al botón "Cancelar".<br>
+	 * Cierra el programa.
+	 * @param e
+	 */
 	private void onCancelarBtnAction(ActionEvent e) {
 		stage.close();
 	}
 
+	/**
+	 * Método encargado de crear la ventana emergente de los idiomas de las cartas.
+	 * @return Devuelve el idioma que se seleccionó.
+	 */
 	public String crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());

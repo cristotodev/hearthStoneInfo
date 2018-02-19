@@ -10,6 +10,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
+/**
+ * Clase que contendrá toda la información de las cartas.
+ * 
+ * @author Cristo
+ *
+ */
 public class Carta {
 	
 	private StringProperty id;

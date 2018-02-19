@@ -16,6 +16,7 @@ import hsi.menu.eliminarMazo.EliminarMazoController;
 import hsi.menu.idioma.cartas.IdiomaCartasController;
 import hsi.menu.informacion.InformacionController;
 import hsi.menu.verMazo.VerMazoController;
+import hsi.panelCentral.TodasLasCartasController;
 import hsi.panelDerecho.PanelDerechoController;
 import hsi.panelDerecho.Busqueda.PanelDerechoBusquedaController;
 import hsi.panelDerecho.Favorito.PanelDerechoFavoritoController;
@@ -43,6 +44,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase encargada de crear la ventana principal la cuál va a tener las demás vistas.
+ * 
+ * @author Cristo
+ *
+ */
 public class MenuController implements Initializable {
 
 	private Stage stage;
@@ -53,6 +60,7 @@ public class MenuController implements Initializable {
 	private PanelDerechoBusquedaController panelDerechoBusquedaController;
 	private PanelDerechoFavoritoController panelDerechoFavoritoController;
 	private PanelIzquierdoController panelIzquierdoController;
+	private TodasLasCartasController todasLasCartasController;
 
 	// model
 	private StringProperty usuario;
@@ -103,6 +111,7 @@ public class MenuController implements Initializable {
 		panelDerechoBusquedaController = new PanelDerechoBusquedaController();
 		panelDerechoFavoritoController = new PanelDerechoFavoritoController();
 		panelIzquierdoController = new PanelIzquierdoController();
+		todasLasCartasController = new TodasLasCartasController();
 		
 		usuario = new SimpleStringProperty(this, "usuario");
 		mazos = new SimpleListProperty<>(this, "barajas", FXCollections.observableArrayList());
@@ -157,9 +166,15 @@ public class MenuController implements Initializable {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
+		//view.setCenter(todasLasCartasController.getView());
 		
 	}
 
+	/**
+	 * Evento asociado a la opción "Inicio" del menú.<br>
+	 * Restablece la vista como al inicio.
+	 * @param e
+	 */
 	private void onInicioMenuAction(ActionEvent e) {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
@@ -170,6 +185,11 @@ public class MenuController implements Initializable {
 		return null;
 	}
 
+	/**
+	 * Evento asociado a la opción "Cartas" relacionado con el idioma.<br>
+	 * Crear una ventana emergente para especificar el idioma de las cartas.
+	 * @param e
+	 */
 	private void onCartasMenuAction(ActionEvent e) {
 		try {
 			IdiomaCartasController controller = new IdiomaCartasController();
@@ -179,6 +199,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado a la opción "Acerca De" del menú.<br>
+	 * Crea una ventana emergente con la versión y el nombre de la compañia de la aplicación.
+	 * @param e
+	 */
 	private void onAcercaDeMenuAction(ActionEvent e) {
 		try {
 			AcercaDeController controller = new AcercaDeController();
@@ -188,6 +213,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado a la opción "Información" del menú.<br>
+	 * Crea un ventana emergente con la información detallada de la aplicación.
+	 * @param e
+	 */
 	private void onInformacionMenuAction(ActionEvent e) {
 		try {
 			InformacionController controller = new InformacionController();
@@ -197,11 +227,22 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado a la opción "Favorito" del menú.<br>
+	 * Modifica la vista principal, quitando el panel izquierdo de búsqueda, sustituyendo el panel derecho inferior y cargando los valores
+	 * de las cartas favoritas en el panel central.
+	 * @param e
+	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
 		//TODO Favorito hacerlo
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
 	}
 
+	/**
+	 * Evento asociado a la opción "Eliminar Mazo" del menú.<br>
+	 * Muestra una ventana emergente con todos los mazos para seleccionar el que deseamos eliminar. Y al cerrar la ventana vuelve a llenar los mazos.
+	 * @param e
+	 */
 	private void onEliminarMazoMenuAction(ActionEvent e) {
 		try {
 			EliminarMazoController controller = new EliminarMazoController();
@@ -220,6 +261,11 @@ public class MenuController implements Initializable {
 		
 	}
 
+	/**
+	 * Evento asocido a la opción "Ver mazo" del menú.<br>
+	 * Muestra una ventana emergente con todos los mazos para seleccionar el que deseamos ver en el panel central.
+	 * @param e
+	 */
 	private void onVerMazoMenuAction(ActionEvent e) {
 		try {
 			VerMazoController controller = new VerMazoController();
@@ -233,6 +279,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	/**
+	 * Evento asociado a la opción "Crear Mazo" del menú.<br>
+	 * Muestra una ventana emergente para crear un nuevo mazo. Y al cerrar la ventana vuelve a llenar los mazos.
+	 * @param e
+	 */
 	private void onCrearMazoMenuAction(ActionEvent e) {
 		try {
 			CrearMazoController mazoController = new CrearMazoController();
