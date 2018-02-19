@@ -21,7 +21,6 @@ public class TodasLasCartasController implements Initializable {
 	public TodasLasCartasController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("TodasCartasView.fxml"));
 		loader.setController(this);
-		loader.setRoot(this);
 		loader.load();
 	}
 	

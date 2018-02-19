@@ -166,7 +166,7 @@ public class MenuController implements Initializable {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
-		//view.setCenter(todasLasCartasController.getView());
+		view.setCenter(todasLasCartasController.getView());
 		
 	}
 
