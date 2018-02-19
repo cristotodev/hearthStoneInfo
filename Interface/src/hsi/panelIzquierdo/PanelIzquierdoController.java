@@ -121,7 +121,7 @@ public class PanelIzquierdoController implements Initializable {
 		
 		task.setOnFailed(e -> falloCargarInfoAPITarea(e));
 		task.setOnSucceeded(e -> correctoCargarInfoAPITarea(e));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void correctoCargarInfoAPITarea(WorkerStateEvent e) {
@@ -193,7 +193,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 
 		} else {
 			try {
@@ -239,7 +239,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}else if(!claseCombo.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -253,7 +253,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}else if(!faccionCombo.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -267,7 +267,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}else if(!rarezaCombo.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -281,7 +281,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}else if(!tipoCombo.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -295,7 +295,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}else {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -309,7 +309,7 @@ public class PanelIzquierdoController implements Initializable {
 			
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			task.run();
+			new Thread(task).start();
 		}
 	}
 

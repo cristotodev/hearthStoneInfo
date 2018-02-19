@@ -96,7 +96,7 @@ public class RegisterController implements Initializable {
 
 		task.setOnFailed(e1 -> crearRegistroFallo(e1));
 		task.setOnSucceeded(e1 -> crearRegistroCorrecto(e1));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void crearRegistroCorrecto(WorkerStateEvent e1) {
@@ -124,7 +124,7 @@ public class RegisterController implements Initializable {
 		};
 
 		task.setOnFailed(e2 -> insertarUsuarioFallo(e2));
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void insertarUsuarioFallo(WorkerStateEvent e1) {

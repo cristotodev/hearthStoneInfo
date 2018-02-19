@@ -80,7 +80,7 @@ public class CrearMazoController implements Initializable {
 		task.setOnFailed(e1 -> falloInsertarMazoBDTarea(e1));
 		task.setOnSucceeded(e1 -> stage.close());
 		
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void falloInsertarMazoBDTarea(WorkerStateEvent e1) {

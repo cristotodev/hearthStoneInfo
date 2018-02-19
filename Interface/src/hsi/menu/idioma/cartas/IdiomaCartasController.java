@@ -78,7 +78,7 @@ public class IdiomaCartasController implements Initializable {
 		
 		task.setOnFailed(e -> falloGetInfoAPITarea(e));
 		task.setOnSucceeded(e -> correctoGetInfoAPITarea(e));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void correctoGetInfoAPITarea(WorkerStateEvent e) {

@@ -75,7 +75,7 @@ public class PanelDerechoFavoritoController implements Initializable {
 		
 		task.setOnSucceeded(e1 -> correctoEliminarFavoritoBDTarea(e1));
 		task.setOnFailed(e1 -> falloEliminarFavoritoBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void falloEliminarFavoritoBDTarea(WorkerStateEvent e1) {
@@ -101,7 +101,7 @@ public class PanelDerechoFavoritoController implements Initializable {
 		
 		task.setOnSucceeded(e -> correctoLlenarFavoritoDBTarea(e));
 		task.setOnFailed(e -> falloEliminarFavoritoBDTarea(e));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	@SuppressWarnings("unchecked")

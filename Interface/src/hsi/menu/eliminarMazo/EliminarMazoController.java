@@ -85,7 +85,7 @@ public class EliminarMazoController implements Initializable {
 		
 		task.setOnSucceeded(e1 -> stage.close());
 		task.setOnFailed(e1 -> falloEliminarMazoBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void falloEliminarMazoBDTarea(WorkerStateEvent e1) {

@@ -80,7 +80,7 @@ public class PanelDerechoMazosController implements Initializable {
 		};
 		
 		task.setOnFailed(e1 -> falloElimnarCartaBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void falloElimnarCartaBDTarea(WorkerStateEvent e1) {
@@ -103,7 +103,7 @@ public class PanelDerechoMazosController implements Initializable {
 		
 		task.setOnSucceeded(e1 -> correctoInsertarFavoritoBDTarea(e1));
 		task.setOnFailed(e1 -> falloElimnarCartaBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void correctoInsertarFavoritoBDTarea(WorkerStateEvent e1) {

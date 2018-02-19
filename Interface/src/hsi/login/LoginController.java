@@ -93,7 +93,7 @@ public class LoginController implements Initializable {
 		
 		task.setOnFailed(e1 -> consultaInicioSesionTaskError(e1));
 		task.setOnSucceeded(e1 ->consultaInicioSesionTaskCorrecto(e1) );
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void consultaInicioSesionTaskCorrecto(WorkerStateEvent e1) {

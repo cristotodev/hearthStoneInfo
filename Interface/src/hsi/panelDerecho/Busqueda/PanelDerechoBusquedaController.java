@@ -74,7 +74,7 @@ public class PanelDerechoBusquedaController implements Initializable {
 		
 		task.setOnSucceeded(e1 -> correctoInsertarFavoritoBDTarea(e1));
 		task.setOnFailed(e1 -> falloInsertarFavoritoBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void falloInsertarFavoritoBDTarea(WorkerStateEvent e1) {
@@ -100,7 +100,7 @@ public class PanelDerechoBusquedaController implements Initializable {
 		
 		task.setOnSucceeded(e -> correctoCogerFavoritosBDTarea(e));
 		task.setOnFailed(e -> falloInsertarFavoritoBDTarea(e));
-		task.run();
+		new Thread(task).start();
 	}
 
 	@SuppressWarnings("unchecked")

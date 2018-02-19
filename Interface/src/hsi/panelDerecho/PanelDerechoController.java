@@ -167,7 +167,7 @@ public class PanelDerechoController implements Initializable {
 		
 		task.setOnFailed(e1 -> falloConsultarMazosBDTarea(e1));
 		task.setOnSucceeded(e1 -> correctoConsultarMazosBDTarea(e1));
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void correctoConsultarMazosBDTarea(WorkerStateEvent e1) {
@@ -189,7 +189,7 @@ public class PanelDerechoController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			task.run();
+			new Thread(task).start();
 		}
 	}
 
@@ -212,7 +212,7 @@ public class PanelDerechoController implements Initializable {
 		
 		task.setOnSucceeded(e -> correctoLlenarMazoBDTarea(e));
 		task.setOnFailed(e ->  falloConsultarMazosBDTarea(e));
-		task.run();
+		new Thread(task).start();
 	}
 
 	private void correctoLlenarMazoBDTarea(WorkerStateEvent e) {

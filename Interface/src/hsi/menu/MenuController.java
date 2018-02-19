@@ -282,7 +282,7 @@ public class MenuController implements Initializable {
 		task.setOnFailed(e -> falloCargarFavoritosBDTarea(e));
 		task.setOnSucceeded(e -> correctoCargarFavoritosBDTarea(e));
 		
-		task.run();
+		new Thread(task).start();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -313,7 +313,7 @@ public class MenuController implements Initializable {
 		task.setOnFailed(e -> falloCargarMazosBDTarea(e));
 		task.setOnSucceeded(e -> correctoCargarMazosBDTarea(e));
 		
-		task.run();
+		new Thread(task).start();
 	}
 	
 	private void correctoCargarMazosBDTarea(WorkerStateEvent e) {
