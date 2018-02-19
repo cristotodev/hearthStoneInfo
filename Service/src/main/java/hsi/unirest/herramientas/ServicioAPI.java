@@ -15,6 +15,14 @@ import hsi.unirest.mapeo.Info;
 import hsi.unirest.mapeo.ListaDeCartas;
 import hsi.unirest.mapeo.ListaDeDorsales;
 
+
+/**
+ * Clase encargada de realiar el mapeo del JSON a objectos java.
+ * 
+ * @author Cristo Estévez
+ * @author Carlos Marrero
+ *
+ */
 public class ServicioAPI {
 
 	/**

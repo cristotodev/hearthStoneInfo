@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
+ * Clase encarga de realizar las consultas con la base de datos.
  * 
  * @author Carlos Marrero Ramos - xibhu
  *
