@@ -42,7 +42,6 @@ public class CartasPane extends TilePane implements Initializable {
 						List<Carta> insertados = (List<Carta>) c.getAddedSubList();
 						
 						for (int i = 0; i < insertados.size(); i++) {
-							
 							CartaView cv = new CartaView();
 							cv.setCarta(insertados.get(i));
 							CartasPane.this.getChildren().add(cv);
@@ -63,7 +62,6 @@ public class CartasPane extends TilePane implements Initializable {
 							
 						}
 					}
-					
 				}
 			}
 		});

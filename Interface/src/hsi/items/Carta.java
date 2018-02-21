@@ -326,9 +326,44 @@ public class Carta {
 	public final void setMecanismo(final String mecanismo) {
 		this.mecanismoProperty().set(mecanismo);
 	}
+	
+	public static Carta fromCartaServicio(hsi.unirest.mapeo.Carta cartaServicio) {
+		Carta carta = new Carta();
+		carta.setId(cartaServicio.getCardId());
+		carta.setNombre(cartaServicio.getName());
+		carta.setExpansion(cartaServicio.getCardSet());
+		carta.setTipo(cartaServicio.getType());
+		carta.setFaccion(cartaServicio.getFaction());
+		carta.setRareza(cartaServicio.getRarity());
 
-	@Override
-	public String toString() {
-		return id + " : " + nombre;
+		if (cartaServicio.getCost() != null)
+			carta.setCoste(cartaServicio.getCost());
+
+		if (cartaServicio.getAttack() != null)
+			carta.setAtaque(cartaServicio.getAttack());
+
+		if (cartaServicio.getHealth() != null)
+			carta.setSalud(cartaServicio.getHealth());
+
+		carta.setAccion(cartaServicio.getFlavor());
+		carta.setDescripcion(cartaServicio.getText());
+		carta.setRaza(cartaServicio.getRace());
+		carta.setArtista(cartaServicio.getArtist());
+		carta.setClase(cartaServicio.getPlayerClass());
+		// TODO Se está cogiendo de la URL. Hay que coger de caché
+		//TODO Quitar comentarios
+		if (cartaServicio.getImg() != null)
+			carta.setImg(new Image(cartaServicio.getImg()));
+		else
+			System.out.println("No imagen, coger una estandar");
+
+		if (cartaServicio.getImgGold() != null)
+			carta.setImgDorada(new Image(cartaServicio.getImgGold()));
+		else
+			System.out.println("No imagen dorada, coger una estandar");
+
+		carta.setMecanismo(cartaServicio.getMechanics());
+		return carta;
 	}
+	
 }

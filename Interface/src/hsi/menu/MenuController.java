@@ -16,6 +16,7 @@ import hsi.menu.eliminarMazo.EliminarMazoController;
 import hsi.menu.idioma.cartas.IdiomaCartasController;
 import hsi.menu.informacion.InformacionController;
 import hsi.menu.verMazo.VerMazoController;
+import hsi.panelCentral.CartasPane;
 import hsi.panelCentral.TodasLasCartasController;
 import hsi.panelDerecho.PanelDerechoController;
 import hsi.panelDerecho.Busqueda.PanelDerechoBusquedaController;
@@ -69,6 +70,7 @@ public class MenuController implements Initializable {
 	private ObjectProperty<Carta> cartaSeleccionada;
 	private ObjectProperty<Mazo> mazoSeleccionado;
 	private StringProperty idiomaCartas;
+	private ListProperty<Carta> cartasBuscadas;
 
 	// view
 	@FXML
@@ -119,6 +121,7 @@ public class MenuController implements Initializable {
 		cartaSeleccionada = new SimpleObjectProperty<>(this, "cartaSeleccionada");
 		mazoSeleccionado = new SimpleObjectProperty<>(this, "mazoSeleccionado");
 		idiomaCartas = new SimpleStringProperty(this, "idiomaCartas", "esES");
+		cartasBuscadas = new SimpleListProperty<>(this, "cartasBuscada", FXCollections.observableArrayList());
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuView.fxml"));
 		loader.setController(this);
@@ -150,6 +153,10 @@ public class MenuController implements Initializable {
 		Bindings.bindBidirectional(favoritas, panelDerechoFavoritoController.favoritosProperty());
 		
 		panelIzquierdoController.idiomaCartaProperty().bind(idiomaCartas);
+		cartasBuscadas.bind(panelIzquierdoController.cartasBusquedaProperty());
+		
+		todasLasCartasController.cartasBuscadasProperty().bind(cartasBuscadas);
+		cartaSeleccionada.bind(todasLasCartasController.cartaSeleccionadaProperty());
 		
 		// Eventos
 		inicioMenu.setOnAction(e -> onInicioMenuAction(e));
@@ -352,7 +359,6 @@ public class MenuController implements Initializable {
 
 	private void llenarMazos() throws ClassNotFoundException, SQLException {
 		mazos.clear();
-		
 		
 		Task<List<hsi.sql.Mazo>> task = new Task<List<hsi.sql.Mazo>>() {
 			@Override

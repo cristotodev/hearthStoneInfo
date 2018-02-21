@@ -9,9 +9,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
+import hsi.panelCentral.CartasPane;
 import hsi.unirest.herramientas.ServicioAPI;
 import hsi.unirest.mapeo.Info;
 import hsi.unirest.mapeo.ListaDeCartas;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -19,6 +21,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -39,13 +42,16 @@ import javafx.scene.layout.VBox;
  */
 public class PanelIzquierdoController implements Initializable {
 
+	private Task<ListaDeCartas> task;
+	
 	// Lógica de negocio
 	private ServicioAPI servicioApi;
 
 	// model
 	private static final Integer POSDESHABILITAR = -1;
 	private PanelIzquierdoModel panelIzquierdoModelo;
-	private ObjectProperty<Info> info;
+	private ObjectProperty<Info> infoSpanish;
+	private ObjectProperty<Info> infoEnglish;
 	private StringProperty idiomaCarta;
 	private ListProperty<Carta> cartasBusqueda;
 	private ListaDeCartas listaCartasServicios;
@@ -97,9 +103,11 @@ public class PanelIzquierdoController implements Initializable {
 	private Button buscarButton;
 
 	public PanelIzquierdoController() throws IOException {
+		
 		servicioApi = new ServicioAPI();
 		panelIzquierdoModelo = new PanelIzquierdoModel();
-		this.info = new SimpleObjectProperty<>(this, "info", new Info());
+		this.infoSpanish = new SimpleObjectProperty<>(this, "info", new Info());
+		infoEnglish = new SimpleObjectProperty<>(this, "infoEnglish", new Info());
 		idiomaCarta = new SimpleStringProperty(this, "idiomaCarta");
 		cartasBusqueda = new SimpleListProperty<>(this, "cartasBusqueda", FXCollections.observableArrayList());
 
@@ -110,14 +118,28 @@ public class PanelIzquierdoController implements Initializable {
 		tipoSeleccionada = new SimpleStringProperty(this, "tipoSeleccionada");
 		razaSeleccionada = new SimpleStringProperty(this, "razaSeleccionada");
 		
-		tareaInfo();
-
+		tareaInfoSpanish();
+		tareaInfoEnglish();
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("PanelIzquierdoView.fxml"));
 		loader.setController(this);
 		loader.load();
 	}
+	
+	private void tareaInfoEnglish() {
+		Task<Info> task = new Task<Info>() {
+			@Override
+			protected Info call() throws Exception {
+				return servicioApi.getInfo("enUS");
+			}
+		};
+		
+		task.setOnFailed(e -> falloCargarInfoAPITarea(e));
+		task.setOnSucceeded(e -> infoEnglish.set((Info) e.getSource().getValue()));
+		new Thread(task).start();
+	}
 
-	private void tareaInfo() {
+	private void tareaInfoSpanish() {
 		Task<Info> task = new Task<Info>() {
 			@Override
 			protected Info call() throws Exception {
@@ -131,15 +153,15 @@ public class PanelIzquierdoController implements Initializable {
 	}
 	
 	private void correctoCargarInfoAPITarea(WorkerStateEvent e) {
-		info.set((Info) e.getSource().getValue());
+		infoSpanish.set((Info) e.getSource().getValue());
 
 		// Llenar modelo
-		panelIzquierdoModelo.getExpansion().setAll(info.get().getSets());
-		panelIzquierdoModelo.getClase().setAll(info.get().getClasses());
-		panelIzquierdoModelo.getFaccion().setAll(info.get().getFactions());
-		panelIzquierdoModelo.getRareza().setAll(info.get().getQualities());
-		panelIzquierdoModelo.getTipo().setAll(info.get().getTypes());
-		panelIzquierdoModelo.getRaza().setAll(info.get().getRaces());
+		panelIzquierdoModelo.getExpansion().setAll(infoSpanish.get().getSets());
+		panelIzquierdoModelo.getClase().setAll(infoSpanish.get().getClasses());
+		panelIzquierdoModelo.getFaccion().setAll(infoSpanish.get().getFactions());
+		panelIzquierdoModelo.getRareza().setAll(infoSpanish.get().getQualities());
+		panelIzquierdoModelo.getTipo().setAll(infoSpanish.get().getTypes());
+		panelIzquierdoModelo.getRaza().setAll(infoSpanish.get().getRaces());
 	}
 
 	private void falloCargarInfoAPITarea(WorkerStateEvent e) {
@@ -169,9 +191,9 @@ public class PanelIzquierdoController implements Initializable {
 		panelIzquierdoModelo.ataqueProperty().bind(ataqueTextField.textProperty());
 		panelIzquierdoModelo.vidaProperty().bind(vidaTextfield.textProperty());
 		panelIzquierdoModelo.costeProperty().bind(costeTextField.textProperty());
-		//TODO Negar para que lo haga bien
-		buscarButton.disableProperty().bind(busquedaCamposVbox.disabledProperty().
-				and(nombreTextField.disabledProperty()));
+
+		buscarButton.disableProperty().bind(busquedaCamposVbox.disabledProperty().not().
+				and(nombreTextField.disabledProperty().not()));
 		
 		busquedaCamposVbox.disableProperty().bind(panelIzquierdoModelo.nombreProperty().isNotEqualTo(""));
 		bindeosDeshabilitarNombreText();
@@ -193,6 +215,7 @@ public class PanelIzquierdoController implements Initializable {
 	 * @param e
 	 */
 	private void onBuscarButtonAction(ActionEvent e) {
+		System.out.println("buscando...");
 		if (busquedaCamposVbox.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -208,6 +231,7 @@ public class PanelIzquierdoController implements Initializable {
 
 		} else {
 			try {
+				//TODO Da error porque las búsquedas son en inglés. Lista para cada uno en inglés 
 				busquedasPorCampos();
 			} catch (NumberFormatException e1) {
 				e1.printStackTrace();
@@ -215,14 +239,10 @@ public class PanelIzquierdoController implements Initializable {
 				e1.printStackTrace();
 			}
 		}
-
-		// MOstrar listado
-		for (Carta carta : cartasBusqueda) {
-			System.out.println(carta);
-		}
 	}
 
 	private void correctoObtenerCartasBDTarea(WorkerStateEvent e1) {
+		System.out.println("Dentro");
 		listaCartasServicios = (ListaDeCartas) e1.getSource().getValue();
 		pasarCartas(listaCartasServicios.getCartas(), cartasBusqueda.get());
 	}
@@ -233,26 +253,26 @@ public class PanelIzquierdoController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		buscarButton.setDisable(false);
+		buscarButton.disableProperty().bind(busquedaCamposVbox.disabledProperty().not().
+				and(nombreTextField.disabledProperty().not()));
 	}
 
 	private void busquedasPorCampos() throws NumberFormatException, UnirestException {
-		
 		if (!expansionCombo.isDisable()) {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasExpansion(expansionSeleccionada.get(),
+					Integer pos = expansionCombo.getSelectionModel().getSelectedIndex();
+					System.out.println(infoEnglish.get().getSets().get(pos));
+					return servicioApi.getCartasExpansion(infoEnglish.get().getSets().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}else if(!claseCombo.isDisable()) {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
 					return servicioApi.getCartasClases(claseSeleccionada.get(),
@@ -261,12 +281,8 @@ public class PanelIzquierdoController implements Initializable {
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}else if(!faccionCombo.isDisable()) {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
 					return servicioApi.getCartasFacciones(faccionSeleccionada.get(),
@@ -275,12 +291,8 @@ public class PanelIzquierdoController implements Initializable {
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}else if(!rarezaCombo.isDisable()) {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
 					return servicioApi.getCartasRareza(rarezaSeleccionada.get(),
@@ -289,12 +301,8 @@ public class PanelIzquierdoController implements Initializable {
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}else if(!tipoCombo.isDisable()) {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
 					return servicioApi.getCartasTipo(tipoSeleccionada.get(),
@@ -303,12 +311,8 @@ public class PanelIzquierdoController implements Initializable {
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}else {
-			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
+			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
 					return servicioApi.getCartasRaza(razaSeleccionada.get(),
@@ -317,11 +321,10 @@ public class PanelIzquierdoController implements Initializable {
 							idiomaCarta.get());
 				}
 			};
-			
-			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
-			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
-			new Thread(task).start();
 		}
+		task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
+		task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
+		new Thread(task).start();
 	}
 
 	/**
@@ -330,43 +333,9 @@ public class PanelIzquierdoController implements Initializable {
 	 * @param cartasPrograma Destino.
 	 */
 	private void pasarCartas(List<hsi.unirest.mapeo.Carta> cartasServicio, List<Carta> cartasPrograma) {
+		cartasBusqueda.clear();
 		for (hsi.unirest.mapeo.Carta cartaServicio : cartasServicio) {
-			Carta carta = new Carta();
-			carta.setId(cartaServicio.getCardId());
-			carta.setNombre(cartaServicio.getName());
-			carta.setExpansion(cartaServicio.getCardSet());
-			carta.setTipo(cartaServicio.getType());
-			carta.setFaccion(cartaServicio.getFaction());
-			carta.setRareza(cartaServicio.getRarity());
-
-			if (cartaServicio.getCost() != null)
-				carta.setCoste(cartaServicio.getCost());
-
-			if (cartaServicio.getAttack() != null)
-				carta.setAtaque(cartaServicio.getAttack());
-
-			if (cartaServicio.getHealth() != null)
-				carta.setSalud(cartaServicio.getHealth());
-
-			carta.setAccion(cartaServicio.getFlavor());
-			carta.setDescripcion(cartaServicio.getText());
-			carta.setRaza(cartaServicio.getRace());
-			carta.setArtista(cartaServicio.getArtist());
-			carta.setClase(cartaServicio.getPlayerClass());
-			// TODO Se está cogiendo de la URL. Hay que coger de caché
-			if (cartaServicio.getImg() != null)
-				carta.setImg(new Image(cartaServicio.getImg()));
-			else
-				System.out.println("No imagen, coger una estandar");
-
-			if (cartaServicio.getImgGold() != null)
-				carta.setImgDorada(new Image(cartaServicio.getImgGold()));
-			else
-				System.out.println("No imagen dorada, coger una estandar");
-
-			carta.setMecanismo(cartaServicio.getMechanics());
-
-			cartasPrograma.add(carta);
+			cartasPrograma.add(Carta.fromCartaServicio(cartaServicio));
 		}
 	}
 
@@ -442,7 +411,7 @@ public class PanelIzquierdoController implements Initializable {
 	}
 
 	public final ObjectProperty<Info> infoProperty() {
-		return this.info;
+		return this.infoSpanish;
 	}
 
 	public final Info getInfo() {
@@ -463,5 +432,19 @@ public class PanelIzquierdoController implements Initializable {
 
 	public final void setIdiomaCarta(final String idiomaCarta) {
 		this.idiomaCartaProperty().set(idiomaCarta);
+	}
+
+	public final ListProperty<Carta> cartasBusquedaProperty() {
+		return this.cartasBusqueda;
+	}
+	
+
+	public final ObservableList<Carta> getCartasBusqueda() {
+		return this.cartasBusquedaProperty().get();
+	}
+	
+
+	public final void setCartasBusqueda(final ObservableList<Carta> cartasBusqueda) {
+		this.cartasBusquedaProperty().set(cartasBusqueda);
 	}
 }
