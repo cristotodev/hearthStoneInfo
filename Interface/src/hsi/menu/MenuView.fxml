@@ -25,8 +25,11 @@
                   <Menu fx:id="appMenu" mnemonicParsing="false" text="App" />
                </items>
           </Menu>
-            <Menu fx:id="informacionMenu" mnemonicParsing="false" text="Información" />
-            <Menu fx:id="acercaDeMenu" mnemonicParsing="false" text="Acerca de" />
+            <Menu mnemonicParsing="false" text="Información">
+               <items>
+                  <MenuItem fx:id="informacionMenu" mnemonicParsing="false" text="Info" />
+                  <MenuItem fx:id="acercaDeMenu" mnemonicParsing="false" text="Acerca de" />
+               </items></Menu>
         </menus>
       </MenuBar>
    </top>

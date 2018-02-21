@@ -6,7 +6,9 @@ import java.util.ResourceBundle;
 
 import hsi.items.Carta;
 import javafx.beans.property.ListProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -18,11 +20,12 @@ import javafx.scene.layout.TilePane;
  *
  */
 public class CartasPane extends TilePane implements Initializable {
-
-	//TODO utilizar modelo carta correcta, cambiar los paquetes
 	
-	ListProperty<Carta> cartas = new SimpleListProperty<>(this, "cartas", FXCollections.observableArrayList());
-
+	private ListProperty<Carta> cartas = new SimpleListProperty<>(this, "cartas", FXCollections.observableArrayList());
+	private ObjectProperty<Carta> cartaSeleccionada = new SimpleObjectProperty<>(this, "cartaSeleccionada", new Carta());
+	
+	//TODO Como enganchar el cartaSeleccionada de CartaView con cartaPane para seguir pasandolo
+	
 	public CartasPane() {
 		initialize(null, null);
 	}

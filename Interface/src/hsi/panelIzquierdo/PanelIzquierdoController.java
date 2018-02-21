@@ -9,11 +9,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
-import hsi.panelCentral.CartasPane;
 import hsi.unirest.herramientas.ServicioAPI;
 import hsi.unirest.mapeo.Info;
 import hsi.unirest.mapeo.ListaDeCartas;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -31,7 +29,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
@@ -135,7 +132,7 @@ public class PanelIzquierdoController implements Initializable {
 		};
 		
 		task.setOnFailed(e -> falloCargarInfoAPITarea(e));
-		task.setOnSucceeded(e -> infoEnglish.set((Info) e.getSource().getValue()));
+		task.setOnSucceeded(e -> infoEnglish.set(((Info) e.getSource().getValue())));
 		new Thread(task).start();
 	}
 
@@ -231,7 +228,6 @@ public class PanelIzquierdoController implements Initializable {
 
 		} else {
 			try {
-				//TODO Da error porque las búsquedas son en inglés. Lista para cada uno en inglés 
 				busquedasPorCampos();
 			} catch (NumberFormatException e1) {
 				e1.printStackTrace();
@@ -253,11 +249,9 @@ public class PanelIzquierdoController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		buscarButton.setDisable(false);
-		buscarButton.disableProperty().bind(busquedaCamposVbox.disabledProperty().not().
-				and(nombreTextField.disabledProperty().not()));
 	}
 
+	//TODO Problema en el servicio de las funciones para recoger cada carta de campo(revisar)
 	private void busquedasPorCampos() throws NumberFormatException, UnirestException {
 		if (!expansionCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {
@@ -275,7 +269,8 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasClases(claseSeleccionada.get(),
+					Integer pos = claseCombo.getSelectionModel().getSelectedIndex();
+					return servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
@@ -285,7 +280,8 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasFacciones(faccionSeleccionada.get(),
+					Integer pos = faccionCombo.getSelectionModel().getSelectedIndex();
+					return servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
@@ -295,7 +291,8 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasRareza(rarezaSeleccionada.get(),
+					Integer pos = rarezaCombo.getSelectionModel().getSelectedIndex();
+					return servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
@@ -305,7 +302,8 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasTipo(tipoSeleccionada.get(),
+					Integer pos = tipoCombo.getSelectionModel().getSelectedIndex();
+					return servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
@@ -315,7 +313,8 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
-					return servicioApi.getCartasRaza(razaSeleccionada.get(),
+					Integer pos = razaCombo.getSelectionModel().getSelectedIndex();
+					return servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());

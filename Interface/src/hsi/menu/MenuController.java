@@ -35,18 +35,21 @@ import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Clase encargada de crear la ventana principal la cuál va a tener las demás vistas.
+ * Clase encargada de crear la ventana principal la cuál va a tener las demás
+ * vistas.
  * 
  * @author Cristo
  *
@@ -54,8 +57,8 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
 	private Stage stage;
-	
-	//controller
+
+	// controller
 	private PanelDerechoController panelDerechoController;
 	private PanelDerechoMazosController panelDerechoMazosController;
 	private PanelDerechoBusquedaController panelDerechoBusquedaController;
@@ -75,10 +78,7 @@ public class MenuController implements Initializable {
 	// view
 	@FXML
 	private BorderPane view;
-	
-	@FXML
-	private BorderPane borderPaneDerecho;
-	
+
 	@FXML
 	private Menu inicioMenu;
 
@@ -101,20 +101,23 @@ public class MenuController implements Initializable {
 	private Menu appMenu;
 
 	@FXML
-	private Menu informacionMenu;
+	private MenuItem informacionMenu;
 
 	@FXML
-	private Menu acercaDeMenu;
+	private MenuItem acercaDeMenu;
+
+	@FXML
+	private BorderPane borderPaneDerecho;
 
 	public MenuController() throws IOException {
-		
+
 		panelDerechoController = new PanelDerechoController();
 		panelDerechoMazosController = new PanelDerechoMazosController();
 		panelDerechoBusquedaController = new PanelDerechoBusquedaController();
 		panelDerechoFavoritoController = new PanelDerechoFavoritoController();
 		panelIzquierdoController = new PanelIzquierdoController();
 		todasLasCartasController = new TodasLasCartasController();
-		
+
 		usuario = new SimpleStringProperty(this, "usuario");
 		mazos = new SimpleListProperty<>(this, "barajas", FXCollections.observableArrayList());
 		favoritas = new SimpleListProperty<>(this, "favoritas", FXCollections.observableArrayList());
@@ -135,29 +138,29 @@ public class MenuController implements Initializable {
 		panelDerechoMazosController.cartaSeleccionadaProperty().bind(cartaSeleccionada);
 		Bindings.bindBidirectional(mazos, panelDerechoMazosController.mazosProperty());
 		Bindings.bindBidirectional(favoritas, panelDerechoMazosController.favoritasProperty());
-		
-		//bindeos
+
+		// bindeos
 		panelDerechoController.cartaSeleccionadaProperty().bind(cartaSeleccionada);
 		Bindings.bindBidirectional(mazoSeleccionado, panelDerechoController.mazoSeleccionadoProperty());
 		panelDerechoController.mazosProperty().bind(mazos);
 		panelDerechoController.usuarioProperty().bind(usuario);
-		
+
 		panelDerechoBusquedaController.cartaSeleccionadaProperty().bind(cartaSeleccionada);
 		panelDerechoBusquedaController.mazoSeleccionadoProperty().bind(mazoSeleccionado);
 		panelDerechoBusquedaController.usuarioProperty().bind(usuario);
 		Bindings.bindBidirectional(favoritas, panelDerechoBusquedaController.favoritosProperty());
-		
+
 		panelDerechoFavoritoController.usuarioProperty().bind(usuario);
 		panelDerechoFavoritoController.mazoSeleccionadoProperty().bind(mazoSeleccionado);
 		panelDerechoFavoritoController.cartaSelecionadaProperty().bind(cartaSeleccionada);
 		Bindings.bindBidirectional(favoritas, panelDerechoFavoritoController.favoritosProperty());
-		
+
 		panelIzquierdoController.idiomaCartaProperty().bind(idiomaCartas);
 		cartasBuscadas.bind(panelIzquierdoController.cartasBusquedaProperty());
-		
+
 		todasLasCartasController.cartasBuscadasProperty().bind(cartasBuscadas);
 		cartaSeleccionada.bind(todasLasCartasController.cartaSeleccionadaProperty());
-		
+
 		// Eventos
 		inicioMenu.setOnAction(e -> onInicioMenuAction(e));
 		crearMazoMenu.setOnAction(e -> onCrearMazoMenuAction(e));
@@ -168,18 +171,19 @@ public class MenuController implements Initializable {
 		appMenu.setOnAction(e -> onAppMenuAction(e));
 		informacionMenu.setOnAction(e -> onInformacionMenuAction(e));
 		acercaDeMenu.setOnAction(e -> onAcercaDeMenuAction(e));
-		
-		//Colocación de paneles
+
+		// Colocación de paneles
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
 		view.setCenter(todasLasCartasController.getView());
-		
+
 	}
 
 	/**
 	 * Evento asociado a la opción "Inicio" del menú.<br>
 	 * Restablece la vista como al inicio.
+	 * 
 	 * @param e
 	 */
 	private void onInicioMenuAction(ActionEvent e) {
@@ -195,6 +199,7 @@ public class MenuController implements Initializable {
 	/**
 	 * Evento asociado a la opción "Cartas" relacionado con el idioma.<br>
 	 * Crear una ventana emergente para especificar el idioma de las cartas.
+	 * 
 	 * @param e
 	 */
 	private void onCartasMenuAction(ActionEvent e) {
@@ -208,7 +213,9 @@ public class MenuController implements Initializable {
 
 	/**
 	 * Evento asociado a la opción "Acerca De" del menú.<br>
-	 * Crea una ventana emergente con la versión y el nombre de la compañia de la aplicación.
+	 * Crea una ventana emergente con la versión y el nombre de la compañia de la
+	 * aplicación.
+	 * 
 	 * @param e
 	 */
 	private void onAcercaDeMenuAction(ActionEvent e) {
@@ -223,6 +230,7 @@ public class MenuController implements Initializable {
 	/**
 	 * Evento asociado a la opción "Información" del menú.<br>
 	 * Crea un ventana emergente con la información detallada de la aplicación.
+	 * 
 	 * @param e
 	 */
 	private void onInformacionMenuAction(ActionEvent e) {
@@ -236,18 +244,22 @@ public class MenuController implements Initializable {
 
 	/**
 	 * Evento asociado a la opción "Favorito" del menú.<br>
-	 * Modifica la vista principal, quitando el panel izquierdo de búsqueda, sustituyendo el panel derecho inferior y cargando los valores
-	 * de las cartas favoritas en el panel central.
+	 * Modifica la vista principal, quitando el panel izquierdo de búsqueda,
+	 * sustituyendo el panel derecho inferior y cargando los valores de las cartas
+	 * favoritas en el panel central.
+	 * 
 	 * @param e
 	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
-		//TODO Favorito hacerlo
+		// TODO Favorito hacerlo
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
 	}
 
 	/**
 	 * Evento asociado a la opción "Eliminar Mazo" del menú.<br>
-	 * Muestra una ventana emergente con todos los mazos para seleccionar el que deseamos eliminar. Y al cerrar la ventana vuelve a llenar los mazos.
+	 * Muestra una ventana emergente con todos los mazos para seleccionar el que
+	 * deseamos eliminar. Y al cerrar la ventana vuelve a llenar los mazos.
+	 * 
 	 * @param e
 	 */
 	private void onEliminarMazoMenuAction(ActionEvent e) {
@@ -259,18 +271,20 @@ public class MenuController implements Initializable {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		try {
 			llenarMazos();
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 	}
 
 	/**
 	 * Evento asocido a la opción "Ver mazo" del menú.<br>
-	 * Muestra una ventana emergente con todos los mazos para seleccionar el que deseamos ver en el panel central.
+	 * Muestra una ventana emergente con todos los mazos para seleccionar el que
+	 * deseamos ver en el panel central.
+	 * 
 	 * @param e
 	 */
 	private void onVerMazoMenuAction(ActionEvent e) {
@@ -288,7 +302,9 @@ public class MenuController implements Initializable {
 
 	/**
 	 * Evento asociado a la opción "Crear Mazo" del menú.<br>
-	 * Muestra una ventana emergente para crear un nuevo mazo. Y al cerrar la ventana vuelve a llenar los mazos.
+	 * Muestra una ventana emergente para crear un nuevo mazo. Y al cerrar la
+	 * ventana vuelve a llenar los mazos.
+	 * 
 	 * @param e
 	 */
 	private void onCrearMazoMenuAction(ActionEvent e) {
@@ -299,7 +315,7 @@ public class MenuController implements Initializable {
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		
+
 		try {
 			llenarMazos();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -308,15 +324,16 @@ public class MenuController implements Initializable {
 	}
 
 	public void crearMenu() {
-		//Llenar listado mazos con los que ya tiene el usuario
-		//Lo situamos en crearMenu para cargarlo una vez se introduce el usuario y es correcto
+		// Llenar listado mazos con los que ya tiene el usuario
+		// Lo situamos en crearMenu para cargarlo una vez se introduce el usuario y es
+		// correcto
 		try {
 			llenarMazos();
 			llenarFavoritos();
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
 		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
@@ -326,26 +343,26 @@ public class MenuController implements Initializable {
 		HsiApp.getPrimaryStage().close();
 		stage.showAndWait();
 	}
-	
+
 	private void llenarFavoritos() {
 		favoritas.clear();
-		
+
 		Task<List<String>> task = new Task<List<String>>() {
 			@Override
 			protected List<String> call() throws Exception {
 				return FuncionesSQL.consultaFavoritos(usuario.get());
 			}
 		};
-		
+
 		task.setOnFailed(e -> falloCargarFavoritosBDTarea(e));
 		task.setOnSucceeded(e -> correctoCargarFavoritosBDTarea(e));
-		
+
 		new Thread(task).start();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void correctoCargarFavoritosBDTarea(WorkerStateEvent e) {
-		favoritas.addAll((List<String>)e.getSource().getValue());
+		favoritas.addAll((List<String>) e.getSource().getValue());
 	}
 
 	private void falloCargarFavoritosBDTarea(WorkerStateEvent e) {
@@ -359,20 +376,20 @@ public class MenuController implements Initializable {
 
 	private void llenarMazos() throws ClassNotFoundException, SQLException {
 		mazos.clear();
-		
+
 		Task<List<hsi.sql.Mazo>> task = new Task<List<hsi.sql.Mazo>>() {
 			@Override
 			protected List<hsi.sql.Mazo> call() throws Exception {
-				return  FuncionesSQL.consultaMazos(usuario.get());
+				return FuncionesSQL.consultaMazos(usuario.get());
 			}
 		};
-		
+
 		task.setOnFailed(e -> falloCargarMazosBDTarea(e));
 		task.setOnSucceeded(e -> correctoCargarMazosBDTarea(e));
-		
+
 		new Thread(task).start();
 	}
-	
+
 	private void correctoCargarMazosBDTarea(WorkerStateEvent e) {
 		@SuppressWarnings("unchecked")
 		List<hsi.sql.Mazo> mazos = (List<hsi.sql.Mazo>) e.getSource().getValue();
@@ -380,7 +397,7 @@ public class MenuController implements Initializable {
 			Mazo mazoNuevo = new Mazo();
 			mazoNuevo.setId(mazo.getID());
 			mazoNuevo.setNombre(mazo.getNombre());
-			
+
 			this.mazos.add(mazoNuevo);
 		}
 	}
