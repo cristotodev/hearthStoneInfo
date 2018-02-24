@@ -24,6 +24,14 @@ import hsi.unirest.mapeo.ListaDeDorsales;
  *
  */
 public class ServicioAPI {
+	/**
+	 * Obtiene los datos de una carta en concreto
+	 * 
+	 * @param id Identificador único de la carta, o también se puede usar el nombre
+	 * @param locale Idioma con el que devolverá la información
+	 * @return Objeto Carta con toda la información del JSON
+	 * @throws UnirestException
+	 */
 
 	public Carta getCartaById(String id, String locale) throws UnirestException {
 		
