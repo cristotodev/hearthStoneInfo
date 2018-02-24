@@ -198,6 +198,7 @@ public class MenuController implements Initializable {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
+		view.setLeft(panelIzquierdoController.getView());
 	}
 
 	/**
@@ -268,6 +269,7 @@ public class MenuController implements Initializable {
 			new Thread(task).start();
 		}
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
+		view.setLeft(null);
 	}
 
 	/**
@@ -334,6 +336,7 @@ public class MenuController implements Initializable {
 
 	@SuppressWarnings("unchecked")
 	private void correctoVerMazoTask(WorkerStateEvent e1) {
+		view.setLeft(null);
 		for (String idCarta : (List<String>) e1.getSource().getValue()) {
 			Task<hsi.unirest.mapeo.Carta> task = new Task<hsi.unirest.mapeo.Carta>() {
 				@Override

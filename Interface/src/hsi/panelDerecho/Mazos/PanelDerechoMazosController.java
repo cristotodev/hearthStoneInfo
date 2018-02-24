@@ -15,6 +15,8 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -71,6 +73,19 @@ public class PanelDerechoMazosController implements Initializable {
 		//Eventos
 		eliminarButton.setOnAction(e -> onEliminarButtonAction(e));
 		insertarEnFavoritoButton.setOnAction(e -> onInsertarEnFavoritonButtonAction(e));
+		
+		mazoSeleccionado.addListener(new ChangeListener<Mazo>() {
+			@Override
+			public void changed(ObservableValue<? extends Mazo> observable, Mazo oldValue, Mazo newValue) {
+				System.out.println("mazo cambiado");
+			}
+		});
+		
+		cartaSeleccionada.addListener(new ChangeListener<Carta>() {
+			public void changed(javafx.beans.value.ObservableValue<? extends Carta> observable, Carta oldValue, Carta newValue) {
+				System.out.println("carta seleccionada cambiada");	
+			};
+		});
 
 	}
 
@@ -84,6 +99,8 @@ public class PanelDerechoMazosController implements Initializable {
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
+				System.out.println(mazoSeleccionado.get().getId());
+				System.out.println(cartaSeleccionada.get().getId());
 				FuncionesSQL.eliminarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
 				return null;
 			}
