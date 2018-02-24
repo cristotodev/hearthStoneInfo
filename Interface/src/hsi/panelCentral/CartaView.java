@@ -60,7 +60,6 @@ public class CartaView extends BorderPane implements Initializable{
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 		    public void handle(MouseEvent me) {
 		    	cartaSeleccionada.set(carta.get());
-		    	System.out.println(cartaSeleccionada.get().getAtaque());
 		    }
 		});
 		

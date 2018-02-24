@@ -50,15 +50,9 @@ public class CargaController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//TODO Investigar como ejecutar código java en la instalación para bajar las imágenes y crear el directorio con el nombre del patch
-		/*try {
-			descargarImagenes();
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}*/
+
 	}
 	
-	//TODO Hacer este método cuanod se instale la aplicación o cuando cambie la versión
 	private void descargarImagenes() throws UnirestException {		
 		ListaDeCartas cartas = servicio.getTodasLasCartas(null, null, null, "esES");
 		

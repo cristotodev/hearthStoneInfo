@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import hsi.items.Carta;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -23,8 +24,6 @@ public class CartasPane extends TilePane implements Initializable {
 	
 	private ListProperty<Carta> cartas = new SimpleListProperty<>(this, "cartas", FXCollections.observableArrayList());
 	private ObjectProperty<Carta> cartaSeleccionada = new SimpleObjectProperty<>(this, "cartaSeleccionada", new Carta());
-	
-	//TODO Como enganchar el cartaSeleccionada de CartaView con cartaPane para seguir pasandolo
 	
 	public CartasPane() {
 		initialize(null, null);
@@ -48,7 +47,7 @@ public class CartasPane extends TilePane implements Initializable {
 							CartaView cv = new CartaView();
 							cv.setCarta(insertados.get(i));
 							CartasPane.this.getChildren().add(cv);
-							
+							Bindings.bindBidirectional(cartaSeleccionada, cv.cartaSeleccionadaProperty());
 						}
 					}
 					
@@ -80,6 +79,20 @@ public class CartasPane extends TilePane implements Initializable {
 
 	public final void setCartas(final ObservableList<Carta> cartas) {
 		this.cartasProperty().set(cartas);
+	}
+
+	public final ObjectProperty<Carta> cartaSeleccionadaProperty() {
+		return this.cartaSeleccionada;
+	}
+	
+
+	public final Carta getCartaSeleccionada() {
+		return this.cartaSeleccionadaProperty().get();
+	}
+	
+
+	public final void setCartaSeleccionada(final Carta cartaSeleccionada) {
+		this.cartaSeleccionadaProperty().set(cartaSeleccionada);
 	}
 
 }

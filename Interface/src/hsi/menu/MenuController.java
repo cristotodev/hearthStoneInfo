@@ -3,6 +3,7 @@ package hsi.menu;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -254,15 +255,17 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
-		//TODO Tarea
 		cartasBuscadas.clear();
 		for (String idCarta : favoritas) {
-			try {
-				hsi.unirest.mapeo.Carta cartaServicio = servicioApi.getCartaById(idCarta, idiomaCartas.get());
-				cartasBuscadas.add(Carta.fromCartaServicio(cartaServicio));
-			} catch (UnirestException e1) {
-				e1.printStackTrace();
-			}
+			Task<hsi.unirest.mapeo.Carta> task = new Task<hsi.unirest.mapeo.Carta>() {
+				@Override
+				protected hsi.unirest.mapeo.Carta call() throws Exception {
+					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
+				}
+			};
+			task.setOnSucceeded(e1 -> cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta)e1.getSource().getValue())));
+			task.setOnFailed(e1 -> falloCargarFavoritosBDTarea(e1));
+			new Thread(task).start();
 		}
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
 	}
@@ -300,10 +303,9 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onVerMazoMenuAction(ActionEvent e) {
-		//TODO Usar hilos
 		cartasBuscadas.clear();
 		try {
-			List<String> cartasMazo;
+			
 			VerMazoController controller = new VerMazoController();
 			controller.getUsuario().bind(usuario);
 			controller.getMazos().bind(mazos);
@@ -311,16 +313,37 @@ public class MenuController implements Initializable {
 			mazoSeleccionado.set(controller.crearVentana());
 			if(mazoSeleccionado.get() != null) {
 				borderPaneDerecho.setBottom(panelDerechoMazosController.getView());
-				cartasMazo = FuncionesSQL.consultaMazoCarta(mazoSeleccionado.get().getId());
-				for (String idCarta : cartasMazo) {
-					hsi.unirest.mapeo.Carta cartaServicio = servicioApi.getCartaById(idCarta, idiomaCartas.get());
-					cartasBuscadas.add(Carta.fromCartaServicio(cartaServicio));
-				}
+				
+				Task<List<String>> task = new Task<List<String>>() {
+					@Override
+					protected List<String> call() throws Exception {
+						return FuncionesSQL.consultaMazoCarta(mazoSeleccionado.get().getId());
+					}
+				}; 
+				
+				task.setOnSucceeded(e1 -> correctoVerMazoTask(e1));
+				task.setOnFailed(e1 -> falloCargarFavoritosBDTarea(e1));
+				new Thread(task).start();
+				
+				
 			}
-		} catch (IOException | ClassNotFoundException | SQLException e1) {
+		} catch (IOException e1) {
 			e1.printStackTrace();
-		} catch (UnirestException e1) {
-			e1.printStackTrace();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void correctoVerMazoTask(WorkerStateEvent e1) {
+		for (String idCarta : (List<String>) e1.getSource().getValue()) {
+			Task<hsi.unirest.mapeo.Carta> task = new Task<hsi.unirest.mapeo.Carta>() {
+				@Override
+				protected hsi.unirest.mapeo.Carta call() throws Exception {
+					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
+				}
+			};
+			task.setOnSucceeded(e2 -> cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta) e2.getSource().getValue())));
+			task.setOnFailed(e2 -> falloCargarFavoritosBDTarea(e2));
+			new Thread(task).start();
 		}
 	}
 

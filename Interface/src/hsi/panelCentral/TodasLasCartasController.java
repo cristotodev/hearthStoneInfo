@@ -2,13 +2,17 @@ package hsi.panelCentral;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import hsi.items.Carta;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -20,12 +24,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 public class TodasLasCartasController implements Initializable {
 
 	//Model
 	private ListProperty<Carta> cartasBuscadas;
 	private ObjectProperty<Carta> cartaSeleccionada;
+	//TODO Crear publico estatico boolean
+	public static Boolean limpieza = true;
 	
 	//view
 	@FXML
@@ -43,30 +50,26 @@ public class TodasLasCartasController implements Initializable {
 		loader.load();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
-		
-		// TODO PRUEBAS borrar
-		/*Carta c1 = new Carta();
-		c1.setId("EX1_572");
-		c1.setImg(new Image("http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_572.png"));
-		cartasPane.getCartas().add(c1);
-		cartasPane.getCartas().add(c1);
-		cartasPane.getCartas().add(c1);		
-		cartasPane.getChildren().clear();
-		cartasPane.getCartas().add(c1);
-		cartasPane.getCartas().add(c1);
-		cartasPane.getCartas().add(c1);
-		cartasPane.getChildren().clear();
-		cartasPane.getCartas().add(c1);*/
-		
 		//bindeos
 		cartasPane.cartasProperty().bind(cartasBuscadas);
+		cartaSeleccionada.bind(cartasPane.cartaSeleccionadaProperty());
 		
-		
+		//cartasPane.startDragAndDrop(TransferMode.ANY);
 		//TODO Ver como limpiar la vista. Da error.
-		
-		
+		//TODO Preguntarle a Francisquito
+		cartasBuscadas.addListener(new ChangeListener() {
+			@Override
+			public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+				System.out.println(oldValue.toString());
+				if(limpieza) {
+					cartasPane.getChildren().clear();
+					limpieza = false;
+				}
+			}
+		});
 	}
 
 	public ScrollPane getView() {

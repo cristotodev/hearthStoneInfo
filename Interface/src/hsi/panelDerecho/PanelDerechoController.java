@@ -125,6 +125,7 @@ public class PanelDerechoController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		// bindeo
 		mazosComboBox.itemsProperty().bind(mazos);	
 		mazosComboBox.valueProperty().addListener(new ChangeListener<Mazo>() {
@@ -136,30 +137,41 @@ public class PanelDerechoController implements Initializable {
 		
 		copiarButton.disableProperty().bind(mazoSeleccionado.isNull().or(cartaSeleccionada.isNull()));
 		
-		imgGif.imageProperty().bind(cartaSeleccionada.get().imgDoradaProperty());
-		imgNormal.imageProperty().bind(cartaSeleccionada.get().imgProperty());
-		nombreLabel.textProperty().bind(cartaSeleccionada.get().nombreProperty());
-		expansionLabel.textProperty().bind(cartaSeleccionada.get().expansionProperty());
-		tipoLabel.textProperty().bind(cartaSeleccionada.get().tipoProperty());
-		faccionLabel.textProperty().bind(cartaSeleccionada.get().faccionProperty());
-		rarezaLabel.textProperty().bind(cartaSeleccionada.get().rarezaProperty());
-		Bindings.bindBidirectional(costeLabel.textProperty(), cartaSeleccionada.get().costeProperty(), new NumberStringConverter());
-		Bindings.bindBidirectional(ataqueLabel.textProperty(), cartaSeleccionada.get().ataqueProperty(), new NumberStringConverter());
-		Bindings.bindBidirectional(vidaLabel.textProperty(), cartaSeleccionada.get().saludProperty(), new NumberStringConverter());
-		textoLabel.textProperty().bind(cartaSeleccionada.get().accionProperty());
-		descripcionLabel.textProperty().bind(cartaSeleccionada.get().descripcionProperty());
-		rarezaLabel.textProperty().bind(cartaSeleccionada.get().rarezaProperty());
-		artistaLabel.textProperty().bind(cartaSeleccionada.get().artistaProperty());
-		eliteLabel.textProperty().bind(cartaSeleccionada.get().eliteProperty().asString());
-		claseLabel.textProperty().bind(cartaSeleccionada.get().claseProperty());
-		mecanismoLabel.textProperty().bind(cartaSeleccionada.get().mecanismoProperty());
-		
-
-		cartaSeleccionada.get().setImg(new Image("http://wow.zamimg.com/images/hearthstone/cards/enus/original/EX1_572.png"));
-		cartaSeleccionada.get().setImgDorada(new Image("http://wow.zamimg.com/images/hearthstone/cards/enus/animated/EX1_572_premium.gif"));
-		
 		//Eventos
 		copiarButton.setOnAction(e -> onCopiarButtonAction(e));
+		
+		//Listener
+		cartaSeleccionada.addListener(new ChangeListener<Carta>() {
+			@Override
+			public void changed(ObservableValue<? extends Carta> observable, Carta oldValue, Carta newValue) {
+				if(newValue != null) {
+					imgGif.imageProperty().bind(newValue.imgDoradaProperty());
+					imgNormal.imageProperty().bind(newValue.imgProperty());
+					nombreLabel.textProperty().bind(newValue.nombreProperty());
+					expansionLabel.textProperty().bind(newValue.expansionProperty());
+					tipoLabel.textProperty().bind(newValue.tipoProperty());
+					faccionLabel.textProperty().bind(newValue.faccionProperty());
+					rarezaLabel.textProperty().bind(newValue.rarezaProperty());
+					Bindings.bindBidirectional(costeLabel.textProperty(), newValue.costeProperty(), new NumberStringConverter());
+					Bindings.bindBidirectional(ataqueLabel.textProperty(), newValue.ataqueProperty(), new NumberStringConverter());
+					Bindings.bindBidirectional(vidaLabel.textProperty(), newValue.saludProperty(), new NumberStringConverter());
+					textoLabel.textProperty().bind(newValue.accionProperty());
+					descripcionLabel.textProperty().bind(newValue.descripcionProperty());
+					rarezaLabel.textProperty().bind(newValue.rarezaProperty());
+					artistaLabel.textProperty().bind(newValue.artistaProperty());
+					eliteLabel.textProperty().bind(newValue.eliteProperty().asString());
+					claseLabel.textProperty().bind(newValue.claseProperty());
+					mecanismoLabel.textProperty().bind(newValue.mecanismoProperty());
+				}
+			}
+		});
+		
+		mazoSeleccionado.addListener(new ChangeListener<Mazo>() {
+			@Override
+			public void changed(ObservableValue<? extends Mazo> observable, Mazo oldValue, Mazo newValue) {
+				mazosComboBox.getSelectionModel().select(getMazoSeleccionado());
+			}
+		});
 	}
 	
 	/**

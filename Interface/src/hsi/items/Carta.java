@@ -356,10 +356,10 @@ public class Carta {
 		else
 			System.out.println("No imagen, coger una estandar");
 
-		if (cartaServicio.getImgGold() != null)
+		/*if (cartaServicio.getImgGold() != null)
 			carta.setImgDorada(new Image(cartaServicio.getImgGold()));
 		else
-			System.out.println("No imagen dorada, coger una estandar");
+			System.out.println("No imagen dorada, coger una estandar");*/
 
 		carta.setMecanismo(cartaServicio.getMechanics());
 		return carta;

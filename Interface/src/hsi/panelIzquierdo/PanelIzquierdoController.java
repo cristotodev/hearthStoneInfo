@@ -9,6 +9,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
+import hsi.panelCentral.TodasLasCartasController;
 import hsi.unirest.herramientas.ServicioAPI;
 import hsi.unirest.mapeo.Info;
 import hsi.unirest.mapeo.ListaDeCartas;
@@ -212,6 +213,7 @@ public class PanelIzquierdoController implements Initializable {
 	 * @param e
 	 */
 	private void onBuscarButtonAction(ActionEvent e) {
+		TodasLasCartasController.limpieza = true;
 		System.out.println("buscando...");
 		if (busquedaCamposVbox.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
@@ -251,7 +253,6 @@ public class PanelIzquierdoController implements Initializable {
 		}
 	}
 
-	//TODO Problema en el servicio de las funciones para recoger cada carta de campo(revisar)
 	private void busquedasPorCampos() throws NumberFormatException, UnirestException {
 		if (!expansionCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {

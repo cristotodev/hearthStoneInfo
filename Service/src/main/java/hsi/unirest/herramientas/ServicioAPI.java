@@ -523,7 +523,6 @@ public class ServicioAPI {
 
 		if (locale != null)
 			consulta += "locale=" + locale;
-		System.out.println(consulta);
 		return consulta;
 	}
 
@@ -651,10 +650,6 @@ public class ServicioAPI {
 		JSONArray locales = datos.getJSONArray("locales");
 		for (int i = 0; i < locales.length(); i++) {
 			info.getLocales().add(locales.get(i).toString());
-		}
-
-		for (int i = 0; i < info.getLocales().size(); i++) {
-			System.out.println(info.getLocales().get(i));
 		}
 
 		return info;
