@@ -10,7 +10,10 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-            <Menu fx:id="inicioMenu" mnemonicParsing="false" text="Inicio" />
+            <Menu mnemonicParsing="false" text="Inicio">
+               <items>
+                  <MenuItem fx:id="inicioMenu" mnemonicParsing="false" text="Inicio" />
+               </items></Menu>
           <Menu mnemonicParsing="false" text="Mazos">
             <items>
               <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo" />
@@ -18,11 +21,13 @@
                   <MenuItem fx:id="eliminarMazoMenu" mnemonicParsing="false" text="Eliminar mazo" />
             </items>
           </Menu>
-          <Menu fx:id="favoritosMenu" mnemonicParsing="false" text="Favoritos" />
+          <Menu mnemonicParsing="false" text="Favoritos">
+               <items>
+                  <MenuItem fx:id="favoritosMenu" mnemonicParsing="false" text="Cartas favoritas" />
+               </items></Menu>
           <Menu mnemonicParsing="false" text="Idioma">
                <items>
                   <Menu fx:id="cartasMenu" mnemonicParsing="false" text="Cartas" />
-                  <Menu fx:id="appMenu" mnemonicParsing="false" text="App" />
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Información">

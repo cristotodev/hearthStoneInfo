@@ -25,6 +25,18 @@ import hsi.unirest.mapeo.ListaDeDorsales;
  */
 public class ServicioAPI {
 
+	public Carta getCartaById(String id, String locale) throws UnirestException {
+		
+		Carta carta = new Carta();
+		String consulta = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+id+"?locale="+locale;
+		HttpResponse<JsonNode> response = Unirest.get(consulta)
+				.header("X-Mashape-Key", "65lMyicqJFmshoONWG7rijO8v9fap1oVHOUjsnCu6wDEybbrNT").asJson();
+		
+		JSONObject datos =response.getBody().getArray().getJSONObject(0);
+		pasarAtributos(datos, carta);
+		return  carta;
+	}
+	
 	/**
 	 * Obtiene todas las cartas del juego
 	 * 

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import hsi.app.HsiApp;
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
@@ -24,6 +26,7 @@ import hsi.panelDerecho.Favorito.PanelDerechoFavoritoController;
 import hsi.panelDerecho.Mazos.PanelDerechoMazosController;
 import hsi.panelIzquierdo.PanelIzquierdoController;
 import hsi.sql.FuncionesSQL;
+import hsi.unirest.herramientas.ServicioAPI;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -57,6 +60,9 @@ import javafx.stage.Stage;
 public class MenuController implements Initializable {
 
 	private Stage stage;
+	
+	//Lógica de negocio
+	private ServicioAPI servicioApi;
 
 	// controller
 	private PanelDerechoController panelDerechoController;
@@ -80,7 +86,7 @@ public class MenuController implements Initializable {
 	private BorderPane view;
 
 	@FXML
-	private Menu inicioMenu;
+	private MenuItem inicioMenu;
 
 	@FXML
 	private MenuItem crearMazoMenu;
@@ -92,13 +98,10 @@ public class MenuController implements Initializable {
 	private MenuItem eliminarMazoMenu;
 
 	@FXML
-	private Menu favoritosMenu;
+	private MenuItem favoritosMenu;
 
 	@FXML
 	private Menu cartasMenu;
-
-	@FXML
-	private Menu appMenu;
 
 	@FXML
 	private MenuItem informacionMenu;
@@ -110,6 +113,8 @@ public class MenuController implements Initializable {
 	private BorderPane borderPaneDerecho;
 
 	public MenuController() throws IOException {
+		
+		servicioApi = new ServicioAPI();
 
 		panelDerechoController = new PanelDerechoController();
 		panelDerechoMazosController = new PanelDerechoMazosController();
@@ -156,7 +161,9 @@ public class MenuController implements Initializable {
 		Bindings.bindBidirectional(favoritas, panelDerechoFavoritoController.favoritosProperty());
 
 		panelIzquierdoController.idiomaCartaProperty().bind(idiomaCartas);
-		cartasBuscadas.bind(panelIzquierdoController.cartasBusquedaProperty());
+		Bindings.bindBidirectional(cartasBuscadas, panelIzquierdoController.cartasBusquedaProperty());
+		// Comentado porque tiene que ser bidireccional (justo encima)
+		// cartasBuscadas.bind(panelIzquierdoController.cartasBusquedaProperty());
 
 		todasLasCartasController.cartasBuscadasProperty().bind(cartasBuscadas);
 		cartaSeleccionada.bind(todasLasCartasController.cartaSeleccionadaProperty());
@@ -168,7 +175,7 @@ public class MenuController implements Initializable {
 		eliminarMazoMenu.setOnAction(e -> onEliminarMazoMenuAction(e));
 		favoritosMenu.setOnAction(e -> onFavoritosMenuAction(e));
 		cartasMenu.setOnAction(e -> onCartasMenuAction(e));
-		appMenu.setOnAction(e -> onAppMenuAction(e));
+		//appMenu.setOnAction(e -> onAppMenuAction(e));
 		informacionMenu.setOnAction(e -> onInformacionMenuAction(e));
 		acercaDeMenu.setOnAction(e -> onAcercaDeMenuAction(e));
 
@@ -190,10 +197,6 @@ public class MenuController implements Initializable {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
-	}
-
-	private Object onAppMenuAction(ActionEvent e) {
-		return null;
 	}
 
 	/**
@@ -251,7 +254,16 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
-		// TODO Favorito hacerlo
+		//Tarea
+		cartasBuscadas.clear();
+		for (String idCarta : favoritas) {
+			try {
+				hsi.unirest.mapeo.Carta cartaServicio = servicioApi.getCartaById(idCarta, idiomaCartas.get());
+				cartasBuscadas.add(Carta.fromCartaServicio(cartaServicio));
+			} catch (UnirestException e1) {
+				e1.printStackTrace();
+			}
+		}
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
 	}
 
