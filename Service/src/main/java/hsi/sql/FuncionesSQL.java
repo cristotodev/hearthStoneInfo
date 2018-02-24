@@ -296,7 +296,7 @@ public class FuncionesSQL {
 			throws ClassNotFoundException, SQLException {
 
 		PreparedStatement ps = conectarServidor()
-				.prepareStatement("delete from T_FAVORITOS where Nombre = ? and IdCarta = ?;");
+				.prepareStatement("delete from T_FAVORITOS where NombreUsuario = ? and IdCarta = ?;");
 		ps.setString(1, nombreUsuario);
 		ps.setString(2, idCard);
 
@@ -551,7 +551,7 @@ public class FuncionesSQL {
 
 	public static void eliminarMazoCarta(int idMAzo, String idCarta) throws ClassNotFoundException, SQLException {
 		PreparedStatement ps = conectarServidor()
-				.prepareStatement("delete top(1) from T_Mazo_Cartas where IdMazo = ? and IdCarta = ?;");
+				.prepareStatement("delete from T_Mazo_Cartas where IdMazo = ? and IdCarta = ?;");
 		ps.setInt(1, idMAzo);
 		ps.setString(2, idCarta);
 
