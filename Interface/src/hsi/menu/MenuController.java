@@ -254,7 +254,7 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
-		//Tarea
+		//TODO Tarea
 		cartasBuscadas.clear();
 		for (String idCarta : favoritas) {
 			try {
@@ -300,14 +300,26 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onVerMazoMenuAction(ActionEvent e) {
+		//TODO Usar hilos
+		cartasBuscadas.clear();
 		try {
+			List<String> cartasMazo;
 			VerMazoController controller = new VerMazoController();
 			controller.getUsuario().bind(usuario);
 			controller.getMazos().bind(mazos);
 
 			mazoSeleccionado.set(controller.crearVentana());
-			borderPaneDerecho.setBottom(panelDerechoMazosController.getView());
-		} catch (IOException e1) {
+			if(mazoSeleccionado.get() != null) {
+				borderPaneDerecho.setBottom(panelDerechoMazosController.getView());
+				cartasMazo = FuncionesSQL.consultaMazoCarta(mazoSeleccionado.get().getId());
+				for (String idCarta : cartasMazo) {
+					hsi.unirest.mapeo.Carta cartaServicio = servicioApi.getCartaById(idCarta, idiomaCartas.get());
+					cartasBuscadas.add(Carta.fromCartaServicio(cartaServicio));
+				}
+			}
+		} catch (IOException | ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		} catch (UnirestException e1) {
 			e1.printStackTrace();
 		}
 	}

@@ -350,8 +350,7 @@ public class Carta {
 		carta.setRaza(cartaServicio.getRace());
 		carta.setArtista(cartaServicio.getArtist());
 		carta.setClase(cartaServicio.getPlayerClass());
-		// TODO Se está cogiendo de la URL. Hay que coger de caché
-		//TODO Quitar comentarios
+		
 		if (cartaServicio.getImg() != null)
 			carta.setImg(new Image(cartaServicio.getImg()));
 		else
