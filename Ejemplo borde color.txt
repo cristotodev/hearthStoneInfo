@@ -1,0 +1,30 @@
+//Instantiating the Shadow class 
+DropShadow dropShadow = new DropShadow(); 
+      
+      //setting the type of blur for the shadow 
+      dropShadow.setBlurType(BlurType.GAUSSIAN); 
+      
+      //Setting color for the shadow 
+      dropShadow.setColor(Color.ROSYBROWN); 
+      
+      //Setting the height of the shadow
+      dropShadow.setHeight(5); 
+      
+      //Setting the width of the shadow 
+      dropShadow.setWidth(5); 
+      
+      //Setting the radius of the shadow 
+      dropShadow.setRadius(5); 
+      
+      //setting the offset of the shadow 
+      dropShadow.setOffsetX(3); 
+      dropShadow.setOffsetY(2); 
+      
+      //Setting the spread of the shadow 
+      dropShadow.setSpread(12);  
+      
+      //Applying shadow effect to the text 
+      text.setEffect(dropShadow);      
+      
+      //Applying shadow effect to the circle 
+      circle.setEffect(dropShadow); 
