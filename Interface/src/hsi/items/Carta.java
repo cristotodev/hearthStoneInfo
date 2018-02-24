@@ -354,12 +354,10 @@ public class Carta {
 		if (cartaServicio.getImg() != null)
 			carta.setImg(new Image(cartaServicio.getImg()));
 		else
-			System.out.println("No imagen, coger una estandar");
+			carta.setImg(new Image("http://wow.zamimg.com/images/hearthstone/backs/original/Card_Back_Default.png"));
 
-		/*if (cartaServicio.getImgGold() != null)
+		if (cartaServicio.getImgGold() != null)
 			carta.setImgDorada(new Image(cartaServicio.getImgGold()));
-		else
-			System.out.println("No imagen dorada, coger una estandar");*/
 
 		carta.setMecanismo(cartaServicio.getMechanics());
 		return carta;

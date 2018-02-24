@@ -2,7 +2,6 @@ package hsi.panelDerecho.Mazos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import hsi.controlErrores.ControllerControlesView;
@@ -99,8 +98,6 @@ public class PanelDerechoMazosController implements Initializable {
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				System.out.println(mazoSeleccionado.get().getId());
-				System.out.println(cartaSeleccionada.get().getId());
 				FuncionesSQL.eliminarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
 				return null;
 			}

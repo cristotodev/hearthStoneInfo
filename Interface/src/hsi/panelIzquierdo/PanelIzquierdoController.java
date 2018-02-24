@@ -214,7 +214,6 @@ public class PanelIzquierdoController implements Initializable {
 	 */
 	private void onBuscarButtonAction(ActionEvent e) {
 		TodasLasCartasController.limpieza = true;
-		System.out.println("buscando...");
 		if (busquedaCamposVbox.isDisable()) {
 			Task<ListaDeCartas> task = new Task<ListaDeCartas>() {
 				@Override
@@ -240,7 +239,6 @@ public class PanelIzquierdoController implements Initializable {
 	}
 
 	private void correctoObtenerCartasBDTarea(WorkerStateEvent e1) {
-		System.out.println("Dentro");
 		listaCartasServicios = (ListaDeCartas) e1.getSource().getValue();
 		pasarCartas(listaCartasServicios.getCartas(), cartasBusqueda.get());
 	}
