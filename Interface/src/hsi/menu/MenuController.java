@@ -78,34 +78,34 @@ public class MenuController implements Initializable {
 
 	// view
 	@FXML
-	private BorderPane view;
+    private BorderPane view;
 
-	@FXML
-	private MenuItem inicioMenu;
+    @FXML
+    private MenuItem inicioMenu;
 
-	@FXML
-	private MenuItem crearMazoMenu;
+    @FXML
+    private MenuItem crearMazoMenu;
 
-	@FXML
-	private MenuItem verMazoMenu;
+    @FXML
+    private MenuItem verMazoMenu;
 
-	@FXML
-	private MenuItem eliminarMazoMenu;
+    @FXML
+    private MenuItem eliminarMazoMenu;
 
-	@FXML
-	private MenuItem favoritosMenu;
+    @FXML
+    private MenuItem favoritosMenu;
 
-	@FXML
-	private Menu cartasMenu;
+    @FXML
+    private MenuItem cartasMenu;
 
-	@FXML
-	private MenuItem informacionMenu;
+    @FXML
+    private MenuItem informacionMenu;
 
-	@FXML
-	private MenuItem acercaDeMenu;
+    @FXML
+    private MenuItem acercaDeMenu;
 
-	@FXML
-	private BorderPane borderPaneDerecho;
+    @FXML
+    private BorderPane borderPaneDerecho;
 
 	public MenuController() throws IOException {
 		

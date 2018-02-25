@@ -27,7 +27,7 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="Idioma">
                <items>
-                  <Menu fx:id="cartasMenu" mnemonicParsing="false" text="Cartas" />
+                  <MenuItem fx:id="cartasMenu" mnemonicParsing="false" text="Cartas" />
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Información">
