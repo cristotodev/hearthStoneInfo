@@ -377,13 +377,16 @@ public class MenuController implements Initializable {
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
-
+		
+		Scene scene = new Scene(view, 720, 600);
+		scene.getStylesheets().add(getClass().getResource("aplicacionEstilos.css").toExternalForm());
+		
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("HearthStoneInfo");
-		stage.setScene(new Scene(view, 720, 600));
+		stage.setScene(scene);
 		HsiApp.getPrimaryStage().close();
 		stage.showAndWait();
 	}

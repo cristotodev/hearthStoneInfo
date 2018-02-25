@@ -3,6 +3,7 @@ package hsi.app;
 import hsi.ventanaArranque.VentanaArranqueController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class HsiApp extends Application {
@@ -13,6 +14,7 @@ public class HsiApp extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
+		this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/hsi/resources/img/iconoHS.png")));
 		
 		VentanaArranqueController controller = new VentanaArranqueController();
 		

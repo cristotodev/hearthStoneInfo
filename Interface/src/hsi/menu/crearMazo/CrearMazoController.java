@@ -114,7 +114,7 @@ public class CrearMazoController implements Initializable {
 	public void crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Crear mazo");
 		stage.setScene(new Scene(view));

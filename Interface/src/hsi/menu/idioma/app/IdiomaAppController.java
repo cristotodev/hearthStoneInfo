@@ -76,7 +76,7 @@ public class IdiomaAppController implements Initializable {
 	public String crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Cambiar Idioma de las Cartas");
 		stage.setScene(new Scene(view));

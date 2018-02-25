@@ -40,7 +40,7 @@ public class AcercaDeController implements Initializable {
 	public void crearVentana() {
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Acerca de");
 		stage.setScene(new Scene(view));

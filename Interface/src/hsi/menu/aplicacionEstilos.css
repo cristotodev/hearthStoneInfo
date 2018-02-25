@@ -1,0 +1,24 @@
+@font-face{
+	font-family: hsi-font;
+    src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
+}
+
+.root{
+	-fx-font-family: 'hsi-font';
+	-fx-font-size: 14px;
+}
+
+/* Estilos menú*/
+.menu{
+	-fx-font-size: 12px;
+}
+
+/*Estilo panel de búsqueda (izquierdo) */
+.panelBusqueda{
+	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
+}
+
+/*Estilos panel de cartas (central) */
+.panelCartas{
+	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
+}

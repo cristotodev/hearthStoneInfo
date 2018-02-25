@@ -8,24 +8,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" spacing="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" spacing="20.0" styleClass="panelBusqueda" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Nombre" />
       <TextField fx:id="nombreTextField" promptText="Nombre" />
       <VBox fx:id="busquedaCamposVbox" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
          <children>
-            <Label text="Expansión" />
-            <ComboBox fx:id="expansionCombo" prefWidth="150.0" />
-            <Label text="Clase" />
-            <ComboBox fx:id="claseCombo" prefWidth="150.0" />
-            <Label text="Facción" />
-            <ComboBox fx:id="faccionCombo" prefWidth="150.0" />
-            <Label text="Rareza" />
-            <ComboBox fx:id="rarezaCombo" prefWidth="150.0" />
-            <Label text="Tipo" />
-            <ComboBox fx:id="tipoCombo" prefWidth="150.0" />
-            <Label text="Raza" />
-            <ComboBox fx:id="razaCombo" prefWidth="150.0" />
+            <ComboBox fx:id="expansionCombo" maxWidth="1.7976931348623157E308" promptText="Expansión" />
+            <ComboBox fx:id="claseCombo" maxWidth="1.7976931348623157E308" promptText="Clase" />
+            <ComboBox fx:id="faccionCombo" maxWidth="1.7976931348623157E308" promptText="Facción" />
+            <ComboBox fx:id="rarezaCombo" maxWidth="1.7976931348623157E308" promptText="Rareza" />
+            <ComboBox fx:id="tipoCombo" maxWidth="1.7976931348623157E308" promptText="Tipo" />
+            <ComboBox fx:id="razaCombo" maxWidth="1.7976931348623157E308" promptText="Raza" />
             <Label text="Ataque" />
             <TextField fx:id="ataqueTextField" />
             <Label text="Vida" />
@@ -36,7 +29,7 @@
       </VBox>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="buscarButton" mnemonicParsing="false" text="Buscar" />
+            <Button fx:id="buscarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Buscar" />
          </children>
          <padding>
             <Insets top="5.0" />
