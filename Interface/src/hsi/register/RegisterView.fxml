@@ -20,13 +20,13 @@
       <ColumnConstraints />
    </columnConstraints>
    <children>
-      <TextField fx:id="usuarioTextField" promptText="Usuario" GridPane.columnSpan="2" />
-      <PasswordField fx:id="contraPassField" promptText="Contraseña" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-      <PasswordField fx:id="repetirPassField" promptText="Repetir contraseña" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <TextField fx:id="usuarioTextField" promptText="Usuario" styleClass="camposInicio" GridPane.columnSpan="2" />
+      <PasswordField fx:id="contraPassField" promptText="Contraseña" styleClass="camposInicio" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <PasswordField fx:id="repetirPassField" promptText="Repetir contraseña" styleClass="camposInicio" GridPane.columnSpan="2" GridPane.rowIndex="2" />
       <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="crearButton" defaultButton="true" mnemonicParsing="false" prefWidth="80.0" text="Crear" />
-            <Button fx:id="cancelarButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefWidth="80.0" text="Cancelar" />
+            <Button fx:id="crearButton" defaultButton="true" mnemonicParsing="false" text="Crear" />
+            <Button fx:id="cancelarButton" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Cancelar" />
          </children>
       </HBox>
    </children>

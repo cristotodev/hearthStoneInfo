@@ -16,8 +16,11 @@ public class HsiApp extends Application {
 		
 		VentanaArranqueController controller = new VentanaArranqueController();
 		
+		Scene scene = new Scene(VentanaArranqueController.getCopiaView(), 640, 480);
+		scene.getStylesheets().add(getClass().getResource("hsiEstilos.css").toExternalForm());
+		
 		primaryStage.setTitle("HearthStone Info");
-		primaryStage.setScene(new Scene(VentanaArranqueController.getCopiaView(), 640, 480));
+		primaryStage.setScene(scene);
 		primaryStage.show(); 
 	}
 

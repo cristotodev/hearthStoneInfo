@@ -1,0 +1,41 @@
+@font-face{
+	font-family: hsi-font;
+    src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
+}
+
+.root{
+	-fx-font-family: 'hsi-font';
+	-fx-font-size: 16px;
+}
+
+/*Estilos ventana login y registro */
+.ventanaArranqueView{
+	-fx-background-image: url("/hsi/resources/img/ventanaArranqueBg.jpg") ;
+	-fx-background-insets: -20, -10;
+	-fx-background-position: left top, center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+}
+
+.camposInicio {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    
+}
+
+.camposInicio{
+	-fx-background-color: transparent ;
+	-fx-border-color: white; 
+	-fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-text-fill: white ;
+}
+
+.mensajeInicioLabel{
+	-fx-text-fill: white ;
+	-fx-font-size: .9em;
+}
+
+/*Botones inicio */
+.botonesInicio{
+	
+}
