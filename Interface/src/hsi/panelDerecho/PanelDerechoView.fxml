@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane>
          <children>
@@ -120,7 +120,7 @@
             <Label text="Mazos:" />
          </children>
       </HBox>
-      <ComboBox fx:id="mazosComboBox" prefWidth="150.0" visibleRowCount="5" />
+      <ComboBox fx:id="mazosComboBox" maxWidth="1.7976931348623157E308" styleClass="comboBox" visibleRowCount="5" />
       <Button fx:id="copiarButton" mnemonicParsing="false" text="Copiar a mazo" />
    </children>
    <padding>

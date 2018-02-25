@@ -13,12 +13,52 @@
 	-fx-font-size: 12px;
 }
 
+/*---------------------------------------------------------------- */
 /*Estilo panel de búsqueda (izquierdo) */
+/*----------------------------------------------------------------- */
 .panelBusqueda{
 	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
 }
 
+.comboBox{
+	-fx-border-width: 0.5px;
+	-fx-border-color: #ACACAC;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-padding: 0px;
+	-fx-font-weight: 700;
+}
+
+.comboBox:hover{
+	-fx-text-fill: white ;
+}
+
+.comboBox-base:hover{
+	-fx-border-color: purple;
+}
+
+.comboBox-base:foucused{
+	-fx-text-fill: purple;
+}
+
+.comboBox .list-view{
+	-fx-border-width: 0.5px;
+	-fx-border-color: #ACACAC;
+	-fx-background-color: white;
+	-fx-padding: 0px;
+	-fx-border-radius: 10px 10px 0px 0px;
+	-fx-background-radius: 10px 10px 0px 0px;
+}
+
+.comboBox .list-view .list-ce:filled{
+	-fx-text-fill: black ;
+	-fx-font-size: 12px;
+	-fx-font-weight: 700;
+}
+
+/*------------------------------------------------------------------ */
 /*Estilos panel de cartas (central) */
+/*------------------------------------------------------------------ */
 .panelCartas{
 	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
 }
