@@ -137,12 +137,15 @@ public class IdiomaCartasController implements Initializable {
 	 * @return Devuelve el idioma que se seleccionó.
 	 */
 	public String crearVentana() {
+		Scene scene = new Scene(view);
+		scene.getStylesheets().add(getClass().getResource("/hsi/menu/mazosEstilo.css").toExternalForm());
+		
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
 		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Cambiar Idioma de las Cartas");
-		stage.setScene(new Scene(view));
+		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.showAndWait();
 		return idiomaSelecionado.get();

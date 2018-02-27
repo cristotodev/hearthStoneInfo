@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<GridPane fx:id="view" hgap="5.0" vgap="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<GridPane fx:id="view" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
@@ -21,11 +20,11 @@
    </columnConstraints>
    <children>
       <Label text="Idioma" />
-      <ComboBox fx:id="idiomasComboBox" prefWidth="150.0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <ComboBox fx:id="idiomasComboBox" maxWidth="1.7976931348623157E308" GridPane.columnSpan="2" GridPane.rowIndex="1" />
       <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="aceptarBtn" mnemonicParsing="false" text="Aceptar" />
-            <Button fx:id="cancelarBtn" mnemonicParsing="false" text="Cancelar" />
+            <Button fx:id="aceptarBtn" defaultButton="true" mnemonicParsing="false" text="Aceptar" />
+            <Button fx:id="cancelarBtn" cancelButton="true" mnemonicParsing="false" text="Cancelar" />
          </children>
       </HBox>
    </children>

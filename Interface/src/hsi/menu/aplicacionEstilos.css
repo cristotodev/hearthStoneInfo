@@ -62,3 +62,35 @@
 .panelCartas{
 	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
 }
+
+/*--------------------------------------------------------------------- */
+/*Panel de información (derecho) */
+/*---------------------------------------------------------------------- */
+.panelInfo{
+	-fx-background-image: url('/hsi/resources/img/fondo_info.png') 
+}
+
+.nombreCarta{
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+}
+
+.titulosLabel{
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+}
+
+.titulo{
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+}
+
+/*-------------------- */
+/*Crear mazo */
+/*---------------------- */
+
+
+
+/*------------------- */
+/*Ver mazo */
+/*------------------- */

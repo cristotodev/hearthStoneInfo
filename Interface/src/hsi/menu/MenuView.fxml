@@ -5,9 +5,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar styleClass="menu" BorderPane.alignment="CENTER">
         <menus>
@@ -17,14 +20,40 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="Mazos">
             <items>
-              <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo" />
-                  <MenuItem fx:id="verMazoMenu" mnemonicParsing="false" text="Ver mazo" />
-                  <MenuItem fx:id="eliminarMazoMenu" mnemonicParsing="false" text="Eliminar mazo" />
+              <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="verMazoMenu" mnemonicParsing="false" text="Ver mazo">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/mazo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="V" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="eliminarMazoMenu" mnemonicParsing="false" text="Eliminar mazo">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Favoritos">
                <items>
-                  <MenuItem fx:id="favoritosMenu" mnemonicParsing="false" text="Cartas favoritas" />
+                  <MenuItem fx:id="favoritosMenu" mnemonicParsing="false" text="Cartas favoritas">
+                     <graphic>
+                        <ImageView pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/icon_favourite.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                </items></Menu>
           <Menu mnemonicParsing="false" text="Idioma">
                <items>

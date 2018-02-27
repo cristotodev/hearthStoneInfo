@@ -1,0 +1,11 @@
+@font-face{
+	font-family: hsi-font;
+    src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
+}
+
+.root{
+	-fx-font-family: 'hsi-font';
+	-fx-font-size: 14px;
+	-fx-background-image: url('/hsi/resources/img/acercaDeFondo.png'); 
+}
+

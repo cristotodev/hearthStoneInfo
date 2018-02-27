@@ -6,12 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox fx:id="view" alignment="BASELINE_CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<VBox fx:id="view" alignment="BASELINE_CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../resources/img/hearthStoneLogo.png" />
+            <Image url="@../../../../../../hearthStoneInfo/Interface/src/hsi/resources/img/hearthStoneLogo.png" />
          </image>
       </ImageView>
       <Label text="Versión: 1.0.0" />

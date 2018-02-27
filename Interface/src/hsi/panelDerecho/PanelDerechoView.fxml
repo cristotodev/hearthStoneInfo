@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" alignment="CENTER" spacing="5.0" styleClass="panelInfo" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane>
          <children>
-            <ImageView fx:id="imgGif" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" translateX="15.0" translateY="-15.0">
+            <ImageView fx:id="imgGif" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateX="15.0" translateY="-15.0">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>
             </ImageView>
-            <ImageView fx:id="imgNormal" fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgNormal" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>
@@ -29,99 +29,105 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </StackPane>
-      <Label fx:id="nombreLabel" alignment="CENTER" text="Nombre" />
+      <Label fx:id="nombreLabel" alignment="CENTER" styleClass="nombreCarta" text="Nombre" />
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Expansión:" />
+            <Label styleClass="titulosLabel" text="Expansión:" />
             <Label fx:id="expansionLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Tipo:" />
+            <Label styleClass="titulosLabel" text="Tipo:" />
             <Label fx:id="tipoLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Facción:" />
+            <Label styleClass="titulosLabel" text="Facción:" />
             <Label fx:id="faccionLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Rareza:" />
+            <Label styleClass="titulosLabel" text="Rareza:" />
             <Label fx:id="rarezaLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Coste:" />
+            <Label styleClass="titulosLabel" text="Coste:" />
             <Label fx:id="costeLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Ataque:" />
+            <Label styleClass="titulosLabel" text="Ataque:" />
             <Label fx:id="ataqueLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Vida:" />
+            <Label styleClass="titulosLabel" text="Vida:" />
             <Label fx:id="vidaLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Texto:" />
+            <Label styleClass="titulosLabel" text="Texto:" />
             <Label fx:id="textoLabel" maxWidth="200.0" text="-" wrapText="true" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Descripción:" />
+            <Label styleClass="titulosLabel" text="Descripción:" />
             <Label fx:id="descripcionLabel" maxWidth="200.0" text="-" wrapText="true" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Raza:" />
+            <Label styleClass="titulosLabel" text="Raza:" />
             <Label fx:id="razaLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Artista:" />
+            <Label styleClass="titulosLabel" text="Artista:" />
             <Label fx:id="artistaLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Elite:" />
+            <Label styleClass="titulosLabel" text="Elite:" />
             <Label fx:id="eliteLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Clase:" />
+            <Label styleClass="titulosLabel" text="Clase:" />
             <Label fx:id="claseLabel" text="-" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" spacing="5.0">
          <children>
-            <Label text="Mecanismo:" />
+            <Label styleClass="titulosLabel" text="Mecanismo:" />
             <Label fx:id="mecanismoLabel" text="-" />
          </children>
       </HBox>
       <Separator />
-      <HBox>
+      <HBox alignment="CENTER">
          <children>
-            <Label text="Mazos:" />
+            <Label styleClass="titulo" text="Mazos" />
          </children>
       </HBox>
-      <ComboBox fx:id="mazosComboBox" maxWidth="1.7976931348623157E308" styleClass="comboBox" visibleRowCount="5" />
-      <Button fx:id="copiarButton" mnemonicParsing="false" text="Copiar a mazo" />
+      <ComboBox fx:id="mazosComboBox" maxWidth="1.7976931348623157E308" promptText="Seleccione un mazo" styleClass="comboBox" visibleRowCount="5">
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </VBox.margin></ComboBox>
+      <Button fx:id="copiarButton" defaultButton="true" maxWidth="130.0" mnemonicParsing="false" text="Copiar a mazo">
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin></Button>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

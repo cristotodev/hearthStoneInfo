@@ -1,0 +1,45 @@
+@font-face{
+	font-family: hsi-font;
+    src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
+}
+
+.root{
+	-fx-font-family: 'hsi-font';
+	-fx-font-size: 14px;
+}
+
+.comboBox{
+	-fx-border-width: 0.5px;
+	-fx-border-color: #ACACAC;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-padding: 0px;
+	-fx-font-weight: 700;
+}
+
+.comboBox:hover{
+	-fx-text-fill: white ;
+}
+
+.comboBox-base:hover{
+	-fx-border-color: purple;
+}
+
+.comboBox-base:foucused{
+	-fx-text-fill: purple;
+}
+
+.comboBox .list-view{
+	-fx-border-width: 0.5px;
+	-fx-border-color: #ACACAC;
+	-fx-background-color: white;
+	-fx-padding: 0px;
+	-fx-border-radius: 10px 10px 0px 0px;
+	-fx-background-radius: 10px 10px 0px 0px;
+}
+
+.comboBox .list-view .list-ce:filled{
+	-fx-text-fill: black ;
+	-fx-font-size: 12px;
+	-fx-font-weight: 700;
+}
