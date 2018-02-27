@@ -34,7 +34,9 @@
 	-fx-text-fill: white ;
 	-fx-font-size: .9em;
 }
-
+.linkRegistro{
+	-fx-font-weight: bold;
+}
 /*Botones inicio */
 .botonesInicio{
 	
