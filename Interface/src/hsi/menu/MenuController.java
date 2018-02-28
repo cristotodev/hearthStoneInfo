@@ -10,7 +10,6 @@ import hsi.app.HsiApp;
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
 import hsi.items.Mazo;
-import hsi.jasper.FuncionesJasper;
 import hsi.menu.acercaDe.AcercaDeController;
 import hsi.menu.crearMazo.CrearMazoController;
 import hsi.menu.eliminarMazo.EliminarMazoController;
@@ -45,7 +44,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
 
 /**
  * Clase encargada de crear la ventana principal la cuál va a tener las demás
@@ -84,9 +82,6 @@ public class MenuController implements Initializable {
 
     @FXML
     private MenuItem inicioMenu;
-    
-    @FXML
-    private MenuItem informeMenu;
 
     @FXML
     private MenuItem crearMazoMenu;
@@ -170,7 +165,6 @@ public class MenuController implements Initializable {
 
 		// Eventos
 		inicioMenu.setOnAction(e -> onInicioMenuAction(e));
-		informeMenu.setOnAction(e -> onInformeMenuAction(e));
 		crearMazoMenu.setOnAction(e -> onCrearMazoMenuAction(e));
 		verMazoMenu.setOnAction(e -> onVerMazoMenuAction(e));
 		eliminarMazoMenu.setOnAction(e -> onEliminarMazoMenuAction(e));
@@ -188,8 +182,6 @@ public class MenuController implements Initializable {
 
 	}
 
-	
-
 	/**
 	 * Evento asociado a la opción "Inicio" del menú.<br>
 	 * Restablece la vista como al inicio.
@@ -203,21 +195,6 @@ public class MenuController implements Initializable {
 		view.setLeft(panelIzquierdoController.getView());
 	}
 
-	/**
-	 * Evento asociado a la opción "Generar Informe" del menú.<br>
-	 * Ejecuta el JasperReport y genera un pdf.
-	 * @param e
-	 */
-	private void onInformeMenuAction(ActionEvent e) {
-		FuncionesJasper.setUsuario(usuario.get());
-		try {
-			new FuncionesJasper().EjecutarJasper();
-		} catch (ClassNotFoundException | SQLException | JRException | IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}
 	/**
 	 * Evento asociado a la opción "Cartas" relacionado con el idioma.<br>
 	 * Crear una ventana emergente para especificar el idioma de las cartas.

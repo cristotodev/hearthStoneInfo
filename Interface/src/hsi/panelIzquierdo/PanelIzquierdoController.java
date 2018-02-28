@@ -256,67 +256,103 @@ public class PanelIzquierdoController implements Initializable {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = expansionCombo.getSelectionModel().getSelectedIndex();
-					System.out.println(infoEnglish.get().getSets().get(pos));
-					return servicioApi.getCartasExpansion(infoEnglish.get().getSets().get(pos),
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty()) {
+						lista = servicioApi.getCartasExpansion(infoEnglish.get().getSets().get(pos),
+								null, null,null, idiomaCarta.get());
+					}else
+						lista = servicioApi.getCartasExpansion(infoEnglish.get().getSets().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
+					return lista;
 				}
 			};
 		}else if(!claseCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = claseCombo.getSelectionModel().getSelectedIndex();
-					return servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty())
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
+								null, null, null, idiomaCarta.get());
+					else
+						lista =  servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 							idiomaCarta.get());
+					return lista;
 				}
 			};
 		}else if(!faccionCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = faccionCombo.getSelectionModel().getSelectedIndex();
-					return servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
-							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-							idiomaCarta.get());
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty())
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
+							null, null, null,idiomaCarta.get());
+					else
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
+								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+								idiomaCarta.get());
+					return lista;
 				}
 			};
 		}else if(!rarezaCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = rarezaCombo.getSelectionModel().getSelectedIndex();
-					return servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
-							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-							idiomaCarta.get());
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty())
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
+								null, null, null, idiomaCarta.get());
+					else
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
+								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+								idiomaCarta.get());
+					return lista;
 				}
 			};
 		}else if(!tipoCombo.isDisable()) {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = tipoCombo.getSelectionModel().getSelectedIndex();
-					return servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
-							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-							idiomaCarta.get());
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty())
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
+							null, null, null,idiomaCarta.get());
+					else
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
+								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+								idiomaCarta.get());
+					return lista;
 				}
 			};
 		}else {
 			task = new Task<ListaDeCartas>() {
 				@Override
 				protected ListaDeCartas call() throws Exception {
+					ListaDeCartas lista;
 					Integer pos = razaCombo.getSelectionModel().getSelectedIndex();
-					return servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
-							Integer.parseInt(panelIzquierdoModelo.getAtaque()),
-							Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
-							idiomaCarta.get());
+					if(ataqueTextField.getText().isEmpty() || vidaTextfield.getText().isEmpty() || costeTextField.getText().isEmpty())
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
+								null,null, null, idiomaCarta.get());
+					else
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
+								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
+								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
+								idiomaCarta.get());
+					
+					return lista;
 				}
 			};
 		}
