@@ -83,12 +83,12 @@ public class ControllerControlesView implements Initializable {
 	 * Método para crear y mostrar la ventana del error.
 	 */
 	public void crearVentana() {
-		Scene scene = new Scene(view, 320, 210);
+		Scene scene = new Scene(view, 330, 270);
 		scene.getStylesheets().add(getClass().getResource("controlErroresEstilos.css").toExternalForm());
 		
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
-		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
+		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Hubo un problema");
 		stage.setScene(scene);
