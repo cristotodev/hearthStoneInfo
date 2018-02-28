@@ -1,0 +1,13 @@
+@font-face{
+	font-family: hsi-font;
+    src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
+}
+
+.erroresView{
+	-fx-background-image: url("/hsi/resources/img/controlErrores.jpg") ;
+}
+
+.mensajeText{
+	-fx-font-size: 16px;
+	-fx-text-fill: white ;
+}

@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
@@ -33,17 +34,17 @@ public class ControllerControlesView implements Initializable {
 	private StringProperty mensaje, urlImage;
 	
 	// view
-	@FXML
-	private GridPane view;
+    @FXML
+    private GridPane view;
 
-	@FXML
-	private ImageView imgView;
+    @FXML
+    private ImageView imgView;
 
-	@FXML
-	private Label mensajeLabel;
+    @FXML
+    private Label mensajeLabel;
 
-	@FXML
-	private Button aceptarBtn;
+    @FXML
+    private Button aceptarBtn;
 
 	/**
 	 * 
@@ -82,12 +83,15 @@ public class ControllerControlesView implements Initializable {
 	 * Método para crear y mostrar la ventana del error.
 	 */
 	public void crearVentana() {
+		Scene scene = new Scene(view, 320, 210);
+		scene.getStylesheets().add(getClass().getResource("controlErroresEstilos.css").toExternalForm());
+		
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
 		// stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Hubo un problema");
-		stage.setScene(new Scene(view));
+		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.showAndWait();
 	}

@@ -42,4 +42,5 @@
 /*Cartas */
 .cartasView{
 	-fx-background-image: url("/hsi/resources/img/crearMazofondo.jpg") ;
+	-fx-font-size: 14px;
 }

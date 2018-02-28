@@ -138,7 +138,7 @@ public class IdiomaCartasController implements Initializable {
 	 */
 	public String crearVentana() {
 		Scene scene = new Scene(view, 300, 150);
-		scene.getStylesheets().add(getClass().getResource("/hsi/menu/mazosEstilo.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/hsi/menu/idiomasEstilos.css").toExternalForm());
 		
 		stage = new Stage();
 		stage.initOwner(HsiApp.getPrimaryStage());
