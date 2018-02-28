@@ -16,15 +16,36 @@
         <menus>
             <Menu mnemonicParsing="false" text="Inicio">
                <items>
-                  <MenuItem fx:id="inicioMenu" mnemonicParsing="false" text="Inicio" />
-                  <MenuItem fx:id="informeMenu" mnemonicParsing="false" text="Generar Informe" />
+                  <MenuItem fx:id="inicioMenu" mnemonicParsing="false" text="Inicio">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/casa.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem fx:id="informeMenu" mnemonicParsing="false" text="Generar Informe">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/pdf.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                </items></Menu>
           <Menu mnemonicParsing="false" text="Mazos">
             <items>
               <MenuItem fx:id="crearMazoMenu" mnemonicParsing="false" text="Crear mazo">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
+                     </accelerator>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/suma.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                   <MenuItem fx:id="verMazoMenu" mnemonicParsing="false" text="Ver mazo">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -39,7 +60,14 @@
                   <MenuItem fx:id="eliminarMazoMenu" mnemonicParsing="false" text="Eliminar mazo">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator></MenuItem>
+                     </accelerator>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/resta.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Favoritos">
@@ -58,13 +86,34 @@
                </items></Menu>
           <Menu mnemonicParsing="false" text="Idioma">
                <items>
-                  <MenuItem fx:id="cartasMenu" mnemonicParsing="false" text="Cartas" />
+                  <MenuItem fx:id="cartasMenu" mnemonicParsing="false" text="Cartas">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/bandera.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Información">
                <items>
-                  <MenuItem fx:id="informacionMenu" mnemonicParsing="false" text="Info" />
-                  <MenuItem fx:id="acercaDeMenu" mnemonicParsing="false" text="Acerca de" />
+                  <MenuItem fx:id="informacionMenu" mnemonicParsing="false" text="Info">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
+                  <MenuItem fx:id="acercaDeMenu" mnemonicParsing="false" text="Acerca de">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/img/interrogacion.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
                </items></Menu>
         </menus>
       </MenuBar>
