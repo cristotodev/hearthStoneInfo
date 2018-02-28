@@ -83,7 +83,7 @@
 }
 
 .comboBoxVer .list-view .list-ce:filled{
-	-fx-text-fill: white  ;
+	-fx-text-fill: white;
 	-fx-font-size: 12px;
 	-fx-background-color: transparent ;
 }

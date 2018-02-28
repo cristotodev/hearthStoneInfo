@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,6 +28,11 @@ public class InformacionController implements Initializable {
 	@FXML
 	private VBox view;
 	
+    @FXML
+    private WebView webView;
+    
+    private WebEngine webEngine;
+	
 	public InformacionController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("InformacionView.fxml"));
 		loader.setController(this);
@@ -34,7 +41,8 @@ public class InformacionController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		webEngine = webView.getEngine();
+		webEngine.load("https://github.com/Cristoto/hearthStoneInfo");
 	}
 	
 	public void crearVentana() {

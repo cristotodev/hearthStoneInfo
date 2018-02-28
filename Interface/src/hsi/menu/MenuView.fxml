@@ -70,7 +70,7 @@
       </MenuBar>
    </top>
    <right>
-      <ScrollPane BorderPane.alignment="CENTER">
+      <ScrollPane styleClass="panelDerechaScrollPane" BorderPane.alignment="CENTER">
          <content>
             <BorderPane fx:id="borderPaneDerecho">
                <padding>

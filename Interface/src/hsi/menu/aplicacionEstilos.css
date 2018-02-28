@@ -17,7 +17,7 @@
 /*Estilo panel de búsqueda (izquierdo) */
 /*----------------------------------------------------------------- */
 .panelBusqueda{
-	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
+	-fx-background-image: url('/hsi/resources/img/arenaBg.png');
 }
 
 .comboBox{
@@ -60,14 +60,14 @@
 /*Estilos panel de cartas (central) */
 /*------------------------------------------------------------------ */
 .panelCartas{
-	-fx-background-image: url('/hsi/resources/img/arenaBg.png') 
+	-fx-background-image: url('/hsi/resources/img/arenaBg.png'); 
 }
 
 /*--------------------------------------------------------------------- */
 /*Panel de información (derecho) */
 /*---------------------------------------------------------------------- */
 .panelInfo{
-	-fx-background-image: url('/hsi/resources/img/fondo_info.png') 
+	-fx-background-image: url('/hsi/resources/img/arenaBG.png'); 
 }
 
 .nombreCarta{
@@ -85,6 +85,12 @@
 	-fx-font-weight: bold;
 }
 
+.panelFavorito{
+	-fx-background-image: url('/hsi/resources/img/arenaBG.png'); 
+}
+.panelDerechaScrollPane{
+	-fx-background-image: url('/hsi/resources/img/arenaBG.png'); 
+}
 /*-------------------- */
 /*Crear mazo */
 /*---------------------- */
