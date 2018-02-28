@@ -117,7 +117,7 @@ public class EliminarMazoController implements Initializable {
 	}
 
 	public void crearVentana() {
-		Scene scene = new Scene(view);
+		Scene scene = new Scene(view, 300, 150);
 		scene.getStylesheets().add(getClass().getResource("/hsi/menu/mazosEstilo.css").toExternalForm());
 		
 		stage = new Stage();

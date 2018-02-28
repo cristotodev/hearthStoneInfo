@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="view" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="view" alignment="BASELINE_CENTER" hgap="10.0" styleClass="verMazoView" vgap="10.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
@@ -19,8 +19,11 @@
       <ColumnConstraints />
    </columnConstraints>
    <children>
-      <ComboBox fx:id="mazosComboBox" maxWidth="1.7976931348623157E308" promptText="Seleccione un mazo" styleClass="comboBox" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-      <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="mazosComboBox" maxWidth="1.7976931348623157E308" promptText="Seleccione un mazo" styleClass="comboBoxVer" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></ComboBox>
+      <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <children>
             <Button fx:id="verBtn" defaultButton="true" mnemonicParsing="false" text="Ver" />
             <Button fx:id="cancelarBtn" cancelButton="true" mnemonicParsing="false" text="Cancelar" />
@@ -28,6 +31,6 @@
       </HBox>
    </children>
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
 </GridPane>

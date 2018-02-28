@@ -43,3 +43,70 @@
 	-fx-font-size: 12px;
 	-fx-font-weight: 700;
 }
+
+/*Ver mazos */
+.verMazoView{
+	-fx-background-image: url("/hsi/resources/img/crearMazofondo.jpg") ;
+}
+
+.comboBoxVer{
+	-fx-background-color: transparent ;
+	-fx-border-color: white ;
+	-fx-border-radius: 50px;
+	-fx-background-radius: 50px;
+	-fx-padding: 0px;
+	-fx-text-fill: white ;
+}
+
+.comboBoxVer:hover{
+	-fx-text-fill: white ;
+	-fx-background-color: transparent ;
+}
+
+.comboBoxVer-base:hover{
+	-fx-border-color: white;
+	-fx-background-color: transparent ;
+}
+
+.comboBoxVer-base:foucused{
+	-fx-text-fill: white ;
+	-fx-background-color: transparent ;
+}
+
+.comboBoxVer .list-view{
+	-fx-border-width: 0.5px;
+	-fx-border-color: white ;
+	-fx-background-color: transparent ;
+	-fx-padding: 0px;
+	-fx-border-radius: 10px 10px 0px 0px;
+	-fx-background-radius: 10px 10px 0px 0px;
+}
+
+.comboBoxVer .list-view .list-ce:filled{
+	-fx-text-fill: white  ;
+	-fx-font-size: 12px;
+	-fx-background-color: transparent ;
+}
+
+/*Crear mazos */
+
+.crearMazosView{
+	-fx-background-image: url("/hsi/resources/img/crearMazofondo.jpg") ;
+}
+
+.camposInicio {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+	-fx-font-size: 16px;    
+}
+
+.camposInicio{
+	-fx-background-color: transparent ;
+	-fx-border-color: white; 
+	-fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+    -fx-text-fill: white ;
+}
+/*Eliminar mazos */
+.eliminarView{
+	-fx-background-image: url("/hsi/resources/img/crearMazofondo.jpg") ;
+}

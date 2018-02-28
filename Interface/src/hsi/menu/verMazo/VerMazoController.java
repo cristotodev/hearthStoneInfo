@@ -100,7 +100,7 @@ public class VerMazoController implements Initializable {
 	 *		   Devuelve false si el usuari le dió a cancelar o cerró la ventana emergente.
 	 */
 	public Mazo crearVentana() {
-		Scene scene = new Scene(view);
+		Scene scene = new Scene(view, 300, 150);
 		scene.getStylesheets().add(getClass().getResource("/hsi/menu/mazosEstilo.css").toExternalForm());
 		
 		stage = new Stage();

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="view" hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="view" hgap="5.0" styleClass="crearMazosView" vgap="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
@@ -18,15 +18,18 @@
       <ColumnConstraints />
    </columnConstraints>
    <children>
-      <TextField fx:id="nombreText" maxWidth="1.7976931348623157E308" promptText="Nombre del mazo" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" />
-      <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <TextField fx:id="nombreText" maxWidth="1.7976931348623157E308" promptText="Nombre del mazo" styleClass="camposInicio" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <children>
             <Button fx:id="crearBtn" defaultButton="true" mnemonicParsing="false" text="Crear" />
             <Button fx:id="cancelarBtn" cancelButton="true" mnemonicParsing="false" text="Cancelar" />
          </children>
+         <GridPane.margin>
+            <Insets bottom="20.0" />
+         </GridPane.margin>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
 </GridPane>

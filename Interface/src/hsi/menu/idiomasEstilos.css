@@ -3,11 +3,6 @@
     src: url('/hsi/resources/fonts/OPTIBelwe-Medium.otf');
 }
 
-.root{
-	-fx-font-family: 'hsi-font';
-	-fx-font-size: 14px;
-}
-
 .comboBox{
 	-fx-border-width: 0.5px;
 	-fx-border-color: #ACACAC;
@@ -42,4 +37,9 @@
 	-fx-text-fill: black ;
 	-fx-font-size: 12px;
 	-fx-font-weight: 700;
+}
+
+/*Cartas */
+.cartasView{
+	-fx-background-image: url("/hsi/resources/img/crearMazofondo.jpg") ;
 }
