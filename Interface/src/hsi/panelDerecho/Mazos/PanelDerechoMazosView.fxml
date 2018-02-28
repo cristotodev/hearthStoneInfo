@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator maxWidth="1.7976931348623157E308" />
       <Button fx:id="eliminarButton" maxWidth="130.0" mnemonicParsing="false" text="Eliminar">

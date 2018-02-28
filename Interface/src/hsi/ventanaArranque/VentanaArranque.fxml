@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="view" styleClass="ventanaArranqueView" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="view" styleClass="ventanaArranqueView" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ImageView fx:id="imgView" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
