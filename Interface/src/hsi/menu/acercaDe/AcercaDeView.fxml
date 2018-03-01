@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" alignment="BASELINE_CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" alignment="BASELINE_CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../hearthStoneInfo/Interface/src/hsi/resources/img/hearthStoneLogo.png" />
+            <Image url="@../../resources/img/personas.png" />
          </image>
       </ImageView>
       <Label text="Versión: 1.0.0" />
+      <Label maxWidth="200.0" wrapText="true" />
+      <Label text="Desarrollado por:">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label text="Cristo:" />
+            <Hyperlink fx:id="cristoGithub" text="GitHub" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <Label text="Carlos:" />
+            <Hyperlink fx:id="carlosGithub" text="GitHub" />
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
