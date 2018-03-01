@@ -369,15 +369,33 @@ public class MenuController implements Initializable {
 						return FuncionesSQL.consultaMazoCarta(mazoSeleccionado.get().getId());
 					}
 				}; 
-				
 				task.setOnSucceeded(e1 -> correctoVerMazoTask(e1));
-				task.setOnFailed(e1 -> falloCargarFavoritosBDTarea(e1));
+				task.setOnFailed(e1 -> falloVerMazoTask(e1));
 				new Thread(task).start();
 				
 				
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+	}
+
+	private void falloVerMazoTask(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("Hubo un problema al cargar las cartas del mazo",
+					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void enProcesoMazoTask(WorkerStateEvent e1) {
+		try {
+			loadController = new LoadController("¡Cargando cartas del mazo!");
+			loadController.crearVentanaLoad();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -392,10 +410,16 @@ public class MenuController implements Initializable {
 					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
 				}
 			};
-			task.setOnSucceeded(e2 -> cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta) e2.getSource().getValue())));
+			task.setOnRunning(e2 -> enProcesoMazoTask(e2));
+			task.setOnSucceeded(e2 -> correctoObtenerCartasTask(e2));
 			task.setOnFailed(e2 -> falloCargarFavoritosBDTarea(e2));
 			new Thread(task).start();
 		}
+	}
+
+	private void correctoObtenerCartasTask(WorkerStateEvent e2) {
+		cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta) e2.getSource().getValue()));
+		loadController.cerrarVentanaLoad();
 	}
 
 	/**
@@ -467,6 +491,7 @@ public class MenuController implements Initializable {
 	}
 
 	private void falloCargarFavoritosBDTarea(WorkerStateEvent e) {
+		loadController.cerrarVentanaLoad();
 		try {
 			new ControllerControlesView("Hubo un problema al cargar los favoritos de la BD",
 					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
