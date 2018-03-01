@@ -200,7 +200,6 @@ public class MenuController implements Initializable {
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());
-		view.setLeft(panelIzquierdoController.getView());
 	}
 
 	/**
@@ -274,10 +273,12 @@ public class MenuController implements Initializable {
 	 */
 	private void onFavoritosMenuAction(ActionEvent e) {
 		cartasBuscadas.clear();
+		TodasLasCartasController.limpieza = true;
 		for (String idCarta : favoritas) {
 			Task<hsi.unirest.mapeo.Carta> task = new Task<hsi.unirest.mapeo.Carta>() {
 				@Override
 				protected hsi.unirest.mapeo.Carta call() throws Exception {
+					
 					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
 				}
 			};
@@ -322,6 +323,7 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onVerMazoMenuAction(ActionEvent e) {
+		TodasLasCartasController.limpieza = true;
 		cartasBuscadas.clear();
 		try {
 			
@@ -331,6 +333,7 @@ public class MenuController implements Initializable {
 
 			mazoSeleccionado.set(controller.crearVentana());
 			if(mazoSeleccionado.get() != null) {
+				
 				borderPaneDerecho.setBottom(panelDerechoMazosController.getView());
 				
 				Task<List<String>> task = new Task<List<String>>() {
@@ -354,6 +357,7 @@ public class MenuController implements Initializable {
 	@SuppressWarnings("unchecked")
 	private void correctoVerMazoTask(WorkerStateEvent e1) {
 		view.setLeft(null);
+		TodasLasCartasController.limpieza = true;
 		for (String idCarta : (List<String>) e1.getSource().getValue()) {
 			Task<hsi.unirest.mapeo.Carta> task = new Task<hsi.unirest.mapeo.Carta>() {
 				@Override
