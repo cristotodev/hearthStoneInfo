@@ -24,6 +24,8 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +33,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.NumberStringConverter;
 
@@ -110,6 +113,9 @@ public class PanelDerechoController implements Initializable {
     
     @FXML
     private Button copiarButton;
+    
+    @FXML
+    private StackPane imagenesStack;
 	
 	public PanelDerechoController() throws IOException {
 		usuario = new SimpleStringProperty(this, "usuario");
@@ -171,6 +177,16 @@ public class PanelDerechoController implements Initializable {
 				mazosComboBox.getSelectionModel().select(getMazoSeleccionado());
 			}
 		});
+		
+		imagenesStack.setOnMousePressed(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				imagenesStack.getChildren().get(1).toBack();
+				
+			}
+		});
+		
 	}
 	
 	/**
@@ -197,6 +213,9 @@ public class PanelDerechoController implements Initializable {
 			Task<Void> task = new Task<Void>() {
 				protected Void call() throws Exception {
 					FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
+					
+					new ControllerControlesView("Copia realizada.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+					
 					return null;
 				};
 			};
