@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import hsi.acciones.carga.LoadController;
 import hsi.app.HsiApp;
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
@@ -70,6 +71,7 @@ public class MenuController implements Initializable {
 	private TodasLasCartasController todasLasCartasController;
 
 	// model
+	private LoadController loadController;
 	private StringProperty usuario;
 	private ListProperty<Mazo> mazos;
 	private ListProperty<String> favoritas;
@@ -282,12 +284,37 @@ public class MenuController implements Initializable {
 					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
 				}
 			};
-			task.setOnSucceeded(e1 -> cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta)e1.getSource().getValue())));
-			task.setOnFailed(e1 -> falloCargarFavoritosBDTarea(e1));
+			task.setOnRunning(e1 -> enProcesoFavoritoTarea(e1));
+			task.setOnSucceeded(e1 -> correctoFavoritoTarea(e1));
+			task.setOnFailed(e1 -> falloFavoritasTarea(e1));
 			new Thread(task).start();
 		}
 		borderPaneDerecho.setBottom(panelDerechoFavoritoController.getView());
 		view.setLeft(null);
+	}
+
+	private void falloFavoritasTarea(WorkerStateEvent e1) {
+		loadController.cerrarVentanaLoad();
+		try {
+			new ControllerControlesView("Hubo un problema al cargar los favoritos de la BD",
+					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void correctoFavoritoTarea(WorkerStateEvent e1) {
+		cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta)e1.getSource().getValue()));
+		loadController.cerrarVentanaLoad();
+	}
+
+	private void enProcesoFavoritoTarea(WorkerStateEvent e1) {
+		try {
+			loadController = new LoadController("¡Cargando favoritos!");
+			loadController.crearVentanaLoad();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 	}
 
 	/**

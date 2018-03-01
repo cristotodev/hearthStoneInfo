@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
-   <center>
-      <ImageView fx:id="laoadImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+<VBox fx:id="view" alignment="CENTER" spacing="10.0" styleClass="busqueda" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="laoadImage" fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/img/carga.gif" />
-         </image>
-      </ImageView>
-   </center>
-</BorderPane>
+         </image></ImageView>
+      <Label fx:id="mensajeLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="mensajeLoad" text="Label" />
+   </children>
+</VBox>

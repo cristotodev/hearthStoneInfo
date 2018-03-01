@@ -47,6 +47,7 @@ public class PanelIzquierdoController implements Initializable {
 	private ServicioAPI servicioApi;
 
 	// model
+	private LoadController controller;
 	private static final Integer POSDESHABILITAR = -1;
 	private PanelIzquierdoModel panelIzquierdoModelo;
 	private ObjectProperty<Info> infoSpanish;
@@ -241,9 +242,8 @@ public class PanelIzquierdoController implements Initializable {
 	}
 
 	private void enProcesoCartasBDTarea(WorkerStateEvent e1) {
-		LoadController controller;
 		try {
-			controller = new LoadController();
+			controller = new LoadController("¡Buscando cartas!");
 			controller.crearVentanaLoad();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -253,9 +253,11 @@ public class PanelIzquierdoController implements Initializable {
 	private void correctoObtenerCartasBDTarea(WorkerStateEvent e1) {
 		listaCartasServicios = (ListaDeCartas) e1.getSource().getValue();
 		pasarCartas(listaCartasServicios.getCartas(), cartasBusqueda.get());
+		controller.cerrarVentanaLoad();
 	}
 
 	private void falloObtenerCartasBDTarea(WorkerStateEvent e1) {
+		controller.cerrarVentanaLoad();
 		try {
 			new ControllerControlesView("Hubo un problema al conectarse con la API para realizar la búsqueda.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
 		} catch (IOException e) {
@@ -463,6 +465,7 @@ public class PanelIzquierdoController implements Initializable {
 				}
 			};
 		}
+		task.setOnRunning(e1 -> enProcesoCartasBDTarea(e1));
 		task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 		task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
 		new Thread(task).start();
