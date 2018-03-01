@@ -353,9 +353,9 @@ public class Carta {
 		
 		if (cartaServicio.getImg() != null)
 			carta.setImg(new Image(cartaServicio.getImg()));
-		else
+		else {
 			carta.setImg(new Image("http://wow.zamimg.com/images/hearthstone/backs/original/Card_Back_Default.png"));
-
+		}
 		if (cartaServicio.getImgGold() != null)
 			carta.setImgDorada(cartaServicio.getImgGold());
 

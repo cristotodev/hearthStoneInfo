@@ -152,8 +152,17 @@ public class PanelDerechoController implements Initializable {
 			public void changed(ObservableValue<? extends Carta> observable, Carta oldValue, Carta newValue) {
 				if(newValue != null) {
 					//imgGif.imageProperty().bind(newValue.imgDoradaProperty());
-					if(newValue.getImgDorada() != null)
-						imgGif.setImage(new Image(newValue.getImgDorada()));
+					if(newValue.getImgDorada() != null) {
+						Task<Image> task = new Task<Image>() {
+							@Override
+							protected Image call() throws Exception {
+								return new Image(newValue.getImgDorada());
+							}
+						};
+						task.setOnSucceeded(e1 -> imgGif.setImage((Image)e1.getSource().getValue()));
+						task.setOnFailed(e1 -> imgGif.setImage(new Image("http://wow.zamimg.com/images/hearthstone/backs/original/Card_Back_Default.png")));
+						new Thread(task).start();
+					}
 					imgNormal.imageProperty().bind(newValue.imgProperty());
 					nombreLabel.textProperty().bind(newValue.nombreProperty());
 					expansionLabel.textProperty().bind(newValue.expansionProperty());
