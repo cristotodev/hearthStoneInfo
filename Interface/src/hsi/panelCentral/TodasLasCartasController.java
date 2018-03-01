@@ -17,6 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 
 public class TodasLasCartasController implements Initializable {
 
@@ -50,8 +53,7 @@ public class TodasLasCartasController implements Initializable {
 		cartaSeleccionada.bind(cartasPane.cartaSeleccionadaProperty());
 		
 		//cartasPane.startDragAndDrop(TransferMode.ANY);
-		//TODO Ver como limpiar la vista. Da error.
-		//TODO Preguntarle a Francisquito
+		
 		cartasBuscadas.addListener(new ChangeListener() {
 			@Override
 			public void changed(ObservableValue observable, Object oldValue, Object newValue) {

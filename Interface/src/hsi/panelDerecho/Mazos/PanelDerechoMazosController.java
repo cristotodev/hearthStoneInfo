@@ -72,20 +72,6 @@ public class PanelDerechoMazosController implements Initializable {
 		//Eventos
 		eliminarButton.setOnAction(e -> onEliminarButtonAction(e));
 		insertarEnFavoritoButton.setOnAction(e -> onInsertarEnFavoritonButtonAction(e));
-		
-		mazoSeleccionado.addListener(new ChangeListener<Mazo>() {
-			@Override
-			public void changed(ObservableValue<? extends Mazo> observable, Mazo oldValue, Mazo newValue) {
-				System.out.println("mazo cambiado");
-			}
-		});
-		
-		cartaSeleccionada.addListener(new ChangeListener<Carta>() {
-			public void changed(javafx.beans.value.ObservableValue<? extends Carta> observable, Carta oldValue, Carta newValue) {
-				System.out.println("carta seleccionada cambiada");	
-			};
-		});
-
 	}
 
 	/**

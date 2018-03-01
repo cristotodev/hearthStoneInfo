@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import hsi.acciones.carga.LoadController;
 import hsi.controlErrores.ControllerControlesView;
 import hsi.items.Carta;
 import hsi.panelCentral.TodasLasCartasController;
@@ -223,6 +224,7 @@ public class PanelIzquierdoController implements Initializable {
 				}
 			};
 			
+			task.setOnRunning(e1 -> enProcesoCartasBDTarea(e1));
 			task.setOnFailed(e1 -> falloObtenerCartasBDTarea(e1));
 			task.setOnSucceeded(e1 -> correctoObtenerCartasBDTarea(e1));
 			new Thread(task).start();
@@ -235,6 +237,16 @@ public class PanelIzquierdoController implements Initializable {
 			} catch (UnirestException e1) {
 				e1.printStackTrace();
 			}
+		}
+	}
+
+	private void enProcesoCartasBDTarea(WorkerStateEvent e1) {
+		LoadController controller;
+		try {
+			controller = new LoadController();
+			controller.crearVentanaLoad();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
