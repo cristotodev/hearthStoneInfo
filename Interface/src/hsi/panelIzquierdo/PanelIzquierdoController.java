@@ -307,27 +307,27 @@ public class PanelIzquierdoController implements Initializable {
 					Integer pos = claseCombo.getSelectionModel().getSelectedIndex();
 					if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()
 							&& !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasClases(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()) {
-						lista = servicioApi.getCartasClases(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								null, Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasClases(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), null,
 								idiomaCarta.get());
 					}else if(!vidaTextfield.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasClases(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 								null,
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else
-						lista = servicioApi.getCartasClases(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasClases(infoEnglish.get().getClasses().get(pos),
 							null, null, null, idiomaCarta.get());
 					return lista;
 				}
@@ -340,27 +340,27 @@ public class PanelIzquierdoController implements Initializable {
 					Integer pos = faccionCombo.getSelectionModel().getSelectedIndex();
 					if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()
 							&& !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasFacciones(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()) {
-						lista = servicioApi.getCartasFacciones(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								null, Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasFacciones(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), null,
 								idiomaCarta.get());
 					}else if(!vidaTextfield.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasFacciones(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 								null,
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else
-						lista = servicioApi.getCartasFacciones(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasFacciones(infoEnglish.get().getFactions().get(pos),
 							null, null, null, idiomaCarta.get());
 					return lista;
 				}
@@ -373,27 +373,27 @@ public class PanelIzquierdoController implements Initializable {
 					Integer pos = rarezaCombo.getSelectionModel().getSelectedIndex();
 					if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()
 							&& !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRareza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()) {
-						lista = servicioApi.getCartasRareza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								null, Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRareza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), null,
 								idiomaCarta.get());
 					}else if(!vidaTextfield.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRareza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 								null,
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else
-						lista = servicioApi.getCartasRareza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRareza(infoEnglish.get().getQualities().get(pos),
 							null, null, null, idiomaCarta.get());
 					return lista;
 				}
@@ -406,27 +406,27 @@ public class PanelIzquierdoController implements Initializable {
 					Integer pos = tipoCombo.getSelectionModel().getSelectedIndex();
 					if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()
 							&& !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasTipo(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()) {
-						lista = servicioApi.getCartasTipo(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								null, Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasTipo(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), null,
 								idiomaCarta.get());
 					}else if(!vidaTextfield.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasTipo(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 								null,
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else
-						lista = servicioApi.getCartasTipo(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasTipo(infoEnglish.get().getTypes().get(pos),
 							null, null, null, idiomaCarta.get());
 					return lista;
 				}
@@ -439,27 +439,27 @@ public class PanelIzquierdoController implements Initializable {
 					Integer pos = razaCombo.getSelectionModel().getSelectedIndex();
 					if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()
 							&& !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRaza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !vidaTextfield.getText().isEmpty()) {
-						lista = servicioApi.getCartasRaza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								null, Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else if(!ataqueTextField.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRaza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 								Integer.parseInt(panelIzquierdoModelo.getAtaque()),
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), null,
 								idiomaCarta.get());
 					}else if(!vidaTextfield.getText().isEmpty() && !costeTextField.getText().isEmpty()) {
-						lista = servicioApi.getCartasRaza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 								null,
 								Integer.parseInt(panelIzquierdoModelo.getCoste()), Integer.parseInt(panelIzquierdoModelo.getVida()),
 								idiomaCarta.get());
 					}else
-						lista = servicioApi.getCartasRaza(infoEnglish.get().getSets().get(pos),
+						lista = servicioApi.getCartasRaza(infoEnglish.get().getRaces().get(pos),
 							null, null, null, idiomaCarta.get());
 					return lista;
 				}

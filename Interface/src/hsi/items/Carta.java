@@ -34,7 +34,7 @@ public class Carta {
 	private StringProperty artista;
 	private StringProperty clase;
 	private ObjectProperty<Image> img;
-	private ObjectProperty<Image> imgDorada;
+	private StringProperty imgDorada;
 	private StringProperty mecanismo;
 	
 	public Carta() {
@@ -54,7 +54,7 @@ public class Carta {
 		artista = new SimpleStringProperty(this, "artista");
 		clase = new SimpleStringProperty(this, "clase");
 		img = new SimpleObjectProperty<>(this, "img");
-		imgDorada = new SimpleObjectProperty<>(this, "imgDorada");
+		imgDorada = new SimpleStringProperty(this, "imgDorada");
 		mecanismo = new SimpleStringProperty(this, "mecanismo");
 	}
 
@@ -298,17 +298,17 @@ public class Carta {
 	}
 	
 
-	public final ObjectProperty<Image> imgDoradaProperty() {
+	public final StringProperty imgDoradaProperty() {
 		return this.imgDorada;
 	}
 	
 
-	public final Image getImgDorada() {
+	public final String getImgDorada() {
 		return this.imgDoradaProperty().get();
 	}
 	
 
-	public final void setImgDorada(final Image imgDorada) {
+	public final void setImgDorada(final String imgDorada) {
 		this.imgDoradaProperty().set(imgDorada);
 	}
 	
@@ -357,7 +357,7 @@ public class Carta {
 			carta.setImg(new Image("http://wow.zamimg.com/images/hearthstone/backs/original/Card_Back_Default.png"));
 
 		if (cartaServicio.getImgGold() != null)
-			carta.setImgDorada(new Image(cartaServicio.getImgGold()));
+			carta.setImgDorada(cartaServicio.getImgGold());
 
 		carta.setMecanismo(cartaServicio.getMechanics());
 		return carta;

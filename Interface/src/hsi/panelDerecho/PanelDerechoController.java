@@ -32,6 +32,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -150,7 +151,9 @@ public class PanelDerechoController implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Carta> observable, Carta oldValue, Carta newValue) {
 				if(newValue != null) {
-					imgGif.imageProperty().bind(newValue.imgDoradaProperty());
+					//imgGif.imageProperty().bind(newValue.imgDoradaProperty());
+					if(newValue.getImgDorada() != null)
+						imgGif.setImage(new Image(newValue.getImgDorada()));
 					imgNormal.imageProperty().bind(newValue.imgProperty());
 					nombreLabel.textProperty().bind(newValue.nombreProperty());
 					expansionLabel.textProperty().bind(newValue.expansionProperty());

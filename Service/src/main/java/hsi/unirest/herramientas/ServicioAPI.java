@@ -478,13 +478,13 @@ public class ServicioAPI {
 		try {
 			destino.setImg(origen.getString("img"));
 		} catch (JSONException e) {
-			destino.setImg("http://wow.zamimg.com/images/hearthstone/backs/original/Card_Back_Default.png");
+			
 		}
 
 		try {
 			destino.setImgGold(origen.getString("imgGold"));
 		} catch (JSONException e) {
-			destino.setImgGold("http://wow.zamimg.com/images/hearthstone/backs/animated/Card_Back_Pandaria.gif");
+			
 		}
 
 		try {
