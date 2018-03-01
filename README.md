@@ -39,4 +39,4 @@ HearthStone info publica toda la documentación en la sección [**"doc"**](doc)
 
 ## Manual de usuario
 
-//TODO hacer link
+Podrás encontrar toda la información acerca del uso de la aplicación a través de la [**wiki**](https://github.com/Cristoto/hearthStoneInfo/wiki).
