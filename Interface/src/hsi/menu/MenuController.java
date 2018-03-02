@@ -200,6 +200,8 @@ public class MenuController implements Initializable {
 	 * @param e
 	 */
 	private void onInicioMenuAction(ActionEvent e) {
+		TodasLasCartasController.limpieza = true;
+		cartasBuscadas.add(null);
 		borderPaneDerecho.setCenter(panelDerechoController.getView());
 		borderPaneDerecho.setBottom(panelDerechoBusquedaController.getView());
 		view.setLeft(panelIzquierdoController.getView());

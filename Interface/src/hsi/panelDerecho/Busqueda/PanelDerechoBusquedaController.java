@@ -95,6 +95,11 @@ public class PanelDerechoBusquedaController implements Initializable {
 	}
 
 	private void correctoInsertarFavoritoBDTarea(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("Agregación a favorito exitosa", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		llenarFavoritos();
 	}
 
