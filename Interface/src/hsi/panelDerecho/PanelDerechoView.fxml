@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="view" alignment="CENTER" spacing="5.0" styleClass="panelInfo" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="view" alignment="CENTER" spacing="5.0" styleClass="panelInfo" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane fx:id="imagenesStack">
          <children>
@@ -114,7 +114,10 @@
             <Label fx:id="mecanismoLabel" text="-" />
          </children>
       </HBox>
-      <Separator />
+      <Separator style="-fx-background-color: black;">
+         <VBox.margin>
+            <Insets left="-10.0" right="-10.0" />
+         </VBox.margin></Separator>
       <HBox alignment="CENTER">
          <children>
             <Label styleClass="titulo" text="Mazos" />
@@ -129,7 +132,10 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin></Button>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets left="10.0" right="10.0" />
    </padding>
 </VBox>

@@ -225,9 +225,6 @@ public class PanelDerechoController implements Initializable {
 			Task<Void> task = new Task<Void>() {
 				protected Void call() throws Exception {
 					FuncionesSQL.insertarMazoCarta(mazoSeleccionado.get().getId(), cartaSeleccionada.get().getId());
-					
-					new ControllerControlesView("Copia realizada.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
-					
 					return null;
 				};
 			};
@@ -235,6 +232,12 @@ public class PanelDerechoController implements Initializable {
 			task.setOnFailed(e2 -> falloConsultarMazosBDTarea(e2));
 			task.setOnSucceeded(e2 -> {
 				try {
+					try {
+						new ControllerControlesView("Copia realizada.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
 					llenarMazos();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();

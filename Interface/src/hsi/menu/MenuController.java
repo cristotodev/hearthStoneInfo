@@ -44,6 +44,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
@@ -284,7 +285,6 @@ public class MenuController implements Initializable {
 					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
 				}
 			};
-			task.setOnRunning(e1 -> enProcesoFavoritoTarea(e1));
 			task.setOnSucceeded(e1 -> correctoFavoritoTarea(e1));
 			task.setOnFailed(e1 -> falloFavoritasTarea(e1));
 			new Thread(task).start();
@@ -294,7 +294,6 @@ public class MenuController implements Initializable {
 	}
 
 	private void falloFavoritasTarea(WorkerStateEvent e1) {
-		loadController.cerrarVentanaLoad();
 		try {
 			new ControllerControlesView("Hubo un problema al cargar los favoritos de la BD",
 					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
@@ -305,7 +304,6 @@ public class MenuController implements Initializable {
 
 	private void correctoFavoritoTarea(WorkerStateEvent e1) {
 		cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta)e1.getSource().getValue()));
-		loadController.cerrarVentanaLoad();
 	}
 
 	private void enProcesoFavoritoTarea(WorkerStateEvent e1) {
@@ -410,7 +408,6 @@ public class MenuController implements Initializable {
 					return servicioApi.getCartaById(idCarta, idiomaCartas.get());
 				}
 			};
-			task.setOnRunning(e2 -> enProcesoMazoTask(e2));
 			task.setOnSucceeded(e2 -> correctoObtenerCartasTask(e2));
 			task.setOnFailed(e2 -> falloCargarFavoritosBDTarea(e2));
 			new Thread(task).start();
@@ -419,7 +416,6 @@ public class MenuController implements Initializable {
 
 	private void correctoObtenerCartasTask(WorkerStateEvent e2) {
 		cartasBuscadas.add(Carta.fromCartaServicio((hsi.unirest.mapeo.Carta) e2.getSource().getValue()));
-		loadController.cerrarVentanaLoad();
 	}
 
 	/**
@@ -460,6 +456,7 @@ public class MenuController implements Initializable {
 		scene.getStylesheets().add(getClass().getResource("aplicacionEstilos.css").toExternalForm());
 		
 		stage = new Stage();
+		stage.setMaximized(true);
 		stage.initOwner(HsiApp.getPrimaryStage());
 		stage.getIcons().add(HsiApp.getPrimaryStage().getIcons().get(0));
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -491,7 +488,6 @@ public class MenuController implements Initializable {
 	}
 
 	private void falloCargarFavoritosBDTarea(WorkerStateEvent e) {
-		loadController.cerrarVentanaLoad();
 		try {
 			new ControllerControlesView("Hubo un problema al cargar los favoritos de la BD",
 					"..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();

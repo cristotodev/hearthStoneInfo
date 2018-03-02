@@ -97,6 +97,11 @@ public class PanelDerechoFavoritoController implements Initializable {
 	}
 	
 	private void correctoEliminarFavoritoBDTarea(WorkerStateEvent e1) {
+		try {
+			new ControllerControlesView("Eliminación exitosa.", "..\\..\\..\\resources\\img\\hearthStoneLogo.png").crearVentana();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		llenarFavoritos();
 	}
 
